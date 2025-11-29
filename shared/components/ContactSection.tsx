@@ -11,7 +11,7 @@ import ContactForm from "./ContactForm";
 
 function ContactSection() {
   return (
-    <section className="page-section">
+    <section id="contact" className="page-section">
       <div className=" m-auto flex flex-col lg:flex-row max-w-[500px] lg:max-w-full gap-8   lg:gap-6 w-full">
         <div className="basis-full lg:basis-1/3 flex flex-col gap-4 sm:gap-5 lg:gap-6 pt-0 lg:pt-4">
           <h2 className="font-russo-one text-3xl sm:text-4xl lg:text-3xl xl:text-4xl leading-tight">

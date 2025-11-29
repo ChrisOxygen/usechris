@@ -12,7 +12,10 @@ function ProjectsSection() {
   const { emblaRef, scrollPrev, scrollNext } = useProjectCarousel();
 
   return (
-    <section className="w-full relative pl-6 sm:pl-8 py-16 md:pl-16 md:py-24 lg:pl-20 lg:py-30 border-b-2 sm:border-b-3 border-black flex flex-col gap-8 lg:gap-12">
+    <section
+      id="projects"
+      className="w-full relative pl-6 sm:pl-8 py-16 md:pl-16 md:py-24 lg:pl-20 lg:py-30 border-b-2 sm:border-b-3 border-black flex flex-col gap-8 lg:gap-12"
+    >
       <div className={`flex items-end justify-between ${RESPONSIVE_PADDING}`}>
         <div className="flex flex-col gap-4">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-russo-one">
