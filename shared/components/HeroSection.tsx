@@ -4,10 +4,10 @@ import FSDTextSvgComponent from "@/shared/components/FSDTextSvgComponent";
 function HeroSection() {
   return (
     <section className="page-section">
-      <span className=" ml-2 lg:mb-6 mb-4 md:text-2xl lg:text-3xl lg:max-w-[900px] font-semibold text-gray-500 dark:text-gray-400">
+      <span className=" ml-2 lg:mb-6 mb-3 md:text-2xl lg:text-3xl lg:max-w-[900px] font-semibold text-gray-500 dark:text-gray-400">
         Hi I&apos;m,
       </span>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-3 md:gap-8">
         <ChrisOkaforTextSvgComponent
           className="w-full [&_path]:stroke-black [&_path]:dark:stroke-white"
           fill="none"
