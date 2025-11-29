@@ -31,11 +31,21 @@ body {
   @apply px-6 sm:px-8 py-16 md:px-16 md:py-24 lg:px-20 lg:py-30 border-b-2 sm:border-b-3 border-black flex flex-col;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
+  from {
+    translate: 0;
   }
-  100% {
-    transform: translateX(-50%);
+  to {
+    translate: -100%;
   }
 }
