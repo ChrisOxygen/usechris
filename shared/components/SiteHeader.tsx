@@ -9,7 +9,7 @@ function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className=" flex flex-col lg:flex-row items-center justify-between w-full px-4 lg:px-20 py-4 lg:py-8 border-b-2 sm:border-b-3 border-black gap-4 lg:gap-0">
+    <header className=" flex flex-col lg:flex-row items-center justify-between w-full px-4 lg:px-20 py-4 lg:py-8 border-b-2 sm:border-b-3 border-black dark:border-white gap-4 lg:gap-0">
       <Link href={"/"} className="text-2xl font-bold">
         <h2 className=" text-3xl font-russo-one">CHRIS OKAFOR</h2>
       </Link>
@@ -22,10 +22,10 @@ function SiteHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-lg lg:text-xl transition-all duration-300 hover:text-black ${
+                className={`text-lg lg:text-xl transition-all duration-300 hover:text-black dark:hover:text-white ${
                   isActive
-                    ? "font-bold text-black"
-                    : "font-semibold text-gray-500"
+                    ? "font-bold text-black dark:text-white"
+                    : "font-semibold text-gray-500 dark:text-gray-400"
                 } ${isTestimonial ? "hidden lg:inline-block" : ""}`}
               >
                 {item.name}

@@ -21,12 +21,12 @@ function ContactSection() {
             <li>
               <Link
                 href="mailto:chris@useChris.dev"
-                className="flex items-center gap-2 sm:gap-3 hover:text-black transition-colors group"
+                className="flex items-center gap-2 sm:gap-3 hover:text-black dark:hover:text-white transition-colors group"
               >
-                <span className="text-lg sm:text-xl text-black">
+                <span className="text-lg sm:text-xl text-black dark:text-white">
                   <FaEnvelope />
                 </span>
-                <span className="text-sm sm:text-base lg:text-lg text-gray-600 group-hover:text-black">
+                <span className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white">
                   chris@useChris.dev
                 </span>
               </Link>
@@ -34,12 +34,12 @@ function ContactSection() {
             <li>
               <Link
                 href="tel:+2347034670696"
-                className="flex items-center gap-2 sm:gap-3 hover:text-black transition-colors group"
+                className="flex items-center gap-2 sm:gap-3 hover:text-black dark:hover:text-white transition-colors group"
               >
-                <span className="text-lg sm:text-xl text-black">
+                <span className="text-lg sm:text-xl text-black dark:text-white">
                   <FaPhone />
                 </span>
-                <span className="text-sm sm:text-base lg:text-lg text-gray-600 group-hover:text-black">
+                <span className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white">
                   (+234) 703 4670 696
                 </span>
               </Link>
@@ -53,7 +53,7 @@ function ContactSection() {
               className="group"
               aria-label="LinkedIn Profile"
             >
-              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
                 <FaLinkedinIn />
               </span>
             </Link>
@@ -64,7 +64,7 @@ function ContactSection() {
               className="group"
               aria-label="X (Twitter) Profile"
             >
-              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
                 <FaXTwitter />
               </span>
             </Link>
@@ -75,13 +75,13 @@ function ContactSection() {
               className="group"
               aria-label="GitHub Profile"
             >
-              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
                 <FaGithub />
               </span>
             </Link>
           </div>
         </div>
-        <div className="basis-full lg:basis-2/3 flex lg:px-8 xl:pl-16 pt-6 sm:pt-8 lg:pt-0 lg:border-l-2 xl:border-l-3 border-t sm:border-t-2 lg:border-t-0 border-gray-300">
+        <div className="basis-full lg:basis-2/3 flex lg:px-8 xl:pl-16 pt-6 sm:pt-8 lg:pt-0 lg:border-l-2 xl:border-l-3 border-t sm:border-t-2 lg:border-t-0 border-gray-300 dark:border-gray-700">
           <ContactForm />
         </div>
       </div>

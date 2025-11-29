@@ -22,8 +22,8 @@ function ProjectCard({
   imageHeight = "h-[200px] lg:h-[280px]",
 }: ProjectCardProps) {
   return (
-    <div className="border-3 rounded-xl overflow-hidden border-black flex h-full flex-col">
-      <div className="border-b-3 border-black overflow-hidden w-full">
+    <div className="border-3 rounded-xl overflow-hidden border-black dark:border-white flex h-full flex-col">
+      <div className="border-b-3 border-black dark:border-white overflow-hidden w-full">
         <Image
           src={`/assets/projects-cover/${project.coverImage}.jpg`}
           alt={project.title}
@@ -41,7 +41,7 @@ function ProjectCard({
           href={project.liveLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 text-center py-2 px-4 bg-black text-white font-semibold rounded-lg hover:bg-black/80 transition-all"
+          className="flex-1 text-center py-2 px-4 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:bg-black/80 dark:hover:bg-white/80 transition-all"
         >
           Live Demo
         </Link>
@@ -49,13 +49,13 @@ function ProjectCard({
           href={project.githubRepo}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 text-center py-2 px-4 border-2 border-black text-black font-semibold rounded-lg hover:bg-black hover:text-white transition-all"
+          className="flex-1 text-center py-2 px-4 border-2 border-black dark:border-white text-black dark:text-white font-semibold rounded-lg hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all"
         >
           GitHub
         </Link>
       </div>
       {showTools && (
-        <div className="flex items-center px-4 gap-2 flex-wrap pb-4 text-sm text-gray-600">
+        <div className="flex items-center px-4 gap-2 flex-wrap pb-4 text-sm text-gray-600 dark:text-gray-400">
           {project.tools.map((tool, index) => (
             <span key={tool}>
               {tool}

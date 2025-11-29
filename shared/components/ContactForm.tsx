@@ -29,7 +29,7 @@ function ContactForm() {
         <div className="sm:basis-1/2 flex flex-col gap-1.5">
           <label
             htmlFor="name"
-            className="pl-1 font-semibold text-sm sm:text-base text-gray-700"
+            className="pl-1 font-semibold text-sm sm:text-base text-gray-700 dark:text-gray-300"
           >
             Your Name *
           </label>
@@ -37,7 +37,7 @@ function ContactForm() {
             id="name"
             type="text"
             placeholder="John Doe"
-            className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all"
+            className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black dark:border-white dark:bg-black dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-black transition-all"
             {...register("name")}
           />
           {errors.name?.message && (
@@ -49,7 +49,7 @@ function ContactForm() {
         <div className="sm:basis-1/2 flex flex-col gap-1.5">
           <label
             htmlFor="email"
-            className="pl-1 font-semibold text-sm sm:text-base text-gray-700"
+            className="pl-1 font-semibold text-sm sm:text-base text-gray-700 dark:text-gray-300"
           >
             Email Address *
           </label>
@@ -57,7 +57,7 @@ function ContactForm() {
             id="email"
             type="email"
             placeholder="john@example.com"
-            className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all"
+            className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black dark:border-white dark:bg-black dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-black transition-all"
             {...register("email")}
           />
           {errors.email?.message && (
@@ -70,7 +70,7 @@ function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="subject"
-          className="pl-1 font-semibold text-sm sm:text-base text-gray-700"
+          className="pl-1 font-semibold text-sm sm:text-base text-gray-700 dark:text-gray-300"
         >
           Subject *
         </label>
@@ -78,7 +78,7 @@ function ContactForm() {
           id="subject"
           type="text"
           placeholder="Project Inquiry"
-          className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all"
+          className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 border-black dark:border-white dark:bg-black dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-black transition-all"
           {...register("subject")}
         />
         {errors.subject?.message && (
@@ -90,7 +90,7 @@ function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="message"
-          className="pl-1 font-semibold text-sm sm:text-base text-gray-700"
+          className="pl-1 font-semibold text-sm sm:text-base text-gray-700 dark:text-gray-300"
         >
           Your Message *
         </label>
@@ -98,7 +98,7 @@ function ContactForm() {
           id="message"
           placeholder="Tell me about your project..."
           rows={5}
-          className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 min-h-32 sm:min-h-40 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all resize-y"
+          className="text-base sm:text-lg lg:text-xl px-3 sm:px-4 py-2.5 sm:py-3 border-2 sm:border-3 min-h-32 sm:min-h-40 border-black dark:border-white dark:bg-black dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-black transition-all resize-y"
           {...register("message")}
         />
         {errors.message?.message && (
@@ -108,7 +108,7 @@ function ContactForm() {
         )}
       </div>
       <button
-        className="font-bold text-base sm:text-lg lg:text-xl text-white bg-black border-2 sm:border-3 border-black rounded-lg px-6 sm:px-8 py-3 sm:py-3.5 transition-all duration-200 hover:bg-black/90 hover:scale-[1.02] active:scale-[0.98] self-start cursor-pointer"
+        className="font-bold text-base sm:text-lg lg:text-xl text-white dark:text-black bg-black dark:bg-white border-2 sm:border-3 border-black dark:border-white rounded-lg px-6 sm:px-8 py-3 sm:py-3.5 transition-all duration-200 hover:bg-black/90 dark:hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98] self-start cursor-pointer"
         type="submit"
       >
         Send Message →

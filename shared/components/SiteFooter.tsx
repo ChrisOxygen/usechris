@@ -7,26 +7,32 @@ function SiteFooter() {
       {/* Left side - Links and Copyright */}
       <div className="flex flex-col gap-3">
         <nav className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base font-semibold uppercase">
-          <Link href="/" className="hover:text-gray-600 transition-colors">
+          <Link
+            href="/"
+            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+          >
             Home
           </Link>
-          <Link href="#about" className="hover:text-gray-600 transition-colors">
+          <Link
+            href="#about"
+            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+          >
             About
           </Link>
           <Link
             href="#projects"
-            className="hover:text-gray-600 transition-colors"
+            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
           >
             Projects
           </Link>
           <Link
             href="#contact"
-            className="hover:text-gray-600 transition-colors"
+            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
           >
             Contact
           </Link>
         </nav>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           © {new Date().getFullYear()} Chris Okafor. All rights reserved.
         </p>
       </div>
@@ -40,7 +46,7 @@ function SiteFooter() {
           className="group"
           aria-label="LinkedIn Profile"
         >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
             <FaLinkedinIn />
           </span>
         </Link>
@@ -51,7 +57,7 @@ function SiteFooter() {
           className="group"
           aria-label="X (Twitter) Profile"
         >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
             <FaXTwitter />
           </span>
         </Link>
@@ -62,7 +68,7 @@ function SiteFooter() {
           className="group"
           aria-label="GitHub Profile"
         >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
             <FaGithub />
           </span>
         </Link>
