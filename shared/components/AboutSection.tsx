@@ -5,15 +5,15 @@ function AboutSection() {
     <section id="about" className="page-section">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full">
         <div className="flex flex-col gap-4 lg:gap-6 items-center lg:basis-4/10">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-russo-one flex flex-row lg:flex-col gap-3  items-center font-bold">
+          <h2 className="text-fluid-about font-russo-one flex flex-row lg:flex-col gap-3  items-center font-bold">
             <span className="">ABOUT</span>
             <span className="">CHRIS</span>
           </h2>
           <Image
             src="/assets/about-chris.jpg"
             alt="About Chris Okafor"
-            width={800}
-            height={800}
+            width={400}
+            height={400}
             className="object-cover object-[center_-60px] w-full lg:max-w-[500px] aspect-square rounded-xl lg:rounded-2xl"
           />
         </div>

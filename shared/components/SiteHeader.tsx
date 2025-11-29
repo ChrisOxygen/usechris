@@ -14,7 +14,7 @@ function SiteHeader() {
         <h2 className="  font-russo-one">CHRIS OKAFOR</h2>
       </Link>
       <div className=" flex lg:flex-row items-center gap-3 lg:gap-6">
-        <menu className=" flex flex-wrap items-center justify-center gap-3 lg:gap-6">
+        <menu className=" flex items-center justify-center gap-3 lg:gap-6">
           {SITE_NAV.map((item) => {
             const isActive = pathname === item.href;
             const isTestimonial = item.name.toLowerCase() === "testimonials";
@@ -22,7 +22,7 @@ function SiteHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-md lg:text-xl transition-all duration-300 hover:text-black dark:hover:text-white ${
+                className={` text-[14px] lg:text-xl transition-all duration-300 hover:text-black dark:hover:text-white ${
                   isActive
                     ? "font-bold text-black dark:text-white"
                     : "font-semibold text-gray-500 dark:text-gray-400"
