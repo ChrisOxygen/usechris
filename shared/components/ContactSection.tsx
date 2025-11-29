@@ -1,6 +1,12 @@
 import Link from "next/link";
 
-import { FaEnvelope, FaPhone, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaGithub,
+} from "react-icons/fa6";
 import ContactForm from "./ContactForm";
 
 function ContactSection() {
@@ -47,7 +53,7 @@ function ContactSection() {
               className="group"
               aria-label="LinkedIn Profile"
             >
-              <span className="size-10 sm:size-11 lg:size-12 text-base sm:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
                 <FaLinkedinIn />
               </span>
             </Link>
@@ -58,8 +64,19 @@ function ContactSection() {
               className="group"
               aria-label="X (Twitter) Profile"
             >
-              <span className="size-10 sm:size-11 lg:size-12 text-base sm:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
                 <FaXTwitter />
+              </span>
+            </Link>
+            <Link
+              href="https://github.com/chrisOxygen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+              aria-label="GitHub Profile"
+            >
+              <span className="size-8 sm:size-10 lg:size-11 xl:size-12 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black text-white transition-all duration-300 group-hover:bg-black/80 group-hover:scale-110">
+                <FaGithub />
               </span>
             </Link>
           </div>
