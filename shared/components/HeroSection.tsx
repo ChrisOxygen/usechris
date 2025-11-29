@@ -22,10 +22,10 @@ function HeroSection() {
           MVP Development Expert
         </p>
         <div className=" flex flex-col md:flex-row gap-4 w-full basis-1/2">
-          <button className="font-semibold shrink-0 text-2xl basis-1/2 text-black border-3 border-black rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <button className="font-semibold shrink-0 text-lg sm:text-xl md:text-2xl basis-1/2 text-black border-2 sm:border-3 border-black rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             Let&apos;s Talk
           </button>
-          <button className="font-semibold shrink-0 text-2xl basis-1/2 text-black border-3 border-black rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <button className="font-semibold shrink-0 text-lg sm:text-xl md:text-2xl basis-1/2 text-black border-2 sm:border-3 border-black rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             Download CV
           </button>
         </div>

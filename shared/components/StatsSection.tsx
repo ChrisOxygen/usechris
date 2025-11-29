@@ -3,9 +3,9 @@ function StatsSection() {
     <section className="page-section">
       <div className="flex flex-col gap-6 sm:gap-0 w-full">
         {/* Row 1 */}
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 sm:border-b-3 sm:border-gray-300 xl:border-b-0">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 sm:border-b-2 md:border-b-3 sm:border-gray-300 xl:border-b-0">
           {/* Stat 1 */}
-          <div className="flex flex-col items-center text-center sm:basis-1/2 xl:basis-1/4 gap-2 pb-6 border-b-2 border-gray-300 sm:border-b-0 sm:py-8 xl:py-0 sm:pr-8 xl:pr-0 sm:border-r-3 sm:border-gray-300 xl:border-r-3">
+          <div className="flex flex-col items-center text-center sm:basis-1/2 xl:basis-1/4 gap-2 pb-6 border-b border-gray-300 sm:border-b-0 sm:py-8 sm:pr-8 xl:py-0 xl:px-8 sm:border-r-2 md:border-r-3 sm:border-gray-300 xl:border-r-3">
             <span className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-russo-one font-bold">
               3+
             </span>
@@ -18,7 +18,7 @@ function StatsSection() {
           </div>
 
           {/* Stat 2 */}
-          <div className="flex flex-col items-center text-center sm:basis-1/2 xl:basis-1/4 gap-2 pb-6 border-b-2 border-gray-300 sm:border-b-0 sm:py-8 xl:py-0 sm:pl-8 xl:px-0 xl:border-r-3 xl:border-gray-300">
+          <div className="flex flex-col items-center text-center sm:basis-1/2 xl:basis-1/4 gap-2 pb-6 border-b border-gray-300 sm:border-b-0 sm:py-8 sm:pl-8 xl:py-0 xl:px-8 xl:border-r-2 xl:border-gray-300">
             <span className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-russo-one font-bold">
               1000+
             </span>
@@ -31,7 +31,7 @@ function StatsSection() {
           </div>
 
           {/* Stat 3 - Visible only on XL */}
-          <div className="hidden xl:flex flex-col items-center text-center xl:basis-1/4 gap-2 xl:border-r-3 xl:border-gray-300">
+          <div className="hidden xl:flex flex-col items-center text-center xl:basis-1/4 gap-2 xl:px-8 xl:border-r-3 xl:border-gray-300">
             <span className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-russo-one font-bold">
               10+
             </span>
@@ -44,7 +44,7 @@ function StatsSection() {
           </div>
 
           {/* Stat 4 - Visible only on XL */}
-          <div className="hidden xl:flex flex-col items-center text-center xl:basis-1/4 gap-2">
+          <div className="hidden xl:flex flex-col items-center text-center xl:basis-1/4 gap-2 xl:px-8">
             <span className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-russo-one font-bold">
               100%
             </span>
@@ -60,7 +60,7 @@ function StatsSection() {
         {/* Row 2 - Hidden on XL */}
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 xl:hidden">
           {/* Stat 3 */}
-          <div className="flex flex-col items-center text-center sm:basis-1/2 gap-2 pb-6 border-b-2 border-gray-300 sm:border-b-0 sm:py-8 sm:pr-8 sm:border-r-3 sm:border-gray-300">
+          <div className="flex flex-col items-center text-center sm:basis-1/2 gap-2 pb-6 border-b border-gray-300 sm:border-b-0 sm:py-8 sm:pr-8 sm:border-r-2 md:border-r-3 sm:border-gray-300">
             <span className="text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-russo-one font-bold">
               10+
             </span>

@@ -9,7 +9,7 @@ function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className=" flex flex-col lg:flex-row items-center justify-between w-full px-4 lg:px-20 py-4 lg:py-8 border-b-3 border-black gap-4 lg:gap-0">
+    <header className=" flex flex-col lg:flex-row items-center justify-between w-full px-4 lg:px-20 py-4 lg:py-8 border-b-2 sm:border-b-3 border-black gap-4 lg:gap-0">
       <Link href={"/"} className="text-2xl font-bold">
         <h2 className=" text-3xl font-russo-one">CHRIS OKAFOR</h2>
       </Link>

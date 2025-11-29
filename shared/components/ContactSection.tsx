@@ -64,7 +64,7 @@ function ContactSection() {
             </Link>
           </div>
         </div>
-        <div className="basis-full lg:basis-2/3 flex lg:px-8 xl:px-10 pt-6 sm:pt-8 lg:pt-0 lg:border-l-3 border-t-2 sm:border-t-3 lg:border-t-0 border-gray-300">
+        <div className="basis-full lg:basis-2/3 flex lg:px-8 xl:pl-16 pt-6 sm:pt-8 lg:pt-0 lg:border-l-2 xl:border-l-3 border-t sm:border-t-2 lg:border-t-0 border-gray-300">
           <ContactForm />
         </div>
       </div>
