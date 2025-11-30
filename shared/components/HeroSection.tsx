@@ -1,5 +1,6 @@
 import ChrisOkaforTextSvgComponent from "@/shared/components/ChrisOkaforTextSvgComponent";
 import FSDTextSvgComponent from "@/shared/components/FSDTextSvgComponent";
+import Link from "next/link";
 
 function HeroSection() {
   return (
@@ -22,12 +23,19 @@ function HeroSection() {
           MVP Development Expert
         </p>
         <div className=" flex flex-col md:flex-row gap-4 w-full basis-1/2">
-          <button className="font-semibold shrink-0 text-lg sm:text-xl md:text-2xl basis-1/2 text-black dark:text-white border-2 sm:border-3 border-black dark:border-white rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+          <Link
+            href="/#contact"
+            className="font-semibold shrink-0 text-lg grid place-items-center sm:text-xl md:text-2xl basis-1/2 text-black dark:text-white border-2 sm:border-3 border-black dark:border-white rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] text-center"
+          >
             Let&apos;s Talk
-          </button>
-          <button className="font-semibold shrink-0 text-lg sm:text-xl md:text-2xl basis-1/2 text-black dark:text-white border-2 sm:border-3 border-black dark:border-white rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+          </Link>
+          <Link
+            href="/Christopher Okafor Resume.pdf"
+            download="Christopher Okafor Resume.pdf"
+            className="font-semibold shrink-0 text-lg grid place-items-center sm:text-xl md:text-2xl basis-1/2 text-black dark:text-white border-2 sm:border-3 border-black dark:border-white rounded-lg px-6 py-3 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] text-center"
+          >
             Download CV
-          </button>
+          </Link>
         </div>
       </div>
     </section>

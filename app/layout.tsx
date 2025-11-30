@@ -110,6 +110,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${russoOne.variable} ${squadaOne.variable} ${revalia.variable} ${sourceCodePro.variable} antialiased`}
       >
         {children}
