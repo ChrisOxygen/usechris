@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "email": "email dev --port 3600"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@react-email/components": "1.0.1",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "next": "16.0.5",
@@ -17,15 +19,18 @@
     "react-dom": "19.2.0",
     "react-hook-form": "^7.67.0",
     "react-icons": "^5.5.0",
+    "resend": "^6.5.2",
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@react-email/preview-server": "^5.0.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.5",
+    "react-email": "5.0.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
