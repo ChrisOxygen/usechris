@@ -5,7 +5,7 @@ function AboutSection() {
     <section id="about" className="page-section">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full">
         <div className="flex flex-col gap-4 lg:gap-6 items-center lg:basis-4/10">
-          <h2 className="text-fluid-about font-russo-one flex flex-row lg:flex-col gap-3  items-center font-bold">
+          <h2 className=" font-russo-one text-[9vw] sm:text-7xl lg:text-8xl flex flex-row lg:flex-col gap-3 lg:gap-0  items-center font-bold">
             <span className="">ABOUT</span>
             <span className="">CHRIS</span>
           </h2>

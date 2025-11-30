@@ -18,7 +18,7 @@ function ProjectsSection() {
     >
       <div className={`flex items-end justify-between ${RESPONSIVE_PADDING}`}>
         <div className="flex flex-col gap-4">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-russo-one">
+          <h2 className="text-[8vw] sm:text-5xl md:text-6xl lg:text-7xl font-russo-one">
             Featured Projects
           </h2>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 w-full max-w-[1200px]">
