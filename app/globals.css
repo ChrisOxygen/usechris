@@ -1,27 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background-light: #ffffff;
-  --color-foreground-light: #171717;
-  --color-background-dark: #0a0a0a;
-  --color-foreground-dark: #ededed;
-}
-
-@variant dark (.dark &);
-
-:root {
-  --background: var(--color-background-light);
-  --foreground: var(--color-foreground-light);
-}
-
-.dark {
-  --background: var(--color-background-dark);
-  --foreground: var(--color-foreground-dark);
+  /* Scarlet Punch — site-wide dark palette */
+  --color-background: #0b0808;
+  --color-surface: #161111;
+  --color-accent: #dc3545;
+  --color-accent-light: #ff3b4e;
+  --color-foreground: #f0ecec;
+  --color-muted: #9e8e8e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Typography — resolved at runtime from Next.js font variables */
   --font-russo-one: var(--font-russo-one);
   --font-squada-one: var(--font-squada-one);
   --font-revalia: var(--font-revalia);
@@ -34,23 +24,22 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-source-code-pro);
 }
 
 .page-section {
-  @apply px-4 sm:px-8 py-16 md:px-16 md:py-24 lg:px-20 lg:py-30 border-b-2 sm:border-b-3 border-black dark:border-white flex flex-col;
+  @apply px-4 sm:px-8 py-16 md:px-16 md:py-24 lg:px-20 lg:py-30 border-b-2 sm:border-b-3 border-muted/20 flex flex-col;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge, and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @keyframes scroll {
@@ -65,9 +54,11 @@ body {
 .embla {
   overflow: hidden;
 }
+
 .embla__container {
   display: flex;
 }
+
 .embla__slide {
   flex: 0 0 calc(40% - 20px);
   min-width: 0;
