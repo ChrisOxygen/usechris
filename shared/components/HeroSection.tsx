@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className=" px-6 md:px-12 lg:px-20 grid grid-rows-[4rem_1fr] bg-linear-to-tr from-[#130202] via-background to-[#130202]"
+      className="px-10 grid grid-rows-[4rem_1fr] bg-linear-to-tr from-[#130202] via-background to-[#130202]"
     >
       {/* Row 1 — nav placeholder (matches NavMenu h-16) */}
       <div aria-hidden="true" />
@@ -121,7 +121,7 @@ export default function HeroSection() {
           </div>
 
           {/* ── Bottom overlay card — lives outside overflow-hidden so it can bleed right ── */}
-          <div className="absolute bottom-8 left-16 -right-8 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl px-3 py-3 flex items-center justify-between gap-4">
+          <div className="absolute bottom-8 left-16 -right-8 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl pl-3 pr-2 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="flex flex-col gap-0.5">
                 <span className="font-squada-one text-[0.55rem] text-muted uppercase tracking-[0.18em]">
