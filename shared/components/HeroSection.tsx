@@ -4,9 +4,13 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen pt-24 pb-16 px-6 md:px-12 lg:px-20 flex items-center bg-linear-to-tr from-[#130202] via-background to-[#130202]"
+      className=" px-6 md:px-12 lg:px-20 grid grid-rows-[4rem_1fr] bg-linear-to-tr from-[#130202] via-background to-[#130202]"
     >
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
+      {/* Row 1 — nav placeholder (matches NavMenu h-16) */}
+      <div aria-hidden="true" />
+
+      {/* Row 2 — hero content */}
+      <div className="w-full py-16 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
         {/* ── Left Column ── */}
         <div className="flex flex-col gap-8 items-start">
           {/* Main heading */}
