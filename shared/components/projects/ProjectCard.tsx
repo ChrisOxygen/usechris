@@ -22,7 +22,7 @@ function ProjectCard({
   imageHeight = "h-[200px] lg:h-[280px]",
 }: ProjectCardProps) {
   return (
-    <div className="border-3 rounded-xl overflow-hidden border-black dark:border-white flex h-full flex-col">
+    <div className="md:border-3 border-2 rounded-xl overflow-hidden border-black dark:border-white flex h-full flex-col">
       <div className="border-b-3 border-black dark:border-white overflow-hidden w-full">
         <Image
           src={`/assets/projects-cover/${project.coverImage}.jpg`}
