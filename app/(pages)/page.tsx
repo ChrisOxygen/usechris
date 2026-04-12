@@ -1,7 +1,7 @@
-import ComingSoon from "@/shared/components/ComingSoon";
-
-function Home() {
-  return <ComingSoon />;
+export default function Home() {
+  return (
+    <main>
+      <h1>Chris Okafor — Portfolio V2</h1>
+    </main>
+  );
 }
-
-export default Home;
