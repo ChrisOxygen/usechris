@@ -8,7 +8,7 @@ export default function HeroSection() {
     >
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
         {/* ── Left Column ── */}
-        <div className="flex flex-col gap-10 items-start">
+        <div className="flex flex-col gap-8 items-start">
           {/* Main heading */}
           <h1 className="font-russo-one text-4xl md:text-5xl xl:text-[4.5rem] leading-[1.08] tracking-tight text-foreground">
             I turn complex
@@ -45,7 +45,7 @@ export default function HeroSection() {
           {/* Stats */}
           <div className="flex items-center justify-center">
             <div className="flex items-center">
-              <div className="flex flex-col items-center gap-1 px-6">
+              <div className="flex flex-col items-center gap-1 pl-1 pr-6">
                 <span className="font-russo-one text-2xl leading-none text-foreground">
                   500+
                 </span>
@@ -97,12 +97,12 @@ export default function HeroSection() {
         {/* ── Right Column ── */}
         <div className="relative w-full">
           {/* Image frame */}
-          <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden">
+          <div className="relative w-full aspect-3/4 rounded-2xl">
             <Image
               src="/assets/hero-chris-okafor.webp"
               alt="Chris Okafor — Full-Stack Developer"
-              fill
-              className="object-cover object-top"
+              width={600}
+              height={800}
               priority
             />
 
@@ -114,7 +114,6 @@ export default function HeroSection() {
                   "linear-gradient(to top, rgba(11,8,8,0.95) 0%, rgba(11,8,8,0.5) 28%, transparent 55%)",
               }}
             />
-
           </div>
 
           {/* ── Bottom overlay card — lives outside overflow-hidden so it can bleed right ── */}
