@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen pt-24 pb-16 px-6 md:px-12 lg:px-20 flex items-center"
+      className="min-h-screen pt-24 pb-16 px-6 md:px-12 lg:px-20 flex items-center bg-linear-to-tr from-[#130202] via-background to-[#130202]"
     >
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
         {/* ── Left Column ── */}
@@ -117,7 +117,7 @@ export default function HeroSection() {
           </div>
 
           {/* ── Bottom overlay card — lives outside overflow-hidden so it can bleed right ── */}
-          <div className="absolute bottom-8 left-16 -right-8 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl px-4 py-3.5 flex items-center justify-between gap-4">
+          <div className="absolute bottom-8 left-16 -right-8 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl px-3 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="flex flex-col gap-0.5">
                 <span className="font-squada-one text-[0.55rem] text-muted uppercase tracking-[0.18em]">

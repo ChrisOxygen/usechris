@@ -73,6 +73,7 @@ public/                — Static assets (og-image.png, favicons, etc.)
 - **Server Actions**: contact form email is sent via Resend through a server action in `shared/actions/`.
 - **No default exports from barrel files** — import directly from the source file.
 - **Tailwind v4**: use the new `@theme` block in CSS for custom tokens, not `tailwind.config.js`. Class names derive automatically from token names.
+- **No inline styles**: never use the `style` prop. All styling must be done through Tailwind CSS classes, including gradients, arbitrary values (e.g. `from-[#1e1212]`), and dynamic values.
 
 ## Commands
 
