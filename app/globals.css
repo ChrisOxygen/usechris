@@ -18,57 +18,8 @@
   --font-source-code-pro: var(--font-source-code-pro);
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-source-code-pro);
-}
-
-.page-section {
-  @apply px-4 sm:px-8 py-16 md:px-16 md:py-24 lg:px-20 lg:py-30 border-b-2 sm:border-b-3 border-muted/20 flex flex-col;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-@keyframes scroll {
-  from {
-    translate: 0;
-  }
-  to {
-    translate: -100%;
-  }
-}
-
-.embla {
-  overflow: hidden;
-}
-
-.embla__container {
-  display: flex;
-}
-
-.embla__slide {
-  flex: 0 0 calc(40% - 20px);
-  min-width: 0;
-  margin-right: 20px;
-}
-
-.embla__slide:last-child {
-  margin-right: 0px;
-}
-
-.text-fluid-about {
-  font-size: clamp(2.5rem, 8vw, 6rem);
 }
