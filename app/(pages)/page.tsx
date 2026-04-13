@@ -1,3 +1,4 @@
+import AboutSection from "@/shared/components/AboutSection";
 import HeroSection from "@/shared/components/HeroSection";
 import ProjectsSection from "@/shared/components/ProjectsSection";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <ProjectsSection />
+      <AboutSection />
     </main>
   );
 }
