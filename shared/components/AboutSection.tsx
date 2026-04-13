@@ -23,7 +23,7 @@ export default function AboutSection() {
         alt=""
         width={700}
         height={700}
-        className=" absolute bottom-0 right-0 opacity-75"
+        className=" absolute bottom-0 right-0 opacity-55"
         aria-hidden="true"
       />
       <div className="">
@@ -91,21 +91,21 @@ export default function AboutSection() {
             alt="Chris Okafor"
             height={500}
             width={500}
-            className="object-cover max-w-[200px] rounded-lg aspect-4/3"
+            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
           />
           <Image
             src="/assets/chris-okafor-about-2.webp"
             alt="Chris Okafor"
             height={500}
             width={500}
-            className="object-cover max-w-[200px] rounded-lg aspect-4/3"
+            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
           />
           <Image
             src="/assets/chris-okafor-about-1.webp"
             alt="Chris Okafor"
             height={500}
             width={500}
-            className="object-cover max-w-[200px] rounded-lg aspect-4/3"
+            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
           />
         </div>
       </div>
