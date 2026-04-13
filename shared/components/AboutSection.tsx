@@ -4,7 +4,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden px-10 py-24">
       {/* Layer 1 — texture background at near-invisible opacity */}
-      <div className="absolute inset-0">
+      {/* <div className="absolute inset-0">
         <Image
           src="/assets/about-sect-bg.jpg"
           alt=""
@@ -12,10 +12,10 @@ export default function AboutSection() {
           className="object-cover opacity-[0.58]"
           aria-hidden="true"
         />
-      </div>
+      </div> */}
 
       {/* Layer 2 — section gradient, same direction as hero/projects */}
-      <div className="absolute inset-0 bg-linear-to-tr from-[#130202] via-background/85 to-[#130202]" />
+      <div className="absolute inset-0 " />
 
       {/* Layer 3 — Chris sitting, anchored to bottom-right of section */}
       <Image
@@ -26,12 +26,6 @@ export default function AboutSection() {
         className=" absolute bottom-0 right-0 opacity-55"
         aria-hidden="true"
       />
-      <div className="">
-        {/* Fade: left edge blends into the section background */}
-        <div className="absolute inset-0 bg-linear-to-r from-background via-background/40 to-transparent" />
-        {/* Fade: top edge dissolves in */}
-        <div className="absolute inset-0 bg-linear-to-b from-background/80 via-transparent to-transparent" />
-      </div>
 
       {/* Layer 4 — content (text + overlay photos) */}
       <div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">

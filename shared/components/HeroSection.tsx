@@ -2,10 +2,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="px-10 grid grid-rows-[4rem_1fr] bg-linear-to-tr from-[#130202] via-background to-[#130202]"
-    >
+    <section id="hero" className="px-10 grid grid-rows-[4rem_1fr] ">
       {/* Row 1 — nav placeholder (matches NavMenu h-16) */}
       <div aria-hidden="true" />
 

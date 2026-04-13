@@ -12,10 +12,7 @@ const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
 export default function ProjectsSection() {
   return (
-    <section
-      id="work"
-      className="bg-linear-to-tr from-[#130202] via-background to-[#130202]"
-    >
+    <section id="work" className="">
       <div className="w-full py-24 max-w-5xl mx-auto flex flex-col gap-24 pb-40">
         {/* Section heading */}
         <div className="flex items-center gap-4">
