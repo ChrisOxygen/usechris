@@ -21,7 +21,7 @@ export default function NavMenu() {
           : ""
       }`}
     >
-      <nav className="max-w-7xl mx-auto h-16 flex items-center justify-between">
+      <nav className="max-w-5xl mx-auto h-16 flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/"

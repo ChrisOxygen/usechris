@@ -10,7 +10,7 @@ export default function HeroSection() {
       <div aria-hidden="true" />
 
       {/* Row 2 — hero content */}
-      <div className="w-full py-16 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
+      <div className="w-full py-16 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
         {/* ── Left Column ── */}
         <div className="flex flex-col gap-8 items-start">
           {/* Main heading */}
