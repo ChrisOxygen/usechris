@@ -1,5 +1,6 @@
 import { PROJECTS } from "@/shared/constants/projects";
 import FeaturedProjectCard from "@/shared/components/FeaturedProjectCard";
+import ProjectCard from "@/shared/components/ProjectCard";
 
 const PLACEHOLDER_IMAGES = [
   "/assets/projects-cover/Dictionary-Web-App-Case-Study-react-API-2.jpg",
@@ -7,6 +8,7 @@ const PLACEHOLDER_IMAGES = [
 ];
 
 const featuredProjects = PROJECTS.filter((p) => p.isFeatured);
+const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
 export default function ProjectsSection() {
   return (
@@ -36,6 +38,21 @@ export default function ProjectsSection() {
               flipped={index % 2 !== 0}
             />
           ))}
+        </div>
+
+        {/* Other noteworthy projects */}
+        <div className="flex flex-col items-center gap-10">
+          <div className="text-center">
+            <h3 className="font-russo-one text-xl text-foreground">
+              Other Noteworthy Projects
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+            {otherProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
