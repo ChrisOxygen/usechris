@@ -82,6 +82,10 @@ export const metadata: Metadata = {
     images: ["/og-image.png"], // Add your Twitter card image
     creator: "@chris_okafor_x", // Add your Twitter handle if you have one
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.svg",
+  },
   robots: {
     index: true,
     follow: true,

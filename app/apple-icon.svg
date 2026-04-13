@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" width="220" height="180">
+  <!-- < opening bracket (smaller) -->
+  <polyline
+    points="22,60 4,90 22,120"
+    fill="none"
+    stroke="#dc3545"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- C (taller than brackets) -->
+  <path
+    d="M100,28 C85,28 52,50 52,90 C52,130 85,152 100,152"
+    fill="none"
+    stroke="#0b0808"
+    stroke-width="14"
+    stroke-linecap="round"
+  />
+  <!-- / slash (smaller) -->
+  <line
+    x1="142" y1="60"
+    x2="122" y2="120"
+    stroke="#dc3545"
+    stroke-width="12"
+    stroke-linecap="round"
+  />
+  <!-- > closing bracket (smaller) -->
+  <polyline
+    points="156,60 174,90 156,120"
+    fill="none"
+    stroke="#dc3545"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
