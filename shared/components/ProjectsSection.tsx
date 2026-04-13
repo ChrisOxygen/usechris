@@ -1,25 +1,41 @@
+import { PROJECTS } from "@/shared/constants/projects";
+import FeaturedProjectCard from "@/shared/components/FeaturedProjectCard";
+
+const PLACEHOLDER_IMAGES = [
+  "/assets/projects-cover/Dictionary-Web-App-Case-Study-react-API-2.jpg",
+  "/assets/projects-cover/modern-financial-services-website-built-with-React-and-SASS.jpg",
+];
+
+const featuredProjects = PROJECTS.filter((p) => p.isFeatured);
+
 export default function ProjectsSection() {
   return (
     <section
       id="work"
-      className="px-10 grid grid-rows-[4rem_1fr] bg-linear-to-tr from-[#130202] via-background to-[#130202]"
+      className="bg-linear-to-tr from-[#130202] via-background to-[#130202]"
     >
-      <div className="w-full py-16 max-w-7xl mx-auto flex flex-col gap-12 pb-60">
-        <h2 className="">Some Things I’ve Built</h2>
-        <div className="grid grid-cols-3">
-          <div className=" row-start-1 w-full col-start-1 col-span-2 bg-red-400 aspect-5/3 "></div>
-          <div className=" col-start-2 row-start-1 w-full  col-span-2  flex flex-col items-end justify-center">
-            <span className="">Featured Project</span>
-            <h2 className="">Halcyon Theme</h2>
-            <div className="p-6 bg-black">
-              <p className=" text-right">
-                A minimal, dark blue theme for VS Code, Sublime Text, Atom,
-                iTerm, and more. Available on Visual Studio Marketplace, Package
-                Control, Atom Package Manager, and npm.
-              </p>
-            </div>
-            <span className="">VS Code Sublime Text Atom iTerm2 Hyper</span>
-          </div>
+      <div className="w-full py-24 px-10 max-w-7xl mx-auto flex flex-col gap-24 pb-40">
+        {/* Section heading */}
+        <div className="flex items-center gap-4">
+          <h2 className="font-russo-one text-2xl md:text-3xl text-foreground whitespace-nowrap">
+            <span className="font-source-code-pro text-accent text-lg font-normal mr-2">
+              03.
+            </span>
+            Some Things I&apos;ve Built
+          </h2>
+          <div className="h-px bg-surface flex-1 max-w-xs" />
+        </div>
+
+        {/* Featured project cards */}
+        <div className="flex flex-col gap-32">
+          {featuredProjects.map((project, index) => (
+            <FeaturedProjectCard
+              key={project.title}
+              project={project}
+              imageSrc={PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length]}
+              flipped={index % 2 !== 0}
+            />
+          ))}
         </div>
       </div>
     </section>

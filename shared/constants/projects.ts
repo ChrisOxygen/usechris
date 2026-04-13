@@ -15,7 +15,16 @@ export const PROJECTS: Project[] = [
     description:
       "Freelancers shouldn't lose jobs because their proposal was weak. Writing a proposal used to cost me an hour. Now it takes two minutes. Propreso is the AI-powered proposal and cover letter generator I built for freelancers — born from my own frustration, validated by 1,000+ downloads on the Chrome Web Store before I even ran a single ad. Currently rebuilding it as a full SaaS with a smarter AI pipeline: the tool classifies job briefs, extracts real signals, and generates proposals that sound like the freelancer — not a robot.",
     role: "Solo founder · Designed, built, and shipped end-to-end.",
-    tools: ["Next.js", "TypeScript", "Supabase", "Vercel AI SDK", "WXT", "Tailwind"],
+    tools: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Vercel AI SDK",
+      "WXT",
+      "Tailwind",
+    ],
+    liveLink: "https://shelf.usechris.dev",
+    githubLink: "https://github.com/chrisokafor/shelf",
   },
   {
     title: "Invox",
@@ -24,6 +33,8 @@ export const PROJECTS: Project[] = [
       "Invoice management for freelancers and small businesses in Nigeria. Invox handles the unglamorous stuff — generating professional invoices, tracking payment status, keeping a paper trail. Simple to use, solid under the hood, and actively processing real transactions. The metric says it all: 500+ invoices isn't a demo. It's a product with real users and real stakes.",
     role: "Full-stack developer · Design, frontend, backend, deployment.",
     tools: ["Next.js", "Prisma", "PostgreSQL", "Tailwind"],
+    liveLink: "https://shelf.usechris.dev",
+    githubLink: "https://github.com/chrisokafor/shelf",
   },
   {
     title: "Shelf",
