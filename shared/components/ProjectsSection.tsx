@@ -16,7 +16,7 @@ export default function ProjectsSection() {
       id="work"
       className="bg-linear-to-tr from-[#130202] via-background to-[#130202]"
     >
-      <div className="w-full py-24 px-10 max-w-7xl mx-auto flex flex-col gap-24 pb-40">
+      <div className="w-full py-24 max-w-5xl mx-auto flex flex-col gap-24 pb-40">
         {/* Section heading */}
         <div className="flex items-center gap-4">
           <h2 className="font-russo-one text-2xl md:text-3xl text-foreground whitespace-nowrap">
