@@ -12,7 +12,7 @@ const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
 export default function ProjectsSection() {
   return (
-    <section id="work" className=" relative px-12  -mt-60 z-10">
+    <section id="work" className=" relative px-6 sm:px-12 -mt-60 z-10">
       <div className="w-full py-18 lg:py-24 max-w-3xl lg:max-w-5xl mx-auto flex flex-col gap-24 ">
         {/* Section heading */}
         <div className="flex items-center gap-4">

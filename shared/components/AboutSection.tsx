@@ -4,7 +4,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden px-12 py-18 lg:py-24"
+      className="relative overflow-hidden px-6 sm:px-12 py-18 lg:py-24"
     >
       {/* Layer 1 — texture background at near-invisible opacity */}
       {/* <div className="absolute inset-0">
@@ -26,7 +26,7 @@ export default function AboutSection() {
         alt=""
         width={700}
         height={700}
-        className=" absolute bottom-0 right-0 opacity-55"
+        className=" absolute bottom-0 sm:right-0 -right-40 opacity-55"
         aria-hidden="true"
       />
 
@@ -76,7 +76,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── Right: Three overlay photos, positioned over the sitting-image bg ── */}
-        <div className="relative flex flex-col gap-4 lg:items-end justify-end mt-20 pr-10">
+        <div className="relative flex flex-col gap-4 lg:items-end items-start justify-end md:mt-20 md:pr-10">
           {/* Photo 1 — upper area */}
           <Image
             src="/assets/chris-okafor-about-3.webp"

@@ -68,10 +68,10 @@ export default function FeaturedProjectCard({
         />
 
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-background/92" />
+        <div className="absolute inset-0 bg-background/98" />
 
         {/* Content on top of overlay */}
-        <div className="relative z-10 p-8 flex flex-col gap-5">
+        <div className="relative z-10 px-4 sm:px-0 py-6 sm:py-0 sm:p-8 flex flex-col gap-5">
           <span className="font-source-code-pro text-xs text-accent tracking-widest uppercase">
             Featured Project
           </span>
@@ -101,7 +101,12 @@ export default function FeaturedProjectCard({
             flipped ? "col-start-6 col-span-7" : "col-start-1 col-span-7",
           ].join(" ")}
         >
-          <Image src={imageSrc} alt={project.title} fill className="object-cover" />
+          <Image
+            src={imageSrc}
+            alt={project.title}
+            fill
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-accent/40 group-hover:bg-transparent transition-colors duration-300 z-10" />
         </div>
 
@@ -133,7 +138,9 @@ export default function FeaturedProjectCard({
               ].join(" ")}
             >
               View Case Study
-              <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+              <span className="group-hover:translate-x-0.5 transition-transform">
+                →
+              </span>
             </button>
           </div>
 
@@ -145,7 +152,10 @@ export default function FeaturedProjectCard({
               ].join(" ")}
             >
               {project.tools!.map((tool) => (
-                <li key={tool} className="font-source-code-pro text-xs text-muted">
+                <li
+                  key={tool}
+                  className="font-source-code-pro text-xs text-muted"
+                >
                   {tool}
                 </li>
               ))}

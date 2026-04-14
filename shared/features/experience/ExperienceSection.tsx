@@ -15,7 +15,7 @@ export default function ExperienceSection() {
   ) as ExperienceEntry;
 
   return (
-    <section id="experience" className="px-12 py-18 lg:py-24">
+    <section id="experience" className="px-6 sm:px-12 py-18 lg:py-24">
       <div className="max-w-3xl mx-auto">
         {/* Section label */}
         <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">

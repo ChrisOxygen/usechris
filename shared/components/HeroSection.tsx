@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section id="hero" className="px-10 grid grid-rows-[4rem_1fr] ">
+    <section id="hero" className="px-6 sm:px-12 grid grid-rows-[4rem_1fr] ">
       {/* Row 1 — nav placeholder (matches NavMenu h-16) */}
       <div aria-hidden="true" />
 
@@ -36,7 +36,7 @@ export default function HeroSection() {
               Next.js · React · TypeScript · Supabase
             </p>
 
-            <p className="font-source-code-pro text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
+            <p className="font-source-code-pro max-w-[300px] sm:max-w-0 text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
               3+ years. 5 production apps. 1,000+ real users.
             </p>
           </div>
@@ -47,13 +47,13 @@ export default function HeroSection() {
               href="#projects"
               className="px-5 py-2.5 rounded-lg border border-accent text-accent font-squada-one text-base tracking-wide hover:bg-accent hover:text-foreground transition-all duration-200"
             >
-              See my work.
+              See my work
             </a>
             <a
               href="#about"
               className="px-5 py-2.5 rounded-lg font-squada-one text-base text-muted tracking-wide hover:text-foreground transition-colors duration-200"
             >
-              Learn more.
+              Download Resume
             </a>
           </div>
 

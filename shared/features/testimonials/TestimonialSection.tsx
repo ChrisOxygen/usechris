@@ -33,7 +33,7 @@ export default function TestimonialSection() {
   }
 
   return (
-    <section id="testimonials" className="px-12 pb-16 pt-18 lg:pt-24">
+    <section id="testimonials" className="px-6 sm:px-12 pb-16 pt-18 lg:pt-24">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
         <div className="flex flex-col items-center text-center">
