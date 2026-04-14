@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { RiArrowRightSFill } from "react-icons/ri";
 import {
   EXPERIENCE,
   type ExperienceEntry,
@@ -74,12 +75,11 @@ export default function ExperienceSection() {
             <ul className="mt-6 flex flex-col gap-3.5">
               {selected.bullets.map((bullet, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span
-                    className="mt-[3px] shrink-0 text-accent text-xs leading-none"
+                  <RiArrowRightSFill
+                    className="mt-[3px] shrink-0 text-accent"
+                    size={16}
                     aria-hidden="true"
-                  >
-                    ▶
-                  </span>
+                  />
                   <span className="font-source-code-pro text-sm text-foreground/70 leading-relaxed">
                     {bullet}
                   </span>
