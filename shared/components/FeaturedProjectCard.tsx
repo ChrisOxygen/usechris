@@ -58,7 +58,7 @@ export default function FeaturedProjectCard({
     <>
       {/* ── Mobile card (< lg) — image background with overlay ── */}
       <div
-        className="lg:hidden relative rounded-xl overflow-hidden border flex flex-col"
+        className="lg:hidden relative rounded-xl overflow-hidden border-accent border flex flex-col"
         style={{ backgroundImage: `url(${imageSrc})` }}
       >
         {/* Dark overlay */}

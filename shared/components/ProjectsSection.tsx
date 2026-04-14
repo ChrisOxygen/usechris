@@ -39,7 +39,7 @@ export default function ProjectsSection() {
 
         {/* Other noteworthy projects */}
         <div className="flex flex-col items-center gap-10">
-          <div className="text-center">
+          <div className="sm:text-center">
             <h3 className="font-russo-one text-xl text-foreground">
               Other Noteworthy Projects
             </h3>

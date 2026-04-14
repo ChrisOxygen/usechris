@@ -37,13 +37,13 @@ export default function TestimonialSection() {
     <section id="testimonials" className="px-6 sm:px-12 pb-16 pt-18 lg:pt-24">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col sm:items-center sm:text-center">
           <div className="flex items-center gap-2">
             <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
               Words From People Who&apos;ve Seen The Work
             </p>
           </div>
-          <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
+          <h2 className="font-russo-one  text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
             Don&apos;t Take My Word For It
           </h2>
           <p className="mt-3 font-source-code-pro text-sm text-muted max-w-lg leading-relaxed">
