@@ -23,7 +23,7 @@ export default function ExperienceSection() {
           The Journey So Far
         </p>
 
-        <h2 className="font-russo-one text-3xl min-[500px]:text-4xl text-foreground leading-tight mt-3">
+        <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
           From <span className="text-accent">freelance gigs</span> to full
           products
         </h2>

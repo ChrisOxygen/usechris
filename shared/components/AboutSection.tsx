@@ -26,7 +26,7 @@ export default function AboutSection() {
         alt=""
         width={700}
         height={700}
-        className=" absolute bottom-0 sm:right-0 -right-40 opacity-55"
+        className=" absolute bottom-0 md:right-0 -right-40 opacity-55"
         aria-hidden="true"
       />
 
@@ -34,7 +34,7 @@ export default function AboutSection() {
       <div className="relative z-10 max-w-3xl lg:max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
         {/* ── Left: Text ── */}
         <div className="flex flex-col gap-6">
-          <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight">
+          <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight">
             I design, build, and ship products{" "}
             <span className="text-accent">people actually use</span>
           </h2>

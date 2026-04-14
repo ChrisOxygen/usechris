@@ -42,7 +42,7 @@ export default function TestimonialSection() {
               Words From People Who&apos;ve Seen The Work
             </p>
           </div>
-          <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight mt-3">
+          <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
             Don&apos;t Take My Word For It
           </h2>
           <p className="mt-3 font-source-code-pro text-sm text-muted max-w-lg leading-relaxed">

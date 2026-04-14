@@ -11,7 +11,7 @@ export default function HeroSection() {
         {/* ── Left Column ── */}
         <div className="flex flex-col items-center gap-8 lg:items-start">
           {/* Main heading */}
-          <h1 className="font-russo-one text-center lg:text-left text-3xl md:text-5xl  leading-[1.08] tracking-tight text-foreground">
+          <h1 className="font-russo-one text-center lg:text-left text-3xl min-[420px]:text-4xl md:text-5xl  leading-[1.08] tracking-tight text-foreground">
             I turn complex
             <br /> ideas into{" "}
             <span className="text-accent">working software.</span>
@@ -36,7 +36,7 @@ export default function HeroSection() {
               Next.js · React · TypeScript · Supabase
             </p>
 
-            <p className="font-source-code-pro max-w-[300px] sm:max-w-0 text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
+            <p className="font-source-code-pro max-w-[300px] sm:max-w-full text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
               3+ years. 5 production apps. 1,000+ real users.
             </p>
           </div>
