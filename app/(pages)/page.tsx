@@ -1,4 +1,5 @@
 import AboutSection from "@/shared/components/AboutSection";
+import CTASection from "@/shared/components/CTASection";
 import ExperienceSection from "@/shared/components/ExperienceSection";
 import HeroSection from "@/shared/components/HeroSection";
 import ProjectsSection from "@/shared/components/ProjectsSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <AboutSection />
       <ExperienceSection />
       <TestimonialSection />
+      <CTASection />
     </main>
   );
 }
