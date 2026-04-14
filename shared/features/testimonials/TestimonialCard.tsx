@@ -8,7 +8,7 @@ type Props = {
 
 export default function TestimonialCard({ testimonial }: Props) {
   return (
-    <div className="relative flex-1 flex flex-col p-10 rounded-md bg-background justify-center min-h-[420px] overflow-hidden">
+    <div className="relative flex-1 flex flex-col p-6 sm:p-10 rounded-md bg-[#1a1010] justify-center min-h-[320px] sm:min-h-[420px] overflow-hidden">
       {/* Watermark */}
       <span
         aria-hidden="true"
@@ -18,7 +18,7 @@ export default function TestimonialCard({ testimonial }: Props) {
       </span>
 
       {/* Content — outer div is re-mounted via key in parent to replay animation */}
-      <div className="relative z-10 testimonial-fade-in pr-14">
+      <div className="relative z-10 testimonial-fade-in  sm:pr-14">
         <blockquote className="font-russo-one text-xl md:text-2xl lg:text-[1.65rem] text-foreground leading-snug">
           {testimonial.testimonial}
         </blockquote>

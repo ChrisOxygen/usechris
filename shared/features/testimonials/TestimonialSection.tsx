@@ -4,6 +4,7 @@ import { useState } from "react";
 import { RiPencilLine } from "react-icons/ri";
 import { TESTIMONIALS } from "@/shared/constants/testimonials";
 import TestimonialImageStack from "./TestimonialImageStack";
+import TestimonialImageRow from "./TestimonialImageRow";
 import TestimonialCard from "./TestimonialCard";
 
 export default function TestimonialSection() {
@@ -51,15 +52,26 @@ export default function TestimonialSection() {
           </p>
         </div>
 
-        {/* Two-panel layout */}
-        <div className="mt-12 max-w-3xl flex mx-auto gap-5 items-stretch">
+        {/* ── Desktop: side-by-side image stack + card ── */}
+        <div className="hidden md:flex mt-12 max-w-3xl mx-auto gap-5 items-stretch">
           <TestimonialImageStack
             visibleItems={visibleItems}
             activeInWindow={activeInWindow}
             onSelect={handleSelect}
           />
-          {/* key swap re-mounts the card, replaying the fade-in animation */}
           <TestimonialCard key={fadeKey} testimonial={active} />
+        </div>
+
+        {/* ── Mobile: card on top, thumbnail row at bottom ── */}
+        <div className="md:hidden mt-8">
+          <TestimonialCard key={fadeKey} testimonial={active} />
+          <TestimonialImageRow
+            visibleItems={visibleItems}
+            activeInWindow={activeInWindow}
+            onSelect={handleSelect}
+            hasLeft={windowStart > 0}
+            hasRight={windowStart + 3 < total}
+          />
         </div>
       </div>
     </section>
