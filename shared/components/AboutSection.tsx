@@ -28,7 +28,7 @@ export default function AboutSection() {
       />
 
       {/* Layer 4 — content (text + overlay photos) */}
-      <div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+      <div className="relative z-10 max-w-3xl lg:max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
         {/* ── Left: Text ── */}
         <div className="flex flex-col gap-6">
           <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight">
@@ -73,7 +73,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── Right: Three overlay photos, positioned over the sitting-image bg ── */}
-        <div className="relative flex flex-col gap-4 items-end justify-end mt-20 pr-10">
+        <div className="relative flex flex-col gap-4 lg:items-end justify-end mt-20 pr-10">
           {/* Photo 1 — upper area */}
           <Image
             src="/assets/chris-okafor-about-3.webp"

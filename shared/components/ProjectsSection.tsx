@@ -12,8 +12,8 @@ const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
 export default function ProjectsSection() {
   return (
-    <section id="work" className="">
-      <div className="w-full py-24 max-w-5xl mx-auto flex flex-col gap-24 pb-40">
+    <section id="work" className=" relative  -mt-60 z-10">
+      <div className="w-full py-24 max-w-3xl lg:max-w-5xl mx-auto flex flex-col gap-24 pb-40">
         {/* Section heading */}
         <div className="flex items-center gap-4">
           <h2 className="font-russo-one text-2xl md:text-3xl text-foreground whitespace-nowrap">
@@ -23,7 +23,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Featured project cards */}
-        <div className="flex flex-col gap-32">
+        <div className="flex flex-col gap-8 lg:gap-32">
           {featuredProjects.map((project, index) => (
             <FeaturedProjectCard
               key={project.title}

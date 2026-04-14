@@ -7,11 +7,11 @@ export default function HeroSection() {
       <div aria-hidden="true" />
 
       {/* Row 2 — hero content */}
-      <div className="w-full py-16 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
+      <div className="w-full py-16 max-w-2xl lg:max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-50 items-center">
         {/* ── Left Column ── */}
-        <div className="flex flex-col gap-8 items-start">
+        <div className="flex flex-col items-center gap-8 lg:items-start">
           {/* Main heading */}
-          <h1 className="font-russo-one text-4xl md:text-5xl xl:text-[4.5rem] leading-[1.08] tracking-tight text-foreground">
+          <h1 className="font-russo-one text-center lg:text-left text-4xl md:text-5xl  leading-[1.08] tracking-tight text-foreground">
             I turn complex
             <br /> ideas into{" "}
             <span className="text-accent">working software.</span>
@@ -96,9 +96,9 @@ export default function HeroSection() {
         </div>
 
         {/* ── Right Column ── */}
-        <div className="relative w-full">
+        <div className="relative w-full max-w-120 mx-auto lg:max-w-none">
           {/* Image frame */}
-          <div className="relative w-full aspect-3/4 rounded-2xl">
+          <div className="relative w-full aspect-square lg:aspect-3/4 rounded-2xl">
             <Image
               src="/assets/hero-chris-okafor.webp"
               alt="Chris Okafor — Full-Stack Developer"
@@ -115,10 +115,13 @@ export default function HeroSection() {
                   "linear-gradient(to top, rgba(11,8,8,0.95) 0%, rgba(11,8,8,0.5) 28%, transparent 55%)",
               }}
             />
+
+            {/* Mobile-only: aggressive bottom fade so image disappears below the CTA */}
+            <div className="lg:hidden absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-background via-background/85 to-transparent pointer-events-none" />
           </div>
 
-          {/* ── Bottom overlay card — lives outside overflow-hidden so it can bleed right ── */}
-          <div className="absolute bottom-8 left-16 -right-8 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl pl-3 pr-2 py-3 flex items-center justify-between gap-4">
+          {/* ── Overlay card — centered on mobile, bottom-right bleed on lg ── */}
+          <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-full max-w-[350px] lg:mr-0  lg:bottom-8 lg:left-16 lg:-right-8 lg:w-auto lg:translate-x-0 bg-surface/80 backdrop-blur-md border border-foreground/10 rounded-xl pl-3 pr-2 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="flex flex-col gap-0.5">
                 <span className="font-squada-one text-[0.55rem] text-muted uppercase tracking-[0.18em]">
