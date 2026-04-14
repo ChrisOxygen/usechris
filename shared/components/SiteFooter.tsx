@@ -1,12 +1,11 @@
 import { RiMailLine, RiLinkedinBoxLine, RiTwitterXLine } from "react-icons/ri";
-import FadeIn from "@/shared/components/FadeIn";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="px-10 py-8 border-t border-foreground/[0.06]">
-      <FadeIn className="max-w-5xl mx-auto flex items-center justify-between gap-4">
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
 
         {/* Copyright */}
         <p className="font-squada-one text-xs text-muted tracking-[0.15em] uppercase">
@@ -42,7 +41,7 @@ export default function SiteFooter() {
           </a>
         </div>
 
-      </FadeIn>
+      </div>
     </footer>
   );
 }
