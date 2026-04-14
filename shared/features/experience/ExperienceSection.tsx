@@ -15,7 +15,7 @@ export default function ExperienceSection() {
   ) as ExperienceEntry;
 
   return (
-    <section id="experience" className="px-10 py-24">
+    <section id="experience" className="px-12 py-24">
       <div className="max-w-3xl mx-auto">
         {/* Section label */}
         <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
@@ -23,7 +23,8 @@ export default function ExperienceSection() {
         </p>
 
         <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight mt-3">
-          From <span className="text-accent">freelance gigs</span> to full products
+          From <span className="text-accent">freelance gigs</span> to full
+          products
         </h2>
 
         {/* Two-panel layout */}

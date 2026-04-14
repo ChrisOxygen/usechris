@@ -2,7 +2,7 @@ import { RiCalendar2Line, RiArrowRightLine } from "react-icons/ri";
 
 export default function CTASection() {
   return (
-    <section id="contact" className="relative px-10 pb-32 overflow-hidden">
+    <section id="contact" className="relative px-12 pb-32 overflow-hidden">
       {/* Ambient red radial glow — draws the eye toward the column */}
       <div
         aria-hidden="true"
@@ -20,12 +20,12 @@ export default function CTASection() {
           </div>
 
           {/* Headline */}
-          <h2 className="mt-5 font-russo-one text-4xl md:text-5xl xl:text-[3.25rem] leading-[1.1] tracking-tight text-foreground text-balance">
+          <h2 className="mt-5 font-russo-one text-5xl xl:text-[3.25rem] leading-[1.1] tracking-tight text-foreground text-balance">
             Let&apos;s talk about what you&apos;re building.
           </h2>
 
           {/* Supporting line */}
-          <p className="mt-6 font-source-code-pro text-sm text-muted leading-relaxed max-w-lg text-pretty">
+          <p className="mt-6 font-source-code-pro text-sm text-muted leading-relaxed lg:max-w-lg text-pretty">
             Whether it&apos;s a product that needs shipping, a team that needs a
             developer, or an idea that needs shape I&apos;d love to hear about
             it. Pick a time, and let&apos;s figure it out together.

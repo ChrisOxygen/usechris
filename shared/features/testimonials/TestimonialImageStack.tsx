@@ -14,7 +14,7 @@ export default function TestimonialImageStack({
   onSelect,
 }: Props) {
   return (
-    <div className="w-24 md:w-52 shrink-0 flex flex-col h-[420px] gap-2">
+    <div className="w-52 shrink-0 flex flex-col h-[420px] gap-2">
       {visibleItems.map((item, pos) => {
         if (!item) return <div key={pos} className="flex-1" />;
         const isActive = pos === activeInWindow;

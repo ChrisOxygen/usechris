@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative overflow-hidden px-10 py-24">
+    <section id="about" className="relative overflow-hidden px-12 py-24">
       {/* Layer 1 — texture background at near-invisible opacity */}
       {/* <div className="absolute inset-0">
         <Image
