@@ -15,10 +15,10 @@ export default function NavMenu() {
 
   return (
     <header
-      className={`fixed top-0 px-10 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 px-10 left-0 right-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-surface"
-          : ""
+          ? "bg-background/80 backdrop-blur-md border-surface"
+          : "border-transparent"
       }`}
     >
       <nav className="max-w-5xl mx-auto h-16 flex items-center justify-between">

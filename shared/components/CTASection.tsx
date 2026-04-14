@@ -2,10 +2,7 @@ import { RiCalendar2Line, RiArrowRightLine } from "react-icons/ri";
 
 export default function CTASection() {
   return (
-    <section
-      id="contact"
-      className="relative px-10 py-32 overflow-hidden"
-    >
+    <section id="contact" className="relative px-10 pb-32 overflow-hidden">
       {/* Ambient red radial glow — draws the eye toward the column */}
       <div
         aria-hidden="true"
@@ -15,14 +12,8 @@ export default function CTASection() {
       <div className="relative max-w-5xl mx-auto">
         {/* ── Centered column ── */}
         <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-
           {/* Section label */}
           <div className="flex items-center gap-2">
-            <RiCalendar2Line
-              className="text-accent"
-              size={13}
-              aria-hidden="true"
-            />
             <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
               Available for New Projects
             </p>
@@ -34,9 +25,9 @@ export default function CTASection() {
           </h2>
 
           {/* Supporting line */}
-          <p className="mt-6 font-source-code-pro text-sm text-muted leading-relaxed max-w-md text-pretty">
+          <p className="mt-6 font-source-code-pro text-sm text-muted leading-relaxed max-w-lg text-pretty">
             Whether it&apos;s a product that needs shipping, a team that needs a
-            developer, or an idea that needs shape — I&apos;d love to hear about
+            developer, or an idea that needs shape I&apos;d love to hear about
             it. Pick a time, and let&apos;s figure it out together.
           </p>
 
@@ -58,8 +49,8 @@ export default function CTASection() {
 
           {/* Secondary text */}
           <p className="mt-5 font-source-code-pro text-xs text-muted leading-relaxed max-w-xs">
-            Not ready to hop on a call? No pressure. Drop me a line and I&apos;ll
-            get back to you.
+            Not ready to hop on a call? No pressure. Drop me a line and
+            I&apos;ll get back to you.
           </p>
 
           {/* Secondary links */}
@@ -93,7 +84,6 @@ export default function CTASection() {
               X
             </a>
           </div>
-
         </div>
       </div>
     </section>

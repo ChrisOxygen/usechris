@@ -17,12 +17,9 @@ export default function ProjectsSection() {
         {/* Section heading */}
         <div className="flex items-center gap-4">
           <h2 className="font-russo-one text-2xl md:text-3xl text-foreground whitespace-nowrap">
-            <span className="font-source-code-pro text-accent text-lg font-normal mr-2">
-              03.
-            </span>
-            Some Things I&apos;ve Built
+            Built to Ship
           </h2>
-          <div className="h-px bg-surface flex-1 max-w-xs" />
+          <div className="h-px bg-accent flex-1" />
         </div>
 
         {/* Featured project cards */}

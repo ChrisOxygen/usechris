@@ -33,16 +33,11 @@ export default function TestimonialSection() {
   }
 
   return (
-    <section id="testimonials" className="px-10 py-24">
+    <section id="testimonials" className="px-10 pb-16 pt-24">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center gap-2">
-            <RiPencilLine
-              className="text-accent"
-              size={13}
-              aria-hidden="true"
-            />
             <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
               Words From People Who&apos;ve Seen The Work
             </p>
@@ -50,7 +45,7 @@ export default function TestimonialSection() {
           <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight mt-3">
             Don&apos;t Take My Word For It
           </h2>
-          <p className="mt-3 font-source-code-pro text-sm text-muted max-w-sm leading-relaxed">
+          <p className="mt-3 font-source-code-pro text-sm text-muted max-w-lg leading-relaxed">
             Real results speak louder than promises. Here&apos;s what clients
             and collaborators have to say after working with me.
           </p>

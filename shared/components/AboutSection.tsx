@@ -31,14 +31,9 @@ export default function AboutSection() {
       <div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
         {/* ── Left: Text ── */}
         <div className="flex flex-col gap-6">
-          <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
-            About me
-          </p>
-
           <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight">
-            Developer. Designer.
-            <br />
-            <span className="text-accent">Builder.</span>
+            I design, build, and ship products{" "}
+            <span className="text-accent">people actually use</span>
           </h2>
 
           <div className="flex flex-col gap-4 font-source-code-pro text-sm text-foreground/65 leading-relaxed">

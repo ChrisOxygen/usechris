@@ -19,11 +19,11 @@ export default function ExperienceSection() {
       <div className="max-w-3xl mx-auto">
         {/* Section label */}
         <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
-          Experience
+          The Journey So Far
         </p>
 
         <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight mt-3">
-          Where I&apos;ve <span className="text-accent">worked.</span>
+          From <span className="text-accent">freelance gigs</span> to full products
         </h2>
 
         {/* Two-panel layout */}
