@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { RiPencilLine } from "react-icons/ri";
 import { TESTIMONIALS } from "@/shared/constants/testimonials";
 import TestimonialImageStack from "./TestimonialImageStack";
 import TestimonialImageRow from "./TestimonialImageRow";

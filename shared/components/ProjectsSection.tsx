@@ -14,7 +14,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="work"
-      className=" relative px-6 sm:px-12 -mt-50 sm:-mt-60 lg:mt-0 z-10"
+      className=" relative px-6 sm:px-12 -mt-40 sm:-mt-60 lg:mt-0 z-10"
     >
       <div className="w-full  lg:pb-20 pb-8 max-w-3xl lg:max-w-5xl mx-auto flex flex-col gap-12 sm:gap-24 ">
         {/* Section heading */}
