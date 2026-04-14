@@ -83,8 +83,8 @@ export const metadata: Metadata = {
     creator: "@chris_okafor_x", // Add your Twitter handle if you have one
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.svg",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
   robots: {
     index: true,
