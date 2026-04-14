@@ -8,7 +8,7 @@ type Props = {
 
 export default function TestimonialCard({ testimonial }: Props) {
   return (
-    <div className="relative flex-1 flex flex-col p-6 sm:p-10 rounded-md bg-[#1a1010] justify-center min-h-[320px] sm:min-h-[420px] overflow-hidden">
+    <div className="relative flex-1 flex flex-col p-6 sm:p-10 rounded-md bg-[#141414] justify-center min-h-[320px] sm:min-h-[420px] overflow-hidden">
       {/* Watermark */}
       <span
         aria-hidden="true"
