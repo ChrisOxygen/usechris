@@ -7,6 +7,7 @@ import {
   type ExperienceEntry,
 } from "@/shared/constants/experience";
 import ExperienceTabs from "@/shared/features/experience/ExperienceTabs";
+import FadeIn from "@/shared/components/FadeIn";
 
 export default function ExperienceSection() {
   const [selectedId, setSelectedId] = useState<string>(EXPERIENCE[0].id);
@@ -18,27 +19,29 @@ export default function ExperienceSection() {
   return (
     <section id="experience" className="px-6 sm:px-12 py-18 lg:py-24">
       <div className="max-w-3xl mx-auto">
-        {/* Section label */}
-        <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
-          The Journey So Far
-        </p>
+        {/* Section label + heading */}
+        <FadeIn>
+          <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
+            The Journey So Far
+          </p>
 
-        <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
-          From <span className="text-accent">freelance gigs</span> to full
-          products
-        </h2>
+          <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight mt-3">
+            From <span className="text-accent">freelance gigs</span> to full
+            products
+          </h2>
+        </FadeIn>
 
         {/* Mobile tab buttons */}
-        <div className="md:hidden mt-12">
+        <FadeIn delayClass="delay-100" className="md:hidden mt-12">
           <ExperienceTabs
             entries={EXPERIENCE}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </div>
+        </FadeIn>
 
         {/* Two-panel layout */}
-        <div className="mt-8 md:mt-12 flex flex-col md:flex-row gap-0">
+        <FadeIn delayClass="delay-100" className="mt-8 md:mt-12 flex flex-col md:flex-row gap-0">
           {/* ── Left: company tab list (desktop only) ── */}
           <aside className="hidden md:flex md:w-44 shrink-0 flex-col">
             {EXPERIENCE.map((entry) => (
@@ -98,7 +101,7 @@ export default function ExperienceSection() {
               ))}
             </ul>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-surface rounded-sm p-6 flex flex-col gap-4 border border-white/5 hover:border-accent/20 hover:-translate-y-1 transition-all duration-200 group">
+    <div className="bg-surface rounded-sm min-h-[300px] p-6 flex flex-col gap-4 border border-white/5 hover:border-accent/20 hover:-translate-y-1 transition-all duration-200 group">
       {/* Top row — folder icon + links */}
       <div className="flex items-center justify-between">
         <FiFolder size={28} className="text-accent" />

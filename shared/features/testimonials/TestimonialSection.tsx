@@ -5,6 +5,7 @@ import { TESTIMONIALS } from "@/shared/constants/testimonials";
 import TestimonialImageStack from "./TestimonialImageStack";
 import TestimonialImageRow from "./TestimonialImageRow";
 import TestimonialCard from "./TestimonialCard";
+import FadeIn from "@/shared/components/FadeIn";
 
 export default function TestimonialSection() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -36,7 +37,7 @@ export default function TestimonialSection() {
     <section id="testimonials" className="px-6 sm:px-12 pb-16 pt-18 lg:pt-24">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
-        <div className="flex flex-col sm:items-center sm:text-center">
+        <FadeIn className="flex flex-col sm:items-center sm:text-center">
           <div className="flex items-center gap-2">
             <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
               Words From People Who&apos;ve Seen The Work
@@ -49,20 +50,20 @@ export default function TestimonialSection() {
             Real results speak louder than promises. Here&apos;s what clients
             and collaborators have to say after working with me.
           </p>
-        </div>
+        </FadeIn>
 
         {/* ── Desktop: side-by-side image stack + card ── */}
-        <div className="hidden md:flex mt-12 max-w-3xl mx-auto gap-5 items-stretch">
+        <FadeIn delayClass="delay-100" className="hidden md:flex mt-12 max-w-3xl mx-auto gap-5 items-stretch">
           <TestimonialImageStack
             visibleItems={visibleItems}
             activeInWindow={activeInWindow}
             onSelect={handleSelect}
           />
           <TestimonialCard key={fadeKey} testimonial={active} />
-        </div>
+        </FadeIn>
 
         {/* ── Mobile: card on top, thumbnail row at bottom ── */}
-        <div className="md:hidden mt-8">
+        <FadeIn delayClass="delay-100" className="md:hidden mt-8">
           <TestimonialCard key={fadeKey} testimonial={active} />
           <TestimonialImageRow
             visibleItems={visibleItems}
@@ -71,7 +72,7 @@ export default function TestimonialSection() {
             hasLeft={windowStart > 0}
             hasRight={windowStart + 3 < total}
           />
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

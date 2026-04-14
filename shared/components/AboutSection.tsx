@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FadeIn from "@/shared/components/FadeIn";
 
 export default function AboutSection() {
   return (
@@ -33,7 +34,7 @@ export default function AboutSection() {
       {/* Layer 4 — content (text + overlay photos) */}
       <div className="relative z-10 max-w-3xl lg:max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
         {/* ── Left: Text ── */}
-        <div className="flex flex-col gap-6">
+        <FadeIn className="flex flex-col gap-6">
           <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight">
             I design, build, and ship products{" "}
             <span className="text-accent">people actually use</span>
@@ -73,32 +74,38 @@ export default function AboutSection() {
               with a team that takes craft seriously.
             </p>
           </div>
-        </div>
+        </FadeIn>
 
         {/* ── Right: Three overlay photos, positioned over the sitting-image bg ── */}
         <div className="relative flex flex-col gap-4 lg:items-end items-start justify-end md:mt-20 md:pr-10">
           {/* Photo 1 — upper area */}
-          <Image
-            src="/assets/chris-okafor-about-3.webp"
-            alt="Chris Okafor"
-            height={500}
-            width={500}
-            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
-          />
-          <Image
-            src="/assets/chris-okafor-about-2.webp"
-            alt="Chris Okafor"
-            height={500}
-            width={500}
-            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
-          />
-          <Image
-            src="/assets/chris-okafor-about-1.webp"
-            alt="Chris Okafor"
-            height={500}
-            width={500}
-            className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
-          />
+          <FadeIn>
+            <Image
+              src="/assets/chris-okafor-about-3.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
+          <FadeIn delayClass="delay-100">
+            <Image
+              src="/assets/chris-okafor-about-2.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
+          <FadeIn delayClass="delay-200">
+            <Image
+              src="/assets/chris-okafor-about-1.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
         </div>
       </div>
     </section>

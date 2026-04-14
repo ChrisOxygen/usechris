@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { RiArrowRightLine } from "react-icons/ri";
+import FadeIn from "@/shared/components/FadeIn";
 
 export default function CTASection() {
   return (
@@ -15,7 +16,7 @@ export default function CTASection() {
 
       <div className="relative max-w-5xl mx-auto">
         {/* ── Centered column ── */}
-        <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+        <FadeIn className="max-w-2xl mx-auto flex flex-col items-center text-center">
           {/* Section label */}
           <div className="flex items-center gap-2">
             <p className="font-squada-one text-xs text-accent uppercase tracking-[0.22em]">
@@ -88,7 +89,7 @@ export default function CTASection() {
               X
             </a>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );
