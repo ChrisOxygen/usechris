@@ -45,7 +45,7 @@ export default function TestimonialImageRow({
                 "relative overflow-hidden rounded-sm transition-all duration-400 cursor-pointer shrink-0",
                 isActive
                   ? "w-16 h-20 opacity-100 ring-2 ring-accent/50"
-                  : "w-14 h-16 opacity-35 hover:opacity-55",
+                  : "w-14 h-20 opacity-35 hover:opacity-55",
               ].join(" ")}
             >
               <Image
