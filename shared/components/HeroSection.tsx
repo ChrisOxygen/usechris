@@ -11,18 +11,32 @@ export default function HeroSection() {
         {/* ── Left Column ── */}
         <div className="flex flex-col items-center gap-8 lg:items-start">
           {/* Main heading */}
-          <h1 className="font-russo-one text-center lg:text-left text-4xl md:text-5xl  leading-[1.08] tracking-tight text-foreground">
+          <h1 className="font-russo-one text-center lg:text-left text-3xl md:text-5xl  leading-[1.08] tracking-tight text-foreground">
             I turn complex
             <br /> ideas into{" "}
             <span className="text-accent">working software.</span>
           </h1>
 
           {/* Description */}
-          <div className="flex flex-col gap-1.5">
-            <p className="font-source-code-pro text-xs text-muted tracking-[0.2em] uppercase">
+          <div className="flex flex-col gap-2 items-center sm:items-start">
+            {/* Mobile stack — individual tags so nothing breaks mid-word */}
+            {/* <div className="flex hidden flex-wrap justify-center gap-2">
+              {["Next.js", "React", "TypeScript", "Supabase"].map((tech) => (
+                <span
+                  key={tech}
+                  className="font-source-code-pro  text-[0.65rem] text-muted tracking-[0.18em] uppercase border border-muted/20 rounded px-2 py-0.5"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div> */}
+
+            {/* sm+ — single dot-separated line */}
+            <p className="hidden sm:block font-source-code-pro text-xs text-muted tracking-[0.2em] uppercase">
               Next.js · React · TypeScript · Supabase
             </p>
-            <p className="font-source-code-pro text-sm text-foreground/60 leading-relaxed">
+
+            <p className="font-source-code-pro text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
               3+ years. 5 production apps. 1,000+ real users.
             </p>
           </div>
