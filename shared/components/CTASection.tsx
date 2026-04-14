@@ -1,4 +1,5 @@
-import { RiCalendar2Line, RiArrowRightLine } from "react-icons/ri";
+import Link from "next/link";
+import { RiArrowRightLine } from "react-icons/ri";
 
 export default function CTASection() {
   return (
@@ -35,8 +36,8 @@ export default function CTASection() {
           </p>
 
           {/* Primary CTA button */}
-          <a
-            href="#"
+          <Link
+            href="#contact"
             className="group mt-10 inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent-light text-foreground font-squada-one text-base tracking-widest rounded-xl transition-all duration-200"
           >
             Book a Free Call
@@ -45,7 +46,7 @@ export default function CTASection() {
               aria-hidden="true"
               className="transition-transform duration-200 group-hover:translate-x-1"
             />
-          </a>
+          </Link>
 
           {/* Vertical pip — separates primary from secondary tier */}
           <div className="mt-12 w-px h-8 bg-foreground/10" aria-hidden="true" />
@@ -62,7 +63,7 @@ export default function CTASection() {
               href="mailto:chris@usechris.dev"
               className="text-muted hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-muted/30 hover:decoration-foreground/50"
             >
-              chris@email.com
+              chris@usechris.dev
             </a>
             <span className="text-muted/30 select-none" aria-hidden="true">
               ·

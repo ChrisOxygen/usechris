@@ -2,6 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  RiLinkedinFill,
+  RiTwitterXFill,
+  RiArrowRightLine,
+} from "react-icons/ri";
 import { NAV_ITEMS } from "@/shared/constants/nav";
 
 export default function NavMenu() {
@@ -98,11 +103,11 @@ export default function NavMenu() {
 
         {/* Sheet panel slides in from the right */}
         <div
-          className={`absolute top-0 right-0 h-full w-[65%] bg-surface border-l border-surface flex flex-col items-center justify-center transition-transform duration-300 ease-in-out ${
+          className={`absolute top-0 right-0 h-full w-[65%] bg-surface border-l border-surface flex flex-col items-center justify-between py-8 transition-transform duration-300 ease-in-out ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <nav className="flex flex-col items-center gap-10">
+          <nav className="flex my-auto flex-col items-center gap-10">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -116,6 +121,43 @@ export default function NavMenu() {
               </Link>
             ))}
           </nav>
+
+          {/* Mobile menu footer */}
+          <div className="flex flex-col items-center gap-6">
+            <Link
+              href="#contact"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
+              onClick={() => setMobileOpen(false)}
+            >
+              Book a Free Call
+              <RiArrowRightLine
+                size={14}
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Link>
+
+            <div className="flex items-center gap-5">
+              <a
+                href="https://www.linkedin.com/in/christopher-okafor-17084416b"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-muted hover:text-foreground transition-colors duration-200"
+              >
+                <RiLinkedinFill size={18} />
+              </a>
+              <a
+                href="https://x.com/chris_okafor_x"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+                className="text-muted hover:text-foreground transition-colors duration-200"
+              >
+                <RiTwitterXFill size={16} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </>
