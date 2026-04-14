@@ -6,6 +6,7 @@ import {
   EXPERIENCE,
   type ExperienceEntry,
 } from "@/shared/constants/experience";
+import ExperienceTabs from "@/shared/features/experience/ExperienceTabs";
 
 export default function ExperienceSection() {
   const [selectedId, setSelectedId] = useState<string>(EXPERIENCE[0].id);
@@ -22,22 +23,31 @@ export default function ExperienceSection() {
           The Journey So Far
         </p>
 
-        <h2 className="font-russo-one text-3xl md:text-4xl text-foreground leading-tight mt-3">
+        <h2 className="font-russo-one text-3xl min-[500px]:text-4xl text-foreground leading-tight mt-3">
           From <span className="text-accent">freelance gigs</span> to full
           products
         </h2>
 
+        {/* Mobile tab buttons */}
+        <div className="md:hidden mt-12">
+          <ExperienceTabs
+            entries={EXPERIENCE}
+            selectedId={selectedId}
+            onSelect={setSelectedId}
+          />
+        </div>
+
         {/* Two-panel layout */}
-        <div className="mt-12 flex flex-col md:flex-row gap-0">
-          {/* ── Left: company tab list ── */}
-          <aside className="md:w-44 shrink-0 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible">
+        <div className="mt-8 md:mt-12 flex flex-col md:flex-row gap-0">
+          {/* ── Left: company tab list (desktop only) ── */}
+          <aside className="hidden md:flex md:w-44 shrink-0 flex-col">
             {EXPERIENCE.map((entry) => (
               <button
                 key={entry.id}
                 onClick={() => setSelectedId(entry.id)}
                 className={[
                   "shrink-0 px-5 py-3 text-left font-source-code-pro text-sm transition-colors duration-150 whitespace-nowrap",
-                  "md:border-l-2 border-b-2 md:border-b-0",
+                  "border-l-2",
                   selectedId === entry.id
                     ? "border-accent text-accent bg-accent/5"
                     : "border-surface text-muted hover:text-foreground hover:border-foreground/20 hover:bg-surface/30",

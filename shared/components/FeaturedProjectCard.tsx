@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import type { Project } from "@/shared/constants/projects";
 
@@ -58,20 +57,15 @@ export default function FeaturedProjectCard({
   return (
     <>
       {/* ── Mobile card (< lg) — image background with overlay ── */}
-      <div className="lg:hidden relative rounded-xl overflow-hidden flex flex-col">
-        {/* Background image */}
-        <Image
-          src={imageSrc}
-          alt={project.title}
-          fill
-          className="object-cover"
-        />
-
+      <div
+        className="lg:hidden relative rounded-xl overflow-hidden border flex flex-col"
+        style={{ backgroundImage: `url(${imageSrc})` }}
+      >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-background/98" />
+        <div className="absolute w-full h-full inset-0 bg-background/98" />
 
         {/* Content on top of overlay */}
-        <div className="relative z-10 px-4 sm:px-0 py-6 sm:py-0 sm:p-8 flex flex-col gap-5">
+        <div className="relative z-10 px-4 sm:px-8 py-6 sm:py-10 sm:p-8 flex flex-col gap-5">
           <span className="font-source-code-pro text-xs text-accent tracking-widest uppercase">
             Featured Project
           </span>
@@ -101,11 +95,12 @@ export default function FeaturedProjectCard({
             flipped ? "col-start-6 col-span-7" : "col-start-1 col-span-7",
           ].join(" ")}
         >
-          <Image
-            src={imageSrc}
-            alt={project.title}
-            fill
-            className="object-cover"
+          {/* eslint-disable-next-line react/forbid-dom-props */}
+          <div
+            style={{ backgroundImage: `url(${imageSrc})` }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            role="img"
+            aria-label={project.title}
           />
           <div className="absolute inset-0 bg-accent/40 group-hover:bg-transparent transition-colors duration-300 z-10" />
         </div>
