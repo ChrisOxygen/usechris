@@ -31,12 +31,13 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://usechris.dev"),
   title: {
-    default: "Chris Okafor - Full-Stack Developer | Next.js & React Specialist",
-    template: "%s | Chris Okafor - Full-Stack Developer",
+    default: "Chris Okafor — Full-Stack Developer",
+    template: "%s | Chris Okafor",
   },
   description:
-    "Freelance Full-Stack Developer with 3+ years of experience specializing in Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL, and MongoDB. Building production-ready MVPs and AI-integrated applications for startups and businesses.",
+    "Freelance Full-Stack Developer specializing in Next.js, React, TypeScript, and Supabase. I build production-ready MVPs and AI-integrated apps for startups.",
   keywords: [
     "Full-Stack Developer",
     "Next.js Developer",
@@ -48,39 +49,42 @@ export const metadata: Metadata = {
     "MongoDB",
     "Prisma",
     "Frontend Developer",
-    "Software Engineer",
     "MVP Development",
     "AI Integration",
     "Freelance Developer",
-    "Port Harcourt Developer",
     "Nigeria Developer",
   ],
-  authors: [{ name: "Chris Okafor" }],
+  authors: [{ name: "Chris Okafor", url: "https://usechris.dev" }],
   creator: "Chris Okafor",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://usechris.dev", // Replace with your actual domain
-    title: "Chris Okafor - Full-Stack Developer | Next.js & React Specialist",
+    url: "https://usechris.dev",
+    title: "Chris Okafor — Full-Stack Developer",
     description:
-      "Freelance Full-Stack Developer with 3+ years of experience specializing in Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL, and MongoDB. Building production-ready MVPs and AI-integrated applications.",
-    siteName: "Chris Okafor Portfolio",
+      "Freelance Full-Stack Developer specializing in Next.js, React, TypeScript, and Supabase. I build production-ready MVPs and AI-integrated apps for startups.",
+    siteName: "Chris Okafor",
     images: [
       {
-        url: "/og-image.png", // Add your Open Graph image
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Chris Okafor - Full-Stack Developer",
+        alt: "Chris Okafor — Full-Stack Developer portfolio",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chris Okafor - Full-Stack Developer | Next.js & React Specialist",
+    title: "Chris Okafor — Full-Stack Developer",
     description:
-      "Freelance Full-Stack Developer with 3+ years of experience. Specializing in Next.js, React, TypeScript, PostgreSQL & MongoDB.",
-    images: ["/og-image.png"], // Add your Twitter card image
-    creator: "@chris_okafor_x", // Add your Twitter handle if you have one
+      "Freelance Full-Stack Developer specializing in Next.js, React, TypeScript, and Supabase. I build production-ready MVPs and AI-integrated apps for startups.",
+    images: ["/og-image.png"],
+    creator: "@chris_okafor_x",
+    site: "@chris_okafor_x",
   },
   icons: {
     icon: "/favicon.png",
@@ -96,13 +100,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    // google: "your-google-verification-code", // Add after setting up Google Search Console
-  },
-  other: {
-    "linkedin:profile":
-      "https://www.linkedin.com/in/christopher-okafor-17084416b", // Replace with your LinkedIn profile URL
   },
 };
 
