@@ -1,14 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { RiStarFill, RiPencilLine } from "react-icons/ri";
+import { RiPencilLine } from "react-icons/ri";
 import { TESTIMONIALS } from "@/shared/constants/testimonials";
-import { PiQuotesBold } from "react-icons/pi";
-
-function avatarPath(name: string) {
-  return `/assets/${name.replace(/\s+/g, "").toLowerCase()}.webp`;
-}
+import TestimonialImageStack from "./TestimonialImageStack";
+import TestimonialCard from "./TestimonialCard";
 
 export default function TestimonialSection() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -62,84 +58,13 @@ export default function TestimonialSection() {
 
         {/* Two-panel layout */}
         <div className="mt-12 max-w-3xl flex mx-auto gap-5 items-stretch">
-          {/* ── Left: image stack ── */}
-          <div className="w-24 md:w-52 shrink-0 flex flex-col h-[420px] gap-2">
-            {visibleItems.map((item, pos) => {
-              if (!item) return <div key={pos} className="flex-1" />;
-              const isActive = pos === activeInWindow;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleSelect(pos)}
-                  aria-label={`View testimonial from ${item.name}`}
-                  className={[
-                    "relative w-full overflow-hidden rounded-sm transition-all duration-500 ease-in-out cursor-pointer",
-                    isActive ? "flex-[2]" : "flex-[1]",
-                    isActive
-                      ? "opacity-100 ring-3 ring-accent/40"
-                      : "opacity-40 hover:opacity-60",
-                  ].join(" ")}
-                >
-                  <Image
-                    src="/assets/chris-okafor-about-3.webp"
-                    alt={item.name}
-                    fill
-                    className="object-cover object-top"
-                    sizes="112px"
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ── Right: testimonial content ── */}
-          <div className="relative flex-1 flex flex-col p-10 rounded-md bg-background justify-center min-h-[420px] overflow-hidden">
-            {/* Watermark — active person's name */}
-            <span
-              aria-hidden="true"
-              className="absolute text-[300px] leading-0  -right-5 -top-18 opacity-5"
-            >
-              <PiQuotesBold />
-            </span>
-
-            {/* Fading content block — key swap triggers re-mount → CSS animation */}
-            <div
-              key={fadeKey}
-              className="relative z-10 testimonial-fade-in pr-14"
-            >
-              <blockquote className="font-russo-one text-xl md:text-2xl lg:text-[1.65rem] text-foreground leading-snug">
-                {active.testimonial}
-              </blockquote>
-
-              <p className="mt-4 font-source-code-pro text-sm text-muted leading-relaxed max-w-md">
-                {active.description}
-              </p>
-
-              <div className="mt-8 flex items-end justify-between">
-                <div>
-                  <p className="font-squada-one text-foreground text-base tracking-wide">
-                    {active.name}
-                  </p>
-                  <p className="font-source-code-pro text-xs text-muted mt-0.5">
-                    {active.role}
-                  </p>
-                </div>
-
-                <div className="flex gap-1">
-                  {Array.from({ length: active.rating }).map((_, i) => (
-                    <RiStarFill
-                      key={i}
-                      className="text-accent"
-                      size={13}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-6 h-px w-full bg-surface" />
-            </div>
-          </div>
+          <TestimonialImageStack
+            visibleItems={visibleItems}
+            activeInWindow={activeInWindow}
+            onSelect={handleSelect}
+          />
+          {/* key swap re-mounts the card, replaying the fade-in animation */}
+          <TestimonialCard key={fadeKey} testimonial={active} />
         </div>
       </div>
     </section>
