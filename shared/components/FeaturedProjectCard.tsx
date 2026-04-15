@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import type { Project } from "@/shared/constants/projects";
 
@@ -80,6 +81,18 @@ export default function FeaturedProjectCard({
 
           {tools}
 
+          {project.caseStudySlug && (
+            <Link
+              href={`/case-studies/${project.caseStudySlug}`}
+              className="font-source-code-pro text-xs text-accent/60 hover:text-accent transition-colors flex items-center gap-1 group self-start"
+            >
+              View Case Study
+              <span className="group-hover:translate-x-0.5 transition-transform">
+                →
+              </span>
+            </Link>
+          )}
+
           {(project.githubLink || project.liveLink) && (
             <div className="flex items-center gap-4 mt-1">{links}</div>
           )}
@@ -126,17 +139,20 @@ export default function FeaturedProjectCard({
             <p className="font-source-code-pro text-sm text-muted leading-relaxed">
               {truncated}
             </p>
-            <button
-              className={[
-                "font-source-code-pro text-xs text-accent/60 hover:text-accent transition-colors flex items-center gap-1 group",
-                flipped ? "self-start" : "self-end",
-              ].join(" ")}
-            >
-              View Case Study
-              <span className="group-hover:translate-x-0.5 transition-transform">
-                →
-              </span>
-            </button>
+            {project.caseStudySlug && (
+              <Link
+                href={`/case-studies/${project.caseStudySlug}`}
+                className={[
+                  "font-source-code-pro text-xs text-accent/60 hover:text-accent transition-colors flex items-center gap-1 group",
+                  flipped ? "self-start" : "self-end",
+                ].join(" ")}
+              >
+                View Case Study
+                <span className="group-hover:translate-x-0.5 transition-transform">
+                  →
+                </span>
+              </Link>
+            )}
           </div>
 
           {tools && (
