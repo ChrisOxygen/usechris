@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BookingTrigger from "@/shared/components/BookingTrigger";
 
 export default function HeroSection() {
   return (
@@ -159,12 +160,9 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <Link
-              href="#contact"
-              className="shrink-0 px-4 py-2 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-wide rounded-lg transition-colors duration-200 whitespace-nowrap"
-            >
+            <BookingTrigger className="shrink-0 px-4 py-2 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-wide rounded-lg transition-colors duration-200 whitespace-nowrap">
               Book a call
-            </Link>
+            </BookingTrigger>
           </div>
         </div>
       </div>

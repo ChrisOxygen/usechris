@@ -1,89 +1,79 @@
-import { google } from "googleapis";
 import { NextRequest, NextResponse } from "next/server";
+import { getCalendarClient } from "@/lib/google";
 
-const WORKING_HOURS_START = 9; // 09:00 UTC
-const WORKING_HOURS_END = 17; // 17:00 UTC
-const SLOT_MINUTES = 15;
+// Your working hours — adjust to your actual availability
+const WORKING_HOURS = { start: 9, end: 17 }; // 9am–5pm WAT
+const SLOT_DURATION = 30; // minutes
+const BUFFER = 15; // minutes between calls
 
-interface BusyPeriod {
-  start: string;
-  end: string;
-}
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const date = searchParams.get("date"); // expects YYYY-MM-DD
 
-function generateSlots(date: string, busyPeriods: BusyPeriod[]) {
-  const slots: { start: string; end: string; label: string }[] = [];
-  const now = new Date();
-
-  for (let h = WORKING_HOURS_START; h < WORKING_HOURS_END; h++) {
-    for (let m = 0; m < 60; m += SLOT_MINUTES) {
-      const hh = String(h).padStart(2, "0");
-      const mm = String(m).padStart(2, "0");
-      const slotStart = new Date(`${date}T${hh}:${mm}:00.000Z`);
-      const slotEnd = new Date(slotStart.getTime() + SLOT_MINUTES * 60_000);
-
-      // Skip slots already in the past
-      if (slotStart <= now) continue;
-
-      const isBusy = busyPeriods.some(({ start, end }) => {
-        const busyStart = new Date(start);
-        const busyEnd = new Date(end);
-        return slotStart < busyEnd && slotEnd > busyStart;
-      });
-
-      if (!isBusy) {
-        const label = slotStart.toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          timeZone: "UTC",
-        });
-        slots.push({
-          start: slotStart.toISOString(),
-          end: slotEnd.toISOString(),
-          label,
-        });
-      }
-    }
-  }
-
-  return slots;
-}
-
-export async function GET(request: NextRequest) {
-  const date = new URL(request.url).searchParams.get("date");
-
-  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return NextResponse.json(
-      { error: "A valid date (YYYY-MM-DD) is required." },
-      { status: 400 }
-    );
+  if (!date) {
+    return NextResponse.json({ error: "Date required" }, { status: 400 });
   }
 
   try {
-    const auth = new google.auth.OAuth2(
-      process.env.GOOGLE_CLIENT_ID,
-      process.env.GOOGLE_CLIENT_SECRET
-    );
-    auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+    const calendar = getCalendarClient();
 
-    const calendar = google.calendar({ version: "v3", auth });
+    const dayStart = new Date(`${date}T00:00:00+01:00`); // WAT offset
+    const dayEnd = new Date(`${date}T23:59:59+01:00`);
 
-    const { data } = await calendar.freebusy.query({
+    // Query Google Calendar freebusy to get busy periods
+    const freeBusyRes = await calendar.freebusy.query({
       requestBody: {
-        timeMin: `${date}T00:00:00Z`,
-        timeMax: `${date}T23:59:59Z`,
-        items: [{ id: "primary" }],
+        timeMin: dayStart.toISOString(),
+        timeMax: dayEnd.toISOString(),
+        timeZone: "Africa/Lagos",
+        items: [{ id: process.env.GOOGLE_CALENDAR_ID || "primary" }],
       },
     });
 
-    const busy = (data.calendars?.primary?.busy ?? []) as BusyPeriod[];
-    const slots = generateSlots(date, busy);
+    const busySlots = freeBusyRes.data.calendars?.primary?.busy || [];
+
+    // Generate all possible slots within working hours
+    const allSlots: string[] = [];
+    for (let h = WORKING_HOURS.start; h < WORKING_HOURS.end; h++) {
+      for (let m = 0; m < 60; m += SLOT_DURATION) {
+        const slotTime = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+        allSlots.push(slotTime);
+      }
+    }
+
+    // Filter out slots that overlap with busy periods and return slot objects
+    const slots = allSlots
+      .filter((slot) => {
+        const slotStart = new Date(`${date}T${slot}:00+01:00`);
+        const slotEnd = new Date(
+          slotStart.getTime() + (SLOT_DURATION + BUFFER) * 60000,
+        );
+
+        return !busySlots.some((busy) => {
+          const busyStart = new Date(busy.start!);
+          const busyEnd = new Date(busy.end!);
+          return slotStart < busyEnd && slotEnd > busyStart;
+        });
+      })
+      .map((slot) => {
+        const [h, m] = slot.split(":").map(Number);
+        const endMinutes = h * 60 + m + SLOT_DURATION;
+        const endH = Math.floor(endMinutes / 60);
+        const endM = endMinutes % 60;
+        const end = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
+        return {
+          start: slot,
+          end,
+          label: `${slot} – ${end}`,
+        };
+      });
 
     return NextResponse.json({ slots });
-  } catch (err) {
-    console.error("[availability]", err);
+  } catch (error) {
+    console.error("Availability error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch availability." },
-      { status: 500 }
+      { error: "Failed to fetch availability" },
+      { status: 500 },
     );
   }
 }
