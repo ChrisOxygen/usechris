@@ -30,7 +30,9 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const busySlots = freeBusyRes.data.calendars?.primary?.busy || [];
+    const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
+    const busySlots =
+      freeBusyRes.data.calendars?.[calendarId]?.busy || [];
 
     // Generate all possible slots within working hours
     const allSlots: string[] = [];

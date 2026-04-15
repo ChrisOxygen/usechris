@@ -9,8 +9,11 @@ import { z } from "zod";
 import {
   RiCloseLine,
   RiArrowLeftLine,
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
   RiVideoLine,
   RiCalendarLine,
+  RiTimeLine,
 } from "react-icons/ri";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -30,37 +33,30 @@ const bookingSchema = z.object({
 
 type BookingFormData = z.infer<typeof bookingSchema>;
 
-// "select" = the two-column calendar + time picker view
 type Step = "select" | "form" | "submitting" | "success" | "error";
 
 // ─── react-day-picker classNames ──────────────────────────────────────────────
-// Selected / today / disabled states are driven by .booking-cal CSS in globals.css
-// which targets the data-* attributes react-day-picker places on each day button.
+// Navigation is hidden — we render our own month header above the grid.
 
 const DAY_PICKER_CLASSES = {
   root: "w-full",
   months: "w-full",
-  month: "relative w-full",
-  month_caption: "flex justify-center mb-4",
-  caption_label:
-    "font-squada-one text-sm tracking-widest text-foreground uppercase py-1",
-  nav: "absolute top-0 left-0 w-full flex items-center justify-between",
-  button_previous:
-    "w-7 h-7 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5 [&_svg]:size-3",
-  button_next:
-    "w-7 h-7 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5 [&_svg]:size-3",
+  month: "w-full",
+  month_caption: "hidden",
+  nav: "hidden",
   month_grid: "w-full",
   weekdays: "",
   weekday:
-    "pb-2 font-squada-one text-xs text-muted/50 tracking-wide text-center",
+    "pb-2 font-squada-one text-[10px] text-muted/40 tracking-wider text-center uppercase",
   week: "",
-  day: "text-center p-0.5",
+  day: "text-center p-px",
   day_button:
-    "mx-auto w-9 h-9 flex items-center justify-center font-source-code-pro text-sm text-muted rounded-lg transition-all duration-150 hover:bg-accent/20 hover:text-foreground",
-  selected: "",
-  today: "",
-  outside: "",
-  disabled: "",
+    "mx-auto w-8 h-8 flex items-center justify-center font-source-code-pro text-xs text-muted rounded-lg transition-all duration-150 hover:bg-accent/15 hover:text-foreground",
+  selected:
+    "[&_button]:bg-accent [&_button]:text-foreground [&_button]:hover:bg-accent-light",
+  today: "[&_button]:text-accent",
+  outside: "[&_button]:opacity-15 [&_button]:pointer-events-none",
+  disabled: "[&_button]:opacity-20 [&_button]:pointer-events-none",
   hidden: "invisible",
   focused: "",
 } as Record<string, string>;
@@ -74,6 +70,16 @@ export default function BookingModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Start of the current month, used to drive DayPicker navigation
+  const [currentMonth, setCurrentMonth] = useState<Date>(() => {
+    const d = new Date(today);
+    d.setDate(1);
+    return d;
+  });
+
   const [step, setStep] = useState<Step>("select");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [slots, setSlots] = useState<TimeSlot[]>([]);
@@ -96,7 +102,35 @@ export default function BookingModal({
 
   const platform = watch("platform");
 
-  // ── Date selected → fetch slots (stays on "select" step) ──────────────────
+  // ── Month navigation ───────────────────────────────────────────────────────
+
+  const isAtStartMonth =
+    currentMonth.getFullYear() === today.getFullYear() &&
+    currentMonth.getMonth() === today.getMonth();
+
+  const goToPrevMonth = () => {
+    if (isAtStartMonth) return;
+    setCurrentMonth((m) => {
+      const d = new Date(m);
+      d.setMonth(d.getMonth() - 1);
+      return d;
+    });
+  };
+
+  const goToNextMonth = () => {
+    setCurrentMonth((m) => {
+      const d = new Date(m);
+      d.setMonth(d.getMonth() + 1);
+      return d;
+    });
+  };
+
+  const monthLabel = currentMonth.toLocaleDateString("en-GB", {
+    month: "long",
+    year: "numeric",
+  });
+
+  // ── Date selected → fetch slots ────────────────────────────────────────────
 
   const handleDateSelect = useCallback(async (date: Date | undefined) => {
     if (!date) return;
@@ -173,7 +207,6 @@ export default function BookingModal({
     onClose();
   };
 
-  // Back from "form" returns to "select" — preserves the loaded date + slots
   const goBack = () => {
     if (step === "form") {
       setSelectedSlot(null);
@@ -185,114 +218,145 @@ export default function BookingModal({
 
   if (!isOpen || typeof document === "undefined") return null;
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
   // ── Render ─────────────────────────────────────────────────────────────────
-  // Portal renders into document.body, escaping any CSS transform stacking
-  // contexts on ancestor elements (e.g. FadeIn's translate-y transitions).
 
   return createPortal(
-    // Full-screen overlay
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
     >
-      {/* Modal shell — widens to two-column on the "select" step */}
+      {/* Modal shell */}
       <div
         className={[
-          "relative w-full bg-surface border border-white/5 rounded-2xl shadow-2xl overflow-hidden",
-          step === "select" ? "max-w-[640px]" : "max-w-md",
+          "relative w-full bg-surface border border-white/8 rounded-2xl shadow-2xl overflow-hidden",
+          "border-t-2 border-t-accent",
+          step === "select" ? "max-w-[660px]" : "max-w-md",
         ].join(" ")}
       >
-        {/* ── Shared close button ── */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
-          aria-label="Close"
-        >
-          <RiCloseLine size={18} />
-        </button>
-
         {/* ════════════════════════════════════════════════════════════════
-            STEP: SELECT — two-column calendar + time slots
+            STEP: SELECT — header + two-column calendar + time slots
         ════════════════════════════════════════════════════════════════ */}
         {step === "select" && (
-          <div className="flex flex-col sm:flex-row">
-            {/* ── Left panel: calendar ── */}
-            <div className="flex-1 min-w-0 p-6 sm:border-r border-b sm:border-b-0 border-white/5">
-              <p className="font-squada-one text-xs text-muted/60 tracking-widest uppercase mb-5">
-                Select a Date
-              </p>
-              <div className="booking-cal">
-                <DayPicker
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={handleDateSelect}
-                  startMonth={today}
-                  disabled={[{ before: today }, { dayOfWeek: [0, 6] }]}
-                  classNames={DAY_PICKER_CLASSES}
-                />
+          <div>
+            {/* Header */}
+            <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-white/5">
+              <div>
+                <h2 className="font-russo-one text-base text-foreground leading-tight">
+                  Book a Discovery Call
+                </h2>
+                <div className="flex items-center gap-2.5 mt-2">
+                  <span className="flex items-center gap-1.5 font-source-code-pro text-xs text-muted">
+                    <RiTimeLine size={11} className="text-accent shrink-0" />
+                    30 min
+                  </span>
+                  <span className="w-px h-3 bg-white/10" />
+                  <span className="flex items-center gap-1.5 font-source-code-pro text-xs text-muted">
+                    <RiVideoLine size={11} className="text-accent shrink-0" />
+                    Video call
+                  </span>
+                  <span className="w-px h-3 bg-white/10" />
+                  <span className="font-source-code-pro text-xs text-muted">
+                    WAT / GMT+1
+                  </span>
+                </div>
               </div>
-              <p className="mt-5 font-source-code-pro text-xs text-muted/40">
-                All times shown in GMT · Weekdays only
-              </p>
+              <button
+                onClick={handleClose}
+                className="ml-4 mt-0.5 w-8 h-8 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5 shrink-0"
+                aria-label="Close"
+              >
+                <RiCloseLine size={18} />
+              </button>
             </div>
 
-            {/* ── Right panel: time slots ── */}
-            <div className="w-full sm:w-48 flex flex-col p-6">
-              {/* Panel header */}
-              <p className="font-squada-one text-xs text-muted/60 tracking-widest uppercase mb-5">
-                {selectedDate
-                  ? selectedDate.toLocaleDateString("en-GB", {
-                      weekday: "short",
-                      day: "numeric",
-                      month: "short",
-                    })
-                  : "Select a Time"}
-              </p>
-
-              {/* Slot list */}
-              {!selectedDate ? (
-                <div className="flex-1 flex items-center justify-center py-8">
-                  <p className="font-source-code-pro text-xs text-muted/40 text-center leading-relaxed">
-                    Pick a date to see available slots
-                  </p>
-                </div>
-              ) : isLoadingSlots ? (
-                <div className="flex-1 flex items-center justify-center py-8">
-                  <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              ) : slots.length === 0 ? (
-                <div className="flex-1 flex flex-col items-center justify-center py-8 gap-3">
-                  <p className="font-source-code-pro text-xs text-muted/60 text-center">
-                    No slots available.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSelectedDate(undefined);
-                      setSlots([]);
-                    }}
-                    className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
-                  >
-                    Try another date
-                  </button>
-                </div>
-              ) : (
-                <div className="overflow-y-auto max-h-[320px] space-y-2 pr-0.5">
-                  {slots.map((slot) => (
+            {/* Two-column body */}
+            <div className="flex flex-col sm:flex-row">
+              {/* ── Left: calendar ── */}
+              <div className="flex-1 min-w-0 px-5 py-5 sm:border-r border-b sm:border-b-0 border-white/5">
+                {/* Custom month navigation row */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-squada-one text-sm text-foreground tracking-wide">
+                    {monthLabel}
+                  </span>
+                  <div className="flex items-center gap-0.5">
                     <button
-                      key={slot.start}
-                      onClick={() => handleSlotSelect(slot)}
-                      className="w-full py-2.5 px-3 rounded-lg font-source-code-pro text-sm transition-all duration-150 text-center bg-background/60 border border-white/8 text-muted hover:border-accent/50 hover:text-foreground hover:bg-accent/10"
+                      onClick={goToPrevMonth}
+                      disabled={isAtStartMonth}
+                      aria-label="Previous month"
+                      className="w-7 h-7 flex items-center justify-center text-muted hover:text-foreground disabled:opacity-20 disabled:pointer-events-none transition-colors rounded-lg hover:bg-white/5"
                     >
-                      {slot.label}
+                      <RiArrowLeftSLine size={16} />
                     </button>
-                  ))}
+                    <button
+                      onClick={goToNextMonth}
+                      aria-label="Next month"
+                      className="w-7 h-7 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+                    >
+                      <RiArrowRightSLine size={16} />
+                    </button>
+                  </div>
                 </div>
-              )}
+
+                <div className="booking-cal">
+                  <DayPicker
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={handleDateSelect}
+                    month={currentMonth}
+                    onMonthChange={setCurrentMonth}
+                    disabled={[{ before: today }, { dayOfWeek: [0, 6] }]}
+                    hideNavigation
+                    classNames={DAY_PICKER_CLASSES}
+                  />
+                </div>
+                <p className="mt-3 font-source-code-pro text-[10px] text-muted/35">
+                  Weekdays only · WAT (GMT+1)
+                </p>
+              </div>
+
+              {/* ── Right: time slots ── */}
+              <div className="w-full sm:w-[200px] shrink-0 flex flex-col px-4 py-5">
+                {!selectedDate ? (
+                  <div className="flex-1 flex items-center justify-center py-10">
+                    <p className="font-source-code-pro text-[11px] text-muted/35 text-center leading-relaxed">
+                      Pick a date to see available slots
+                    </p>
+                  </div>
+                ) : isLoadingSlots ? (
+                  <div className="flex-1 flex items-center justify-center py-10">
+                    <div className="w-4 h-4 border-[1.5px] border-accent border-t-transparent rounded-full animate-spin" />
+                  </div>
+                ) : slots.length === 0 ? (
+                  <div className="flex-1 flex flex-col items-center justify-center py-10 gap-3">
+                    <p className="font-source-code-pro text-[11px] text-muted/50 text-center leading-relaxed">
+                      No slots available<br />on this day.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSelectedDate(undefined);
+                        setSlots([]);
+                      }}
+                      className="font-squada-one text-[10px] text-accent hover:text-accent-light tracking-wider transition-colors uppercase"
+                    >
+                      Try another date
+                    </button>
+                  </div>
+                ) : (
+                  <div className="overflow-y-auto max-h-[280px] space-y-1.5 pr-0.5">
+                    {slots.map((slot) => (
+                      <button
+                        key={slot.start}
+                        onClick={() => handleSlotSelect(slot)}
+                        className="w-full py-2.5 px-3 rounded-lg font-source-code-pro text-xs whitespace-nowrap transition-all duration-150 text-center bg-background/60 border border-white/8 text-muted hover:border-accent/50 hover:text-foreground hover:bg-accent/10"
+                      >
+                        {slot.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -314,13 +378,20 @@ export default function BookingModal({
               <h2 className="font-russo-one text-base text-foreground">
                 Your details
               </h2>
+              <button
+                onClick={handleClose}
+                className="ml-auto w-8 h-8 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+                aria-label="Close"
+              >
+                <RiCloseLine size={18} />
+              </button>
             </div>
 
             <div className="px-6 py-6">
               {/* Selected slot summary */}
               {selectedDate && selectedSlot && (
                 <div className="flex items-center gap-2 mb-6 px-3 py-2.5 bg-background rounded-lg border border-white/5">
-                  <RiCalendarLine size={13} className="text-accent shrink-0" />
+                  <RiCalendarLine size={12} className="text-accent shrink-0" />
                   <span className="font-source-code-pro text-xs text-muted">
                     {selectedDate.toLocaleDateString("en-GB", {
                       weekday: "short",
@@ -328,7 +399,8 @@ export default function BookingModal({
                       month: "short",
                     })}
                     {" · "}
-                    {selectedSlot.label} GMT
+                    {selectedSlot.label}
+                    {" WAT"}
                   </span>
                 </div>
               )}
@@ -336,14 +408,14 @@ export default function BookingModal({
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block font-squada-one text-xs tracking-wider text-muted uppercase mb-1.5">
+                  <label className="block font-squada-one text-[10px] tracking-wider text-muted uppercase mb-1.5">
                     Name
                   </label>
                   <input
                     {...register("name")}
                     type="text"
                     placeholder="Jane Smith"
-                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/30"
+                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/25"
                   />
                   {errors.name && (
                     <p className="mt-1 font-source-code-pro text-xs text-accent/80">
@@ -354,14 +426,14 @@ export default function BookingModal({
 
                 {/* Email */}
                 <div>
-                  <label className="block font-squada-one text-xs tracking-wider text-muted uppercase mb-1.5">
+                  <label className="block font-squada-one text-[10px] tracking-wider text-muted uppercase mb-1.5">
                     Email
                   </label>
                   <input
                     {...register("email")}
                     type="email"
                     placeholder="jane@company.com"
-                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/30"
+                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/25"
                   />
                   {errors.email && (
                     <p className="mt-1 font-source-code-pro text-xs text-accent/80">
@@ -372,9 +444,9 @@ export default function BookingModal({
 
                 {/* Notes */}
                 <div>
-                  <label className="block font-squada-one text-xs tracking-wider text-muted uppercase mb-1.5">
+                  <label className="block font-squada-one text-[10px] tracking-wider text-muted uppercase mb-1.5">
                     Notes{" "}
-                    <span className="normal-case font-source-code-pro font-normal tracking-normal text-muted/40">
+                    <span className="normal-case font-source-code-pro font-normal tracking-normal text-muted/35">
                       (optional)
                     </span>
                   </label>
@@ -382,13 +454,13 @@ export default function BookingModal({
                     {...register("notes")}
                     rows={3}
                     placeholder="What would you like to discuss?"
-                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/30 resize-none"
+                    className="w-full bg-background border border-white/10 focus:border-accent/40 outline-none text-foreground font-source-code-pro text-sm px-4 py-3 rounded-lg transition-colors placeholder:text-muted/25 resize-none"
                   />
                 </div>
 
                 {/* Platform */}
                 <div>
-                  <label className="block font-squada-one text-xs tracking-wider text-muted uppercase mb-2">
+                  <label className="block font-squada-one text-[10px] tracking-wider text-muted uppercase mb-2">
                     Platform
                   </label>
                   <div className="flex gap-2">
@@ -427,7 +499,7 @@ export default function BookingModal({
         ════════════════════════════════════════════════════════════════ */}
         {step === "submitting" && (
           <div className="flex flex-col items-center justify-center h-64 gap-4">
-            <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+            <div className="w-5 h-5 border-[1.5px] border-accent border-t-transparent rounded-full animate-spin" />
             <p className="font-source-code-pro text-sm text-muted">
               Locking in your slot...
             </p>
@@ -441,8 +513,8 @@ export default function BookingModal({
           <div className="flex flex-col items-center text-center py-12 px-8 gap-5">
             <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
               <svg
-                width="24"
-                height="24"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
@@ -472,13 +544,13 @@ export default function BookingModal({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
               >
-                <RiVideoLine size={15} aria-hidden="true" />
+                <RiVideoLine size={14} aria-hidden="true" />
                 Open Meeting Link
               </a>
             )}
             <button
               onClick={handleClose}
-              className="font-squada-one text-xs text-muted/50 hover:text-muted tracking-wider transition-colors"
+              className="font-squada-one text-xs text-muted/40 hover:text-muted tracking-wider transition-colors"
             >
               Close
             </button>
@@ -492,8 +564,8 @@ export default function BookingModal({
           <div className="flex flex-col items-center text-center py-12 px-8 gap-5">
             <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
               <svg
-                width="24"
-                height="24"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
