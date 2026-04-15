@@ -50,7 +50,7 @@ function DetailRow({
     <Section
       style={{
         borderBottom: last ? "none" : `1px solid ${c.border}`,
-        padding: "12px 0",
+        padding: "10px 0",
       }}
     >
       <table
@@ -64,7 +64,7 @@ function DetailRow({
             <td
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 600,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase" as const,
@@ -79,7 +79,7 @@ function DetailRow({
             <td
               style={{
                 fontFamily: font,
-                fontSize: 14,
+                fontSize: 13,
                 color: c.text,
                 fontWeight: 500,
                 verticalAlign: "top",
@@ -128,7 +128,7 @@ export function ClientConfirmationEmail({
           style={{
             maxWidth: 560,
             margin: "0 auto",
-            padding: "40px 16px 48px",
+            padding: "32px 16px 40px",
           }}
         >
           {/* ── Header ───────────────────────────────────────────────── */}
@@ -136,19 +136,19 @@ export function ClientConfirmationEmail({
             style={{
               backgroundColor: c.header,
               borderRadius: "14px 14px 0 0",
-              padding: "28px 32px 24px",
+              padding: "24px 28px 20px",
             }}
           >
             {/* Wordmark */}
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 13,
+                fontSize: 11,
                 fontWeight: 700,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase" as const,
                 color: "#ffffff",
-                margin: "0 0 20px",
+                margin: "0 0 16px",
               }}
             >
               CHRIS OKAFOR
@@ -157,11 +157,11 @@ export function ClientConfirmationEmail({
             {/* Accent line */}
             <div
               style={{
-                width: 32,
-                height: 3,
+                width: 28,
+                height: 2,
                 backgroundColor: c.accent,
                 borderRadius: 2,
-                marginBottom: 20,
+                marginBottom: 16,
               }}
             />
 
@@ -169,10 +169,10 @@ export function ClientConfirmationEmail({
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 26,
+                fontSize: 20,
                 fontWeight: 700,
                 color: "#ffffff",
-                margin: "0 0 6px",
+                margin: "0 0 5px",
                 lineHeight: "1.2",
               }}
             >
@@ -181,7 +181,7 @@ export function ClientConfirmationEmail({
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 14,
+                fontSize: 13,
                 color: "rgba(255,255,255,0.55)",
                 margin: 0,
               }}
@@ -194,14 +194,14 @@ export function ClientConfirmationEmail({
           <Section
             style={{
               backgroundColor: c.surface,
-              padding: "28px 32px",
+              padding: "24px 28px",
             }}
           >
-            {/* Booking details */}
+            {/* Booking details label */}
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 700,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase" as const,
@@ -212,7 +212,7 @@ export function ClientConfirmationEmail({
               Booking details
             </Text>
 
-            <Hr style={{ borderColor: c.border, margin: "12px 0 0" }} />
+            <Hr style={{ borderColor: c.border, margin: "10px 0 0" }} />
 
             <DetailRow label="Date" value={date} />
             <DetailRow label="Time" value={`${time} (West Africa Time)`} />
@@ -220,17 +220,17 @@ export function ClientConfirmationEmail({
             <DetailRow label="Platform" value={platformLabel} last />
 
             {/* CTA */}
-            <Section style={{ textAlign: "center" as const, marginTop: 28 }}>
+            <Section style={{ textAlign: "center" as const, marginTop: 24 }}>
               <Button
                 href={meetingLink}
                 style={{
                   backgroundColor: c.accent,
                   color: "#ffffff",
                   fontFamily: font,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 700,
                   letterSpacing: "0.05em",
-                  padding: "14px 32px",
+                  padding: "12px 28px",
                   borderRadius: 8,
                   textDecoration: "none",
                   display: "inline-block",
@@ -241,9 +241,9 @@ export function ClientConfirmationEmail({
               <Text
                 style={{
                   fontFamily: font,
-                  fontSize: 12,
+                  fontSize: 11,
                   color: c.muted,
-                  margin: "10px 0 0",
+                  margin: "8px 0 0",
                 }}
               >
                 Or copy the link:{" "}
@@ -264,13 +264,13 @@ export function ClientConfirmationEmail({
                 backgroundColor: c.pill,
                 border: `1px solid ${c.pillBorder}`,
                 borderTop: "none",
-                padding: "20px 32px",
+                padding: "16px 28px",
               }}
             >
               <Text
                 style={{
                   fontFamily: font,
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: 700,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase" as const,
@@ -283,7 +283,7 @@ export function ClientConfirmationEmail({
               <Text
                 style={{
                   fontFamily: font,
-                  fontSize: 14,
+                  fontSize: 13,
                   color: c.text,
                   margin: 0,
                   lineHeight: "1.6",
@@ -300,15 +300,15 @@ export function ClientConfirmationEmail({
               backgroundColor: c.surface,
               borderTop: `1px solid ${c.border}`,
               borderRadius: notes ? "0 0 14px 14px" : undefined,
-              padding: "20px 32px 24px",
+              padding: "16px 28px 20px",
             }}
           >
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 12,
+                fontSize: 11,
                 color: c.muted,
-                margin: "0 0 6px",
+                margin: "0 0 5px",
                 lineHeight: "1.6",
               }}
             >
@@ -318,7 +318,7 @@ export function ClientConfirmationEmail({
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 12,
+                fontSize: 11,
                 color: c.muted,
                 margin: 0,
               }}
@@ -334,14 +334,14 @@ export function ClientConfirmationEmail({
             </Text>
           </Section>
 
-          {/* ── Bottom margin / branding ──────────────────────────────── */}
+          {/* ── Bottom branding ──────────────────────────────────────── */}
           <Text
             style={{
               fontFamily: font,
-              fontSize: 11,
+              fontSize: 10,
               color: "#b09090",
               textAlign: "center" as const,
-              marginTop: 24,
+              marginTop: 20,
             }}
           >
             © {new Date().getFullYear()} Chris Okafor · usechris.dev

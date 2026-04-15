@@ -50,7 +50,7 @@ function Row({
     <Section
       style={{
         borderBottom: last ? "none" : `1px solid ${c.border}`,
-        padding: "11px 0",
+        padding: "10px 0",
       }}
     >
       <table
@@ -64,7 +64,7 @@ function Row({
             <td
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 600,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase" as const,
@@ -79,7 +79,7 @@ function Row({
             <td
               style={{
                 fontFamily: font,
-                fontSize: 14,
+                fontSize: 13,
                 color: c.text,
                 fontWeight: 500,
               }}
@@ -127,7 +127,7 @@ export function OwnerNotificationEmail({
           style={{
             maxWidth: 520,
             margin: "0 auto",
-            padding: "40px 16px 48px",
+            padding: "32px 16px 40px",
           }}
         >
           {/* ── Header ───────────────────────────────────────────────── */}
@@ -135,18 +135,18 @@ export function OwnerNotificationEmail({
             style={{
               backgroundColor: c.header,
               borderRadius: "14px 14px 0 0",
-              padding: "24px 28px 20px",
+              padding: "20px 24px 18px",
             }}
           >
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 700,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase" as const,
                 color: "rgba(255,255,255,0.4)",
-                margin: "0 0 14px",
+                margin: "0 0 12px",
               }}
             >
               CHRIS OKAFOR · BOOKING SYSTEM
@@ -167,13 +167,13 @@ export function OwnerNotificationEmail({
                         backgroundColor: c.accent,
                         color: "#ffffff",
                         fontFamily: font,
-                        fontSize: 10,
+                        fontSize: 9,
                         fontWeight: 700,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase" as const,
-                        padding: "4px 10px",
+                        padding: "3px 8px",
                         borderRadius: 100,
-                        marginBottom: 10,
+                        marginBottom: 8,
                       }}
                     >
                       New Booking
@@ -185,7 +185,7 @@ export function OwnerNotificationEmail({
                     <Text
                       style={{
                         fontFamily: font,
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: 700,
                         color: "#ffffff",
                         margin: 0,
@@ -201,9 +201,9 @@ export function OwnerNotificationEmail({
                     <Text
                       style={{
                         fontFamily: font,
-                        fontSize: 13,
+                        fontSize: 12,
                         color: "rgba(255,255,255,0.5)",
-                        margin: "4px 0 0",
+                        margin: "3px 0 0",
                       }}
                     >
                       {clientEmail}
@@ -218,13 +218,13 @@ export function OwnerNotificationEmail({
           <Section
             style={{
               backgroundColor: c.surface,
-              padding: "24px 28px 20px",
+              padding: "20px 24px 16px",
             }}
           >
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 700,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase" as const,
@@ -234,7 +234,7 @@ export function OwnerNotificationEmail({
             >
               Call details
             </Text>
-            <Hr style={{ borderColor: c.border, margin: "10px 0 0" }} />
+            <Hr style={{ borderColor: c.border, margin: "8px 0 0" }} />
 
             <Row label="Date" value={date} />
             <Row label="Time" value={`${time} WAT`} />
@@ -250,18 +250,18 @@ export function OwnerNotificationEmail({
                 border: `1px solid ${c.tagBorder}`,
                 borderTop: "none",
                 borderBottom: "none",
-                padding: "16px 28px",
+                padding: "14px 24px",
               }}
             >
               <Text
                 style={{
                   fontFamily: font,
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: 700,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase" as const,
                   color: c.accent,
-                  margin: "0 0 6px",
+                  margin: "0 0 5px",
                 }}
               >
                 Client&apos;s notes
@@ -269,7 +269,7 @@ export function OwnerNotificationEmail({
               <Text
                 style={{
                   fontFamily: font,
-                  fontSize: 14,
+                  fontSize: 13,
                   color: c.text,
                   margin: 0,
                   lineHeight: "1.6",
@@ -286,7 +286,7 @@ export function OwnerNotificationEmail({
               backgroundColor: c.surface,
               borderTop: `1px solid ${c.border}`,
               borderRadius: "0 0 14px 14px",
-              padding: "20px 28px 24px",
+              padding: "16px 24px 20px",
               textAlign: "center" as const,
             }}
           >
@@ -296,10 +296,10 @@ export function OwnerNotificationEmail({
                 backgroundColor: c.accent,
                 color: "#ffffff",
                 fontFamily: font,
-                fontSize: 13,
+                fontSize: 12,
                 fontWeight: 700,
                 letterSpacing: "0.05em",
-                padding: "13px 28px",
+                padding: "11px 24px",
                 borderRadius: 8,
                 textDecoration: "none",
                 display: "inline-block",
@@ -310,9 +310,9 @@ export function OwnerNotificationEmail({
             <Text
               style={{
                 fontFamily: font,
-                fontSize: 11,
+                fontSize: 10,
                 color: c.muted,
-                margin: "10px 0 0",
+                margin: "8px 0 0",
               }}
             >
               {meetingLink}
@@ -323,10 +323,10 @@ export function OwnerNotificationEmail({
           <Text
             style={{
               fontFamily: font,
-              fontSize: 11,
+              fontSize: 10,
               color: "#b09090",
               textAlign: "center" as const,
-              marginTop: 24,
+              marginTop: 20,
             }}
           >
             © {new Date().getFullYear()} Chris Okafor · usechris.dev
