@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const WORKING_HOURS_START = 9; // 09:00 UTC
 const WORKING_HOURS_END = 17; // 17:00 UTC
-const SLOT_MINUTES = 30;
+const SLOT_MINUTES = 15;
 
 interface BusyPeriod {
   start: string;

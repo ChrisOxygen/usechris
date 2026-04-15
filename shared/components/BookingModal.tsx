@@ -28,11 +28,13 @@ const bookingSchema = z.object({
 });
 
 type BookingFormData = z.infer<typeof bookingSchema>;
-type Step = "calendar" | "slots" | "form" | "submitting" | "success" | "error";
+
+// "select" = the two-column calendar + time picker view
+type Step = "select" | "form" | "submitting" | "success" | "error";
 
 // ─── react-day-picker classNames ──────────────────────────────────────────────
-// Selected / today / disabled state is handled by .booking-cal CSS in globals.css
-// using data-* attributes that react-day-picker sets on the button element.
+// Selected / today / disabled states are driven by .booking-cal CSS in globals.css
+// which targets the data-* attributes react-day-picker places on each day button.
 
 const DAY_PICKER_CLASSES = {
   root: "w-full",
@@ -62,17 +64,6 @@ const DAY_PICKER_CLASSES = {
   focused: "",
 } as Record<string, string>;
 
-// ─── Step header titles ───────────────────────────────────────────────────────
-
-const STEP_TITLE: Record<Step, string> = {
-  calendar: "Pick a date",
-  slots: "Choose a time",
-  form: "Your details",
-  submitting: "Booking...",
-  success: "You're booked!",
-  error: "Slot unavailable",
-};
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function BookingModal({
@@ -82,7 +73,7 @@ export default function BookingModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const [step, setStep] = useState<Step>("calendar");
+  const [step, setStep] = useState<Step>("select");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
@@ -104,14 +95,14 @@ export default function BookingModal({
 
   const platform = watch("platform");
 
-  // ── Fetch slots for a selected date ────────────────────────────────────────
+  // ── Date selected → fetch slots (stays on "select" step) ──────────────────
 
   const handleDateSelect = useCallback(async (date: Date | undefined) => {
     if (!date) return;
     setSelectedDate(date);
+    setSelectedSlot(null);
     setIsLoadingSlots(true);
     setSlots([]);
-    setStep("slots");
 
     const dateStr = date.toISOString().split("T")[0];
     try {
@@ -126,14 +117,14 @@ export default function BookingModal({
     }
   }, []);
 
-  // ── Select a time slot ──────────────────────────────────────────────────────
+  // ── Slot selected → advance to form ───────────────────────────────────────
 
   const handleSlotSelect = (slot: TimeSlot) => {
     setSelectedSlot(slot);
     setStep("form");
   };
 
-  // ── Submit the form ─────────────────────────────────────────────────────────
+  // ── Form submit ────────────────────────────────────────────────────────────
 
   const onSubmit = async (data: BookingFormData) => {
     if (!selectedDate || !selectedSlot) return;
@@ -168,10 +159,10 @@ export default function BookingModal({
     }
   };
 
-  // ── Close & reset ───────────────────────────────────────────────────────────
+  // ── Close & reset ──────────────────────────────────────────────────────────
 
   const handleClose = () => {
-    setStep("calendar");
+    setStep("select");
     setSelectedDate(undefined);
     setSlots([]);
     setSelectedSlot(null);
@@ -181,14 +172,11 @@ export default function BookingModal({
     onClose();
   };
 
+  // Back from "form" returns to "select" — preserves the loaded date + slots
   const goBack = () => {
-    if (step === "slots") {
-      setSelectedDate(undefined);
-      setSlots([]);
-      setStep("calendar");
-    } else if (step === "form") {
+    if (step === "form") {
       setSelectedSlot(null);
-      setStep("slots");
+      setStep("select");
     } else if (step === "error") {
       setStep("form");
     }
@@ -199,49 +187,41 @@ export default function BookingModal({
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const showBack = step === "slots" || step === "form" || step === "error";
+  // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
+    // Full-screen overlay
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
     >
-      <div className="relative w-full max-w-md bg-surface border border-white/5 rounded-2xl shadow-2xl overflow-hidden">
-        {/* ── Header ── */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-          <div className="flex items-center gap-3">
-            {showBack && (
-              <button
-                onClick={goBack}
-                className="text-muted hover:text-foreground transition-colors"
-                aria-label="Go back"
-              >
-                <RiArrowLeftLine size={18} />
-              </button>
-            )}
-            <h2 className="font-russo-one text-base text-foreground">
-              {STEP_TITLE[step]}
-            </h2>
-          </div>
-          <button
-            onClick={handleClose}
-            className="text-muted hover:text-foreground transition-colors"
-            aria-label="Close"
-          >
-            <RiCloseLine size={20} />
-          </button>
-        </div>
+      {/* Modal shell — widens to two-column on the "select" step */}
+      <div
+        className={[
+          "relative w-full bg-surface border border-white/5 rounded-2xl shadow-2xl overflow-hidden",
+          step === "select" ? "max-w-[640px]" : "max-w-md",
+        ].join(" ")}
+      >
+        {/* ── Shared close button ── */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+          aria-label="Close"
+        >
+          <RiCloseLine size={18} />
+        </button>
 
-        {/* ── Body ── */}
-        <div className="px-6 py-6 min-h-[340px]">
-
-          {/* Step: Calendar */}
-          {step === "calendar" && (
-            <div>
-              <p className="font-source-code-pro text-xs text-muted mb-5">
-                All times are in GMT. Pick any available weekday to see open slots.
+        {/* ════════════════════════════════════════════════════════════════
+            STEP: SELECT — two-column calendar + time slots
+        ════════════════════════════════════════════════════════════════ */}
+        {step === "select" && (
+          <div className="flex flex-col sm:flex-row">
+            {/* ── Left panel: calendar ── */}
+            <div className="flex-1 min-w-0 p-6 sm:border-r border-b sm:border-b-0 border-white/5">
+              <p className="font-squada-one text-xs text-muted/60 tracking-widest uppercase mb-5">
+                Select a Date
               </p>
               <div className="booking-cal">
                 <DayPicker
@@ -253,46 +233,57 @@ export default function BookingModal({
                   classNames={DAY_PICKER_CLASSES}
                 />
               </div>
+              <p className="mt-5 font-source-code-pro text-xs text-muted/40">
+                All times shown in GMT · Weekdays only
+              </p>
             </div>
-          )}
 
-          {/* Step: Slots */}
-          {step === "slots" && (
-            <div>
-              {selectedDate && (
-                <p className="font-squada-one text-xs text-accent tracking-wider uppercase mb-5">
-                  {selectedDate.toLocaleDateString("en-GB", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </p>
-              )}
+            {/* ── Right panel: time slots ── */}
+            <div className="w-full sm:w-48 flex flex-col p-6">
+              {/* Panel header */}
+              <p className="font-squada-one text-xs text-muted/60 tracking-widest uppercase mb-5">
+                {selectedDate
+                  ? selectedDate.toLocaleDateString("en-GB", {
+                      weekday: "short",
+                      day: "numeric",
+                      month: "short",
+                    })
+                  : "Select a Time"}
+              </p>
 
-              {isLoadingSlots ? (
-                <div className="flex items-center justify-center py-16">
+              {/* Slot list */}
+              {!selectedDate ? (
+                <div className="flex-1 flex items-center justify-center py-8">
+                  <p className="font-source-code-pro text-xs text-muted/40 text-center leading-relaxed">
+                    Pick a date to see available slots
+                  </p>
+                </div>
+              ) : isLoadingSlots ? (
+                <div className="flex-1 flex items-center justify-center py-8">
                   <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : slots.length === 0 ? (
-                <div className="text-center py-16 space-y-4">
-                  <p className="font-source-code-pro text-sm text-muted">
-                    No slots available on this day.
+                <div className="flex-1 flex flex-col items-center justify-center py-8 gap-3">
+                  <p className="font-source-code-pro text-xs text-muted/60 text-center">
+                    No slots available.
                   </p>
                   <button
-                    onClick={goBack}
+                    onClick={() => {
+                      setSelectedDate(undefined);
+                      setSlots([]);
+                    }}
                     className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
                   >
-                    ← Pick a different date
+                    Try another date
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-3 gap-2">
+                <div className="overflow-y-auto max-h-[320px] space-y-2 pr-0.5">
                   {slots.map((slot) => (
                     <button
                       key={slot.start}
                       onClick={() => handleSlotSelect(slot)}
-                      className="py-2.5 px-2 bg-background border border-white/8 hover:border-accent/60 hover:bg-accent/10 text-muted hover:text-foreground font-source-code-pro text-xs rounded-lg transition-all duration-150 text-center"
+                      className="w-full py-2.5 px-3 rounded-lg font-source-code-pro text-sm transition-all duration-150 text-center bg-background/60 border border-white/8 text-muted hover:border-accent/50 hover:text-foreground hover:bg-accent/10"
                     >
                       {slot.label}
                     </button>
@@ -300,13 +291,32 @@ export default function BookingModal({
                 </div>
               )}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Step: Form */}
-          {step === "form" && (
-            <div>
+        {/* ════════════════════════════════════════════════════════════════
+            STEP: FORM — booking details
+        ════════════════════════════════════════════════════════════════ */}
+        {step === "form" && (
+          <div>
+            {/* Header */}
+            <div className="flex items-center gap-3 px-6 py-4 border-b border-white/5">
+              <button
+                onClick={goBack}
+                className="text-muted hover:text-foreground transition-colors"
+                aria-label="Go back"
+              >
+                <RiArrowLeftLine size={18} />
+              </button>
+              <h2 className="font-russo-one text-base text-foreground">
+                Your details
+              </h2>
+            </div>
+
+            <div className="px-6 py-6">
+              {/* Selected slot summary */}
               {selectedDate && selectedSlot && (
-                <div className="flex items-center gap-2 mb-5 px-3 py-2.5 bg-background rounded-lg border border-white/5">
+                <div className="flex items-center gap-2 mb-6 px-3 py-2.5 bg-background rounded-lg border border-white/5">
                   <RiCalendarLine size={13} className="text-accent shrink-0" />
                   <span className="font-source-code-pro text-xs text-muted">
                     {selectedDate.toLocaleDateString("en-GB", {
@@ -373,7 +383,7 @@ export default function BookingModal({
                   />
                 </div>
 
-                {/* Platform toggle */}
+                {/* Platform */}
                 <div>
                   <label className="block font-squada-one text-xs tracking-wider text-muted uppercase mb-2">
                     Platform
@@ -406,106 +416,111 @@ export default function BookingModal({
                 </button>
               </form>
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Step: Submitting */}
-          {step === "submitting" && (
-            <div className="flex flex-col items-center justify-center h-64 gap-4">
-              <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin" />
-              <p className="font-source-code-pro text-sm text-muted">
-                Locking in your slot...
+        {/* ════════════════════════════════════════════════════════════════
+            STEP: SUBMITTING
+        ════════════════════════════════════════════════════════════════ */}
+        {step === "submitting" && (
+          <div className="flex flex-col items-center justify-center h-64 gap-4">
+            <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+            <p className="font-source-code-pro text-sm text-muted">
+              Locking in your slot...
+            </p>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════════════════════════
+            STEP: SUCCESS
+        ════════════════════════════════════════════════════════════════ */}
+        {step === "success" && (
+          <div className="flex flex-col items-center text-center py-12 px-8 gap-5">
+            <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className="text-accent"
+              >
+                <path
+                  d="M5 12l5 5 9-9"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-russo-one text-xl text-foreground">
+                You&apos;re booked!
+              </h3>
+              <p className="font-source-code-pro text-sm text-muted leading-relaxed max-w-xs">
+                A confirmation email is on its way. Looking forward to chatting.
               </p>
             </div>
-          )}
-
-          {/* Step: Success */}
-          {step === "success" && (
-            <div className="flex flex-col items-center text-center py-8 gap-5">
-              <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="text-accent"
-                >
-                  <path
-                    d="M5 12l5 5 9-9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-russo-one text-xl text-foreground">
-                  You&apos;re booked!
-                </h3>
-                <p className="font-source-code-pro text-sm text-muted leading-relaxed max-w-xs">
-                  A confirmation email is on its way. Looking forward to
-                  chatting.
-                </p>
-              </div>
-              {meetingLink && (
-                <a
-                  href={meetingLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
-                >
-                  <RiVideoLine size={15} aria-hidden="true" />
-                  Open Meeting Link
-                </a>
-              )}
-              <button
-                onClick={handleClose}
-                className="font-squada-one text-xs text-muted/50 hover:text-muted tracking-wider transition-colors"
+            {meetingLink && (
+              <a
+                href={meetingLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
               >
-                Close
-              </button>
-            </div>
-          )}
+                <RiVideoLine size={15} aria-hidden="true" />
+                Open Meeting Link
+              </a>
+            )}
+            <button
+              onClick={handleClose}
+              className="font-squada-one text-xs text-muted/50 hover:text-muted tracking-wider transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        )}
 
-          {/* Step: Error */}
-          {step === "error" && (
-            <div className="flex flex-col items-center text-center py-8 gap-5">
-              <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="text-accent"
-                >
-                  <path
-                    d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-russo-one text-xl text-foreground">
-                  Slot taken
-                </h3>
-                <p className="font-source-code-pro text-sm text-muted leading-relaxed max-w-xs">
-                  {errorMessage}
-                </p>
-              </div>
-              <button
-                onClick={goBack}
-                className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
+        {/* ════════════════════════════════════════════════════════════════
+            STEP: ERROR
+        ════════════════════════════════════════════════════════════════ */}
+        {step === "error" && (
+          <div className="flex flex-col items-center text-center py-12 px-8 gap-5">
+            <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className="text-accent"
               >
-                ← Try a different time
-              </button>
+                <path
+                  d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
-          )}
-        </div>
+            <div className="space-y-2">
+              <h3 className="font-russo-one text-xl text-foreground">
+                Slot taken
+              </h3>
+              <p className="font-source-code-pro text-sm text-muted leading-relaxed max-w-xs">
+                {errorMessage}
+              </p>
+            </div>
+            <button
+              onClick={goBack}
+              className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
+            >
+              ← Try a different time
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
