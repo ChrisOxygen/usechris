@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCalendarClient } from "@/lib/google";
 
 // Your working hours — adjust to your actual availability
-const WORKING_HOURS = { start: 9, end: 17 }; // 9am–5pm WAT
+const WORKING_HOURS = { start: 8, end: 20 }; // 8am–8pm WAT
 const SLOT_DURATION = 30; // minutes
 const BUFFER = 15; // minutes between calls
 
