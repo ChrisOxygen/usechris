@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { DayPicker } from "react-day-picker";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -182,14 +183,16 @@ export default function BookingModal({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   // ── Render ─────────────────────────────────────────────────────────────────
+  // Portal renders into document.body, escaping any CSS transform stacking
+  // contexts on ancestor elements (e.g. FadeIn's translate-y transitions).
 
-  return (
+  return createPortal(
     // Full-screen overlay
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
@@ -522,6 +525,7 @@ export default function BookingModal({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
