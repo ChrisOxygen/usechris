@@ -33,6 +33,28 @@
   animation: testimonial-fade-in 0.4s ease-out forwards;
 }
 
+/* ── Booking calendar (react-day-picker) theming ─────────────────────────── */
+/* react-day-picker sets data-* attributes on each day <button>.             */
+/* We style selected / today / disabled / outside via those attributes here. */
+
+.booking-cal button[data-selected] {
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+}
+
+.booking-cal button[data-today]:not([data-selected]) {
+  color: var(--color-accent);
+}
+
+.booking-cal button[data-disabled] {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.booking-cal button[data-outside] {
+  opacity: 0.15;
+}
+
 body {
   background-color: var(--color-background);
   /* background-image: url("/assets/sitebg.webp"); */

@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { RiArrowRightLine } from "react-icons/ri";
 import FadeIn from "@/shared/components/FadeIn";
+import BookingTrigger from "@/shared/components/BookingTrigger";
 
 export default function CTASection() {
   return (
@@ -37,17 +36,7 @@ export default function CTASection() {
           </p>
 
           {/* Primary CTA button */}
-          <Link
-            href="#contact"
-            className="group mt-10 inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent-light text-foreground font-squada-one text-base tracking-widest rounded-xl transition-all duration-200"
-          >
-            Book a Free Call
-            <RiArrowRightLine
-              size={16}
-              aria-hidden="true"
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </Link>
+          <BookingTrigger />
 
           {/* Vertical pip — separates primary from secondary tier */}
           <div className="mt-12 w-px h-8 bg-foreground/10" aria-hidden="true" />
