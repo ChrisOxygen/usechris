@@ -27,7 +27,7 @@ export default function AboutSection() {
         alt=""
         width={700}
         height={700}
-        className="absolute bottom-0 md:right-0 -right-40 opacity-55 w-[700px] h-[700px]"
+        className="absolute bottom-0 md:right-0 -right-40 opacity-55 "
         aria-hidden="true"
       />
 
