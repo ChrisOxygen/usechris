@@ -347,7 +347,7 @@ export default function BookingModal({
                     </button>
                   </div>
                 ) : (
-                  <div className="overflow-y-auto max-h-[280px] space-y-1.5 pr-0.5">
+                  <div className="overflow-y-auto max-h-[200px] sm:max-h-[280px] space-y-1.5 pr-0.5">
                     {slots.map((slot) => (
                       <button
                         key={slot.start}
