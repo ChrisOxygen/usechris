@@ -1,80 +1,47 @@
-import Link from "next/link";
-import { FaLinkedinIn, FaXTwitter, FaGithub } from "react-icons/fa6";
+import { RiMailLine, RiLinkedinBoxLine, RiTwitterXLine } from "react-icons/ri";
 
-function SiteFooter() {
+export default function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="flex flex-col sm:flex-row justify-between items-start gap-6 lg:gap-8 px-6 sm:px-8 md:px-16 lg:px-20 py-8 lg:py-12 ">
-      {/* Left side - Links and Copyright */}
-      <div className="flex flex-col gap-3">
-        <nav className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base font-semibold uppercase">
-          <Link
-            href="/"
-            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="#about"
-            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="#projects"
-            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-          >
-            Projects
-          </Link>
-          <Link
-            href="#contact"
-            className="hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-          >
-            Contact
-          </Link>
-        </nav>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          © {new Date().getFullYear()} Chris Okafor. All rights reserved.
-        </p>
-      </div>
+    <footer className="px-10 py-8 border-t border-foreground/[0.06]">
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
 
-      {/* Right side - Social Media Icons */}
-      <div className="flex gap-3 sm:gap-4">
-        <Link
-          href="https://www.linkedin.com/in/christopher-okafor-17084416b"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group"
-          aria-label="LinkedIn Profile"
-        >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
-            <FaLinkedinIn />
-          </span>
-        </Link>
-        <Link
-          href="https://x.com/chris_okafor_x"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group"
-          aria-label="X (Twitter) Profile"
-        >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
-            <FaXTwitter />
-          </span>
-        </Link>
-        <Link
-          href="https://github.com/chrisOxygen"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group"
-          aria-label="GitHub Profile"
-        >
-          <span className="size-8 sm:size-10 lg:size-11 text-sm sm:text-base lg:text-lg grid place-items-center rounded-full bg-black dark:bg-white text-white dark:text-black transition-all duration-300 group-hover:bg-black/80 dark:group-hover:bg-white/80 group-hover:scale-110">
-            <FaGithub />
-          </span>
-        </Link>
+        {/* Copyright */}
+        <p className="font-squada-one text-xs text-muted tracking-[0.15em] uppercase">
+          © {year} Chris Okafor
+        </p>
+
+        {/* Social links */}
+        <div className="flex items-center gap-5">
+          <a
+            href="mailto:chris@usechris.dev"
+            aria-label="Email"
+            className="text-muted hover:text-foreground transition-colors duration-200"
+          >
+            <RiMailLine size={16} aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/christopher-okafor-17084416b"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-muted hover:text-foreground transition-colors duration-200"
+          >
+            <RiLinkedinBoxLine size={16} aria-hidden="true" />
+          </a>
+          <a
+            href="https://x.com/chris_okafor_x"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (formerly Twitter)"
+            className="text-muted hover:text-foreground transition-colors duration-200"
+          >
+            <RiTwitterXLine size={16} aria-hidden="true" />
+          </a>
+        </div>
+
       </div>
     </footer>
   );
 }
-
-export default SiteFooter;

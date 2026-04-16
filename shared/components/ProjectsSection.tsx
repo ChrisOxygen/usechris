@@ -1,49 +1,67 @@
-"use client";
+import { PROJECTS } from "@/shared/constants/projects";
+import FeaturedProjectCard from "@/shared/components/FeaturedProjectCard";
+import ProjectCard from "@/shared/components/ProjectCard";
+import FadeIn from "@/shared/components/FadeIn";
 
-import { PROJECTS } from "../constants";
-import { useProjectCarousel } from "../hooks/useProjectCarousel";
-import CarouselControls from "./projects/CarouselControls";
-import ProjectCarousel from "./projects/ProjectCarousel";
-import ProjectGrid from "./projects/ProjectGrid";
+const PLACEHOLDER_IMAGES = [
+  "/assets/projects-cover/Dictionary-Web-App-Case-Study-react-API-2.jpg",
+  "/assets/projects-cover/modern-financial-services-website-built-with-React-and-SASS.jpg",
+];
 
-const RESPONSIVE_PADDING = "pr-4 sm:pr-8 md:pr-16 lg:pr-20";
+const featuredProjects = PROJECTS.filter((p) => p.isFeatured);
+const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
-function ProjectsSection() {
-  const { emblaRef, scrollPrev, scrollNext } = useProjectCarousel();
-
+export default function ProjectsSection() {
   return (
     <section
-      id="projects"
-      className="w-full relative pl-4 sm:pl-8 py-16 md:pl-16 md:py-24 lg:pl-20 lg:py-30 border-b-2 sm:border-b-3 border-black dark:border-white flex flex-col gap-8 lg:gap-12"
+      id="work"
+      className=" relative px-6 sm:px-12 -mt-40 sm:-mt-60 lg:mt-0 z-10"
     >
-      <div className={`flex items-end justify-between ${RESPONSIVE_PADDING}`}>
-        <div className="flex flex-col gap-4">
-          <h2 className="text-[8vw] sm:text-5xl md:text-6xl lg:text-7xl font-russo-one">
-            Featured Projects
+      <div className="w-full  lg:pb-20 pb-8 max-w-3xl lg:max-w-5xl mx-auto flex flex-col gap-12 sm:gap-24 ">
+        {/* Section heading */}
+        <FadeIn className="flex items-center gap-4">
+          <h2 className="font-russo-one text-2xl md:text-3xl text-foreground whitespace-nowrap">
+            Built to Ship
           </h2>
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 w-full max-w-[1200px]">
-            Recent work showcasing innovative solutions, quality craftsmanship,
-            and modern development practices across various platforms.
-          </p>
+          <div className="h-px bg-accent flex-1" />
+        </FadeIn>
+
+        {/* Featured project cards */}
+        <div className="flex flex-col gap-8 lg:gap-32">
+          {featuredProjects.map((project, index) => (
+            <FadeIn key={project.title}>
+              <FeaturedProjectCard
+                project={project}
+                imageSrc={PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length]}
+                flipped={index % 2 !== 0}
+              />
+            </FadeIn>
+          ))}
         </div>
-        <CarouselControls
-          onPrev={scrollPrev}
-          onNext={scrollNext}
-          className="hidden lg:flex"
-        />
+
+        {/* Other noteworthy projects */}
+        <div className="flex flex-col items-center gap-10">
+          <FadeIn className="sm:text-center">
+            <h3 className="font-russo-one text-xl text-foreground">
+              Other Noteworthy Projects
+            </h3>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+            {otherProjects.map((project, index) => {
+              const delays = ["", "delay-100", "delay-200", "delay-300"];
+              return (
+                <FadeIn
+                  key={project.title}
+                  delayClass={delays[index % delays.length]}
+                >
+                  <ProjectCard project={project} />
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
       </div>
-
-      <ProjectCarousel projects={PROJECTS} emblaRef={emblaRef} />
-
-      <CarouselControls
-        onPrev={scrollPrev}
-        onNext={scrollNext}
-        className="hidden md:flex lg:hidden"
-      />
-
-      <ProjectGrid projects={PROJECTS} />
     </section>
   );
 }
-
-export default ProjectsSection;

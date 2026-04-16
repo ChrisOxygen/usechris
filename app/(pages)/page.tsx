@@ -1,7 +1,19 @@
-import ComingSoon from "@/shared/components/ComingSoon";
+import AboutSection from "@/shared/components/AboutSection";
+import CTASection from "@/shared/components/CTASection";
+import ExperienceSection from "@/shared/components/ExperienceSection";
+import HeroSection from "@/shared/components/HeroSection";
+import ProjectsSection from "@/shared/components/ProjectsSection";
+import TestimonialSection from "@/shared/components/TestimonialSection";
 
-function Home() {
-  return <ComingSoon />;
+export default function Home() {
+  return (
+    <main>
+      <HeroSection />
+      <ProjectsSection />
+      <AboutSection />
+      <ExperienceSection />
+      <TestimonialSection />
+      <CTASection />
+    </main>
+  );
 }
-
-export default Home;

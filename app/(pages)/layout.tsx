@@ -1,9 +1,15 @@
 import React from "react";
+import NavMenu from "@/shared/components/NavMenu";
+import SiteFooter from "@/shared/components/SiteFooter";
 
-// Layout stripped for "Coming Soon" mode.
-// To restore: re-add SiteHeader, SiteFooter, and the grid wrapper.
 function SiteRootLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div className=" bg-background/40">
+      <NavMenu />
+      {children}
+      <SiteFooter />
+    </div>
+  );
 }
 
 export default SiteRootLayout;

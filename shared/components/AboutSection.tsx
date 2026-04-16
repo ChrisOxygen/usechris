@@ -1,97 +1,113 @@
 import Image from "next/image";
+import FadeIn from "@/shared/components/FadeIn";
 
-function AboutSection() {
+export default function AboutSection() {
   return (
-    <section id="about" className="page-section">
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full">
-        <div className="flex flex-col gap-4 lg:gap-6 items-center lg:basis-4/10">
-          <h2 className=" font-russo-one text-[9vw] sm:text-7xl lg:text-8xl flex flex-row lg:flex-col gap-3 lg:gap-0  items-center font-bold">
-            <span className="">ABOUT</span>
-            <span className="">CHRIS</span>
+    <section
+      id="about"
+      className="relative overflow-hidden px-6 sm:px-12 py-18 lg:py-24"
+    >
+      {/* Layer 1 — texture background at near-invisible opacity */}
+      {/* <div className="absolute inset-0">
+        <Image
+          src="/assets/about-sect-bg.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-[0.58]"
+          aria-hidden="true"
+        />
+      </div> */}
+
+      {/* Layer 2 — section gradient, same direction as hero/projects */}
+      <div className="absolute inset-0 " />
+
+      {/* Layer 3 — Chris sitting, anchored to bottom-right of section */}
+      <Image
+        src="/assets/chris-okafor-sitting.webp"
+        alt=""
+        width={700}
+        height={700}
+        className=" absolute bottom-0 md:right-0 -right-40 opacity-55"
+        aria-hidden="true"
+      />
+
+      {/* Layer 4 — content (text + overlay photos) */}
+      <div className="relative z-10 max-w-3xl lg:max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+        {/* ── Left: Text ── */}
+        <FadeIn className="flex flex-col gap-6">
+          <h2 className="font-russo-one text-3xl min-[420px]:text-4xl text-foreground leading-tight">
+            I design, build, and ship products{" "}
+            <span className="text-accent">people actually use</span>
           </h2>
-          <Image
-            src="/assets/about-chris.jpg"
-            alt="About Chris Okafor"
-            width={400}
-            height={400}
-            className="object-cover object-[center_-60px] w-full lg:max-w-[500px] aspect-square rounded-xl lg:rounded-2xl"
-          />
-        </div>
-        <div className="lg:basis-6/10 flex flex-col gap-4 sm:gap-5 lg:gap-6 text-base sm:text-lg lg:text-xl leading-[160%] sm:leading-[170%] text-gray-700 dark:text-gray-300">
-          <p className="">
-            I started my career as a graphics designer, creating visuals for
-            clients before moving into web development through{" "}
-            <span className="font-bold text-black dark:text-white">
-              WordPress
-            </span>{" "}
-            and{" "}
-            <span className="font-bold text-black dark:text-white">
-              Elementor
-            </span>
-            . Building sites was exciting, but I wanted more control and deeper
-            technical capabilities. That curiosity led me to dive into{" "}
-            <span className="font-bold text-black dark:text-white">
-              JavaScript
-            </span>
-            ,{" "}
-            <span className="font-bold text-black dark:text-white">React</span>,
-            and{" "}
-            <span className="font-bold text-black dark:text-white">
-              TypeScript
-            </span>
-            —a decision that completely transformed my career.
-          </p>
-          <p>
-            Today, I&apos;m a full-stack developer specializing in{" "}
-            <span className="font-bold text-black dark:text-white">
-              Next.js
-            </span>
-            ,{" "}
-            <span className="font-bold text-black dark:text-white">React</span>,
-            and{" "}
-            <span className="font-bold text-black dark:text-white">
-              TypeScript
-            </span>
-            , helping startups and businesses build MVPs and production-ready
-            applications. My design background gives me a unique edge: I
-            don&apos;t just write code, I craft experiences that look great and
-            work seamlessly. From authentication systems to complex dashboards,
-            I build solutions that solve real problems while maintaining
-            exceptional user experience.
-          </p>
-          <div className="flex flex-col gap-2 sm:gap-3">
-            <h3 className="text-xl sm:text-2xl font-bold text-black dark:text-white">
-              Tech Stack:
-            </h3>
-            <div className="flex gap-3 sm:gap-4 text-base sm:text-lg flex-wrap">
-              <div className="basis-full sm:basis-[calc(50%-0.5rem)] flex flex-col gap-2">
-                <span className="font-semibold text-black dark:text-white">
-                  Next.js
-                </span>
-                <span className="font-semibold text-black dark:text-white">
-                  TypeScript
-                </span>
-                <span className="font-semibold text-black dark:text-white">
-                  React
-                </span>
-              </div>
-              <div className="basis-full sm:basis-[calc(50%-0.5rem)] flex flex-col gap-2">
-                <span className="font-semibold text-black dark:text-white">
-                  Tailwind CSS
-                </span>
-                <span className="font-semibold text-black dark:text-white">
-                  Prisma
-                </span>
-                <span className="font-semibold text-black dark:text-white">
-                  PostgreSQL
-                </span>
-              </div>
-            </div>
+
+          <div className="flex flex-col gap-4 font-source-code-pro text-sm text-foreground/65 leading-relaxed">
+            <p>
+              I&apos;m Chris, a full-stack developer from Port Harcourt,
+              Nigeria, with a background in UI/UX design that still shapes every
+              interface I build.
+            </p>
+            <p>
+              I didn&apos;t start in code. I started in pixels — designing
+              layouts, thinking through flows, obsessing over spacing. Then I
+              realized I could design it but had to wait for someone else to
+              build it. So I learned to build.
+            </p>
+            <p>
+              Three years later, I&apos;ve shipped a Chrome extension with over
+              1,000 downloads, an invoice platform handling 500+ real
+              transactions, and a visa application system with some of the most
+              complex form logic I&apos;ve ever had to think through. I&apos;ve
+              also built the backend operations for a business I co-founded:
+              lead capture, automation, CRM — the invisible plumbing that makes
+              it all run.
+            </p>
+            <p>
+              I work across the full stack: Next.js on the front, Supabase and
+              Prisma on the back, TypeScript throughout. But the design
+              background never left. I still care deeply about how things{" "}
+              <em className="text-foreground/85 not-italic">feel</em>, not just
+              whether they work.
+            </p>
+            <p>
+              Right now I&apos;m building Propreso into a full SaaS product, and
+              I&apos;m open to full-time roles where I can do meaningful work
+              with a team that takes craft seriously.
+            </p>
           </div>
+        </FadeIn>
+
+        {/* ── Right: Three overlay photos, positioned over the sitting-image bg ── */}
+        <div className="relative flex flex-col gap-4 lg:items-end items-start justify-end md:mt-20 md:pr-10">
+          {/* Photo 1 — upper area */}
+          <FadeIn>
+            <Image
+              src="/assets/chris-okafor-about-3.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
+          <FadeIn delayClass="delay-100">
+            <Image
+              src="/assets/chris-okafor-about-2.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
+          <FadeIn delayClass="delay-200">
+            <Image
+              src="/assets/chris-okafor-about-1.webp"
+              alt="Chris Okafor"
+              height={500}
+              width={500}
+              className="object-cover max-w-[250px] shadow-2xl rounded-lg aspect-4/3"
+            />
+          </FadeIn>
         </div>
       </div>
     </section>
   );
 }
-
-export default AboutSection;
