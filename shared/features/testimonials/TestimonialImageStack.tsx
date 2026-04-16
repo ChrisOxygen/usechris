@@ -35,6 +35,7 @@ export default function TestimonialImageStack({
               src={avatarPath(item.name)}
               alt={item.name}
               fill
+              sizes="208px"
               className="object-cover object-top"
             />
           </button>

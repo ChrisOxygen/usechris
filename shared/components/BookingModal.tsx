@@ -184,7 +184,8 @@ export default function BookingModal({
         reset();
       } else {
         setErrorMessage(
-          result.error ?? "That slot was just taken. Please choose another time."
+          result.error ??
+            "That slot was just taken. Please choose another time.",
         );
         setStep("error");
       }
@@ -247,17 +248,17 @@ export default function BookingModal({
                   Book a Discovery Call
                 </h2>
                 <div className="flex items-center gap-2.5 mt-2">
-                  <span className="flex items-center gap-1.5 font-source-code-pro text-xs text-muted">
+                  <span className="flex shrink-0 items-center gap-1.5 font-source-code-pro text-xs text-muted">
                     <RiTimeLine size={11} className="text-accent shrink-0" />
                     30 min
                   </span>
                   <span className="w-px h-3 bg-white/10" />
-                  <span className="flex items-center gap-1.5 font-source-code-pro text-xs text-muted">
+                  <span className="flex shrink-0 items-center gap-1.5 font-source-code-pro text-xs text-muted">
                     <RiVideoLine size={11} className="text-accent shrink-0" />
                     Video call
                   </span>
                   <span className="w-px h-3 bg-white/10" />
-                  <span className="font-source-code-pro text-xs text-muted">
+                  <span className="font-source-code-pro shrink-0 text-xs text-muted">
                     WAT / GMT+1
                   </span>
                 </div>
@@ -331,7 +332,9 @@ export default function BookingModal({
                 ) : slots.length === 0 ? (
                   <div className="flex-1 flex flex-col items-center justify-center py-10 gap-3">
                     <p className="font-source-code-pro text-[11px] text-muted/50 text-center leading-relaxed">
-                      No slots available<br />on this day.
+                      No slots available
+                      <br />
+                      on this day.
                     </p>
                     <button
                       onClick={() => {
@@ -598,6 +601,6 @@ export default function BookingModal({
         )}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

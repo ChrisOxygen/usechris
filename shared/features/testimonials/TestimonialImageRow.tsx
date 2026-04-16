@@ -52,6 +52,7 @@ export default function TestimonialImageRow({
                 src={avatarPath(item.name)}
                 alt={item.name}
                 fill
+                sizes="64px"
                 className="object-cover object-top"
               />
             </button>
