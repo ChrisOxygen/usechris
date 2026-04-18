@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import {
   FiDollarSign,
@@ -69,10 +70,9 @@ function DataFlowDiagram() {
         <div className="overflow-x-auto pb-2">
           <div className="flex items-stretch min-w-[740px] gap-0">
             {layers.map((layer, i) => (
-              <>
+              <React.Fragment key={layer.name}>
                 {/* Layer node */}
                 <div
-                  key={layer.name}
                   className="flex flex-col items-center gap-2 flex-1 min-w-0"
                 >
                   <div className="w-full bg-surface border border-[#2a1e1e] rounded-lg overflow-hidden hover:border-accent/25 transition-colors">
@@ -116,7 +116,7 @@ function DataFlowDiagram() {
                     <FiArrowRight className="w-3 h-3 text-muted/30 rotate-180" />
                   </div>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
