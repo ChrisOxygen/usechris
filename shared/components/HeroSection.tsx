@@ -51,12 +51,13 @@ export default function HeroSection() {
             >
               See my work
             </Link>
-            <Link
-              href="#about"
+            <a
+              href="/Christopher-Okafor-FullStack-Developer-2026.docx"
+              download
               className="px-5 py-2.5 rounded-lg font-squada-one text-base text-muted tracking-wide hover:text-foreground transition-colors duration-200"
             >
               Download Resume
-            </Link>
+            </a>
           </div>
 
           {/* Stats */}
