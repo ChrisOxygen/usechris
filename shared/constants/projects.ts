@@ -15,7 +15,7 @@ export const PROJECTS: Project[] = [
     isFeatured: true,
     caseStudySlug: "propreso",
     description:
-      "Freelancers shouldn't lose jobs because their proposal was weak. Writing a proposal used to cost me an hour. Now it takes two minutes. Propreso is the AI-powered proposal and cover letter generator I built for freelancers — born from my own frustration, validated by 1,000+ downloads on the Chrome Web Store before I even ran a single ad. Currently rebuilding it as a full SaaS with a smarter AI pipeline: the tool classifies job briefs, extracts real signals, and generates proposals that sound like the freelancer — not a robot.",
+      "Generic AI proposals get skipped. Propreso analyzes each job post for emotional signals and client intent first — then streams a human-sounding proposal in under 60 seconds. Two-stage Claude pipeline, Chrome extension, Stripe billing. Built from my own frustration. Validated by real users.",
     role: "Solo founder · Designed, built, and shipped end-to-end.",
     tools: [
       "Next.js",
@@ -25,19 +25,19 @@ export const PROJECTS: Project[] = [
       "WXT",
       "Tailwind",
     ],
-    liveLink: "https://shelf.usechris.dev",
-    githubLink: "https://github.com/chrisokafor/shelf",
+    liveLink: "https://propreso.com",
+    githubLink: "https://github.com/ChrisOxygen/propreso-v2",
   },
   {
     title: "Invox",
     isFeatured: true,
     caseStudySlug: "invox",
     description:
-      "Invoice management for freelancers and small businesses in Nigeria. Invox handles the unglamorous stuff — generating professional invoices, tracking payment status, keeping a paper trail. Simple to use, solid under the hood, and actively processing real transactions. The metric says it all: 500+ invoices isn't a demo. It's a product with real users and real stakes.",
+      "500+ invoices processed. Real freelancers, real money, real stakes. Invox is invoice management built for Nigerian freelancers — professional invoices, payment tracking, and a clean audit trail. Simple on the surface. Interesting under the hood.",
     role: "Full-stack developer · Design, frontend, backend, deployment.",
     tools: ["Next.js", "Prisma", "PostgreSQL", "Tailwind"],
-    liveLink: "https://shelf.usechris.dev",
-    githubLink: "https://github.com/chrisokafor/shelf",
+    liveLink: "https://www.invox.cc/",
+    githubLink: "https://github.com/ChrisOxygen/invox",
   },
   {
     title: "Dictionary Wiki",

@@ -222,47 +222,6 @@ function Divider() {
   return <div className="w-full h-px bg-surface my-20" />;
 }
 
-function ImagePlaceholder({
-  label,
-  wide = true,
-}: {
-  label: string;
-  wide?: boolean;
-}) {
-  return (
-    <figure className="my-10">
-      <div
-        className={`w-full ${
-          wide ? "aspect-video" : "aspect-[4/3]"
-        } bg-surface border-2 border-dashed border-[#2a1e1e] rounded-xl flex flex-col items-center justify-center gap-3`}
-      >
-        <div className="w-12 h-12 rounded-full bg-[#1e1414] flex items-center justify-center">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#5a4040"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2.5" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-        </div>
-        <p className="font-squada-one text-[10px] text-[#5a4040] text-center px-8 leading-relaxed max-w-[400px] uppercase tracking-[0.12em]">
-          {label}
-        </p>
-      </div>
-      <figcaption className="font-source-code-pro text-xs text-muted text-center mt-3 leading-relaxed">
-        {label}
-      </figcaption>
-    </figure>
-  );
-}
-
 function InlineCode({ children }: { children: React.ReactNode }) {
   return (
     <code className="font-source-code-pro text-[12px] bg-surface text-accent px-1.5 py-0.5 rounded">
@@ -432,14 +391,18 @@ export default function PropresCaseStudyPage() {
 
             <div className="flex flex-wrap gap-3">
               <a
-                href="#"
+                href="https://propreso.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-squada-one inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
               >
                 View Live App
                 <FiExternalLink className="w-3.5 h-3.5" />
               </a>
               <a
-                href="#"
+                href="https://github.com/ChrisOxygen/propreso-v2"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
               >
                 View GitHub
@@ -450,10 +413,13 @@ export default function PropresCaseStudyPage() {
         </div>
 
         <div className="max-w-[1100px] mx-auto px-6 pb-12">
-          <ImagePlaceholder
-            label="SCREENSHOT: Generate Page — job post input, profile selector, tone picker, and streaming proposal output."
-            wide={true}
-          />
+          <figure className="my-10">
+            <img
+              src="/assets/generating-proposals.gif"
+              alt="Propreso generating a proposal — job post input, profile selector, tone picker, and streaming output"
+              className="w-full rounded-xl border border-[#2a1e1e]"
+            />
+          </figure>
         </div>
       </section>
 
@@ -630,10 +596,13 @@ export default function PropresCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="SCREENSHOT: Profile Setup — role selector, skills picker, bio input, and portfolio items."
-          wide={false}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/adding-profiles.gif"
+            alt="Propreso profile setup — role selector, skills picker, bio input, and portfolio items"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       {/* Architecture */}
@@ -710,10 +679,13 @@ export default function PropresCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="SCREENSHOT: Proposal History — status badges (Won, Replied, No Response) and win-rate metric."
-          wide={false}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/proposals-history.gif"
+            alt="Propreso proposal history — status badges (Won, Replied, No Response) and win-rate metric"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       {/* Design system */}
@@ -763,13 +735,6 @@ export default function PropresCaseStudyPage() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="SCREENSHOT: Design System / Brand — landing hero and dashboard side-by-side showing the warm ember palette in context."
-          wide={true}
-        />
       </div>
 
       {/* Billing */}
@@ -874,13 +839,6 @@ export default function PropresCaseStudyPage() {
         </div>
       </div>
 
-      <div className="max-w-[1100px] mx-auto px-6 pb-6">
-        <ImagePlaceholder
-          label="SCREENSHOT: Chrome Extension — Propreso panel open on an Upwork job page."
-          wide={false}
-        />
-      </div>
-
       {/* Challenges */}
       <div className="max-w-[780px] mx-auto px-6 pb-20 pt-4">
         <Divider />
@@ -957,14 +915,18 @@ export default function PropresCaseStudyPage() {
 
           <div className="flex flex-wrap gap-3 justify-center mb-10">
             <a
-              href="#"
+              href="https://propreso.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-squada-one inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
             >
               View Live App
               <FiExternalLink className="w-3.5 h-3.5" />
             </a>
             <a
-              href="#"
+              href="https://github.com/ChrisOxygen/propreso-v2"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
             >
               View GitHub

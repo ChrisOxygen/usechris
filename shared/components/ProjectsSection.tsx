@@ -3,11 +3,6 @@ import FeaturedProjectCard from "@/shared/components/FeaturedProjectCard";
 import ProjectCard from "@/shared/components/ProjectCard";
 import FadeIn from "@/shared/components/FadeIn";
 
-const PLACEHOLDER_IMAGES = [
-  "/assets/projects-cover/Dictionary-Web-App-Case-Study-react-API-2.jpg",
-  "/assets/projects-cover/modern-financial-services-website-built-with-React-and-SASS.jpg",
-];
-
 const featuredProjects = PROJECTS.filter((p) => p.isFeatured);
 const otherProjects = PROJECTS.filter((p) => !p.isFeatured);
 
@@ -32,7 +27,6 @@ export default function ProjectsSection() {
             <FadeIn key={project.title}>
               <FeaturedProjectCard
                 project={project}
-                imageSrc={PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length]}
                 flipped={index % 2 !== 0}
               />
             </FadeIn>
