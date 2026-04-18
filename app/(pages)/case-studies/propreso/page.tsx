@@ -23,6 +23,189 @@ export const metadata: Metadata = {
     "AI-powered proposal generation for Upwork freelancers. A full-stack SaaS with a two-stage Claude pipeline, Chrome extension, and Stripe billing.",
 };
 
+/* ─── Pipeline Diagram ───────────────────────────────────────────────────── */
+
+function PipelineDiagram() {
+  return (
+    <figure className="my-10">
+      <div className="w-full bg-[#0d0a0a] border border-[#2a1e1e] rounded-xl p-8">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-[#2a1e1e]" />
+          <span className="font-squada-one text-[11px] tracking-[0.18em] uppercase text-muted px-2">
+            2-Stage AI Pipeline
+          </span>
+          <div className="h-px flex-1 bg-[#2a1e1e]" />
+        </div>
+
+        {/* Flow — horizontally scrollable on small screens */}
+        <div className="overflow-x-auto pb-2">
+          <div className="flex items-stretch min-w-[680px] gap-0">
+
+            {/* 1 — Input: Job Post */}
+            <div className="flex flex-col items-center gap-2 w-[108px] flex-shrink-0">
+              <div className="w-full h-full bg-[#161111] border border-[#2a1e1e] rounded-lg p-4 text-center flex flex-col items-center justify-center">
+                <div className="w-8 h-8 mb-3 rounded-lg bg-[#0d0a0a] border border-[#2a1e1e] flex items-center justify-center">
+                  <FiMessageSquare className="w-4 h-4 text-muted" />
+                </div>
+                <p className="font-squada-one text-[11px] uppercase tracking-wide text-foreground mb-1">
+                  Job Post
+                </p>
+                <p className="font-source-code-pro text-[10px] text-muted leading-relaxed">
+                  Raw Upwork posting
+                </p>
+              </div>
+              <span className="font-source-code-pro text-[9px] text-muted/40 uppercase tracking-widest">
+                input
+              </span>
+            </div>
+
+            {/* Connector */}
+            <div className="flex items-center flex-1 px-2 mb-5">
+              <div className="h-px flex-1 bg-[#3a2020]" />
+              <FiArrowRight className="w-3 h-3 text-accent flex-shrink-0" />
+            </div>
+
+            {/* 2 — Stage 1: Analyzer / Haiku */}
+            <div className="flex flex-col items-center gap-2 w-[150px] flex-shrink-0">
+              <div className="w-full bg-surface border border-accent/20 rounded-lg overflow-hidden">
+                <div className="bg-[#1c1414] border-b border-accent/15 px-3 py-1.5 flex items-center justify-between">
+                  <span className="font-source-code-pro text-[9px] text-accent tracking-wide">
+                    Stage 1
+                  </span>
+                  <span className="font-source-code-pro text-[9px] text-muted">
+                    Claude Haiku
+                  </span>
+                </div>
+                <div className="p-3">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <div className="w-5 h-5 rounded bg-[#1c1414] border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <FiCpu className="w-3 h-3 text-accent" />
+                    </div>
+                    <p className="font-squada-one text-[11px] uppercase tracking-wide text-foreground">
+                      Analyzer
+                    </p>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {[
+                      "Tone & urgency",
+                      "Client fears",
+                      "Keyword mapping",
+                      "Red flag detection",
+                    ].map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-center gap-1.5 font-source-code-pro text-[10px] text-muted"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-accent/40 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <span className="font-source-code-pro text-[9px] text-muted/40 uppercase tracking-widest">
+                ~600 tokens
+              </span>
+            </div>
+
+            {/* Connector — Intelligence Report label */}
+            <div className="flex flex-col items-center justify-center flex-1 px-2 mb-5 gap-1">
+              <span className="font-source-code-pro text-[9px] text-muted/60 whitespace-nowrap">
+                Intelligence Report
+              </span>
+              <div className="w-full flex items-center">
+                <div className="h-px flex-1 bg-[#3a2020]" />
+                <FiArrowRight className="w-3 h-3 text-accent flex-shrink-0" />
+              </div>
+            </div>
+
+            {/* 3 — Stage 2: Generator / Sonnet */}
+            <div className="flex flex-col items-center gap-2 w-[150px] flex-shrink-0">
+              <div className="w-full bg-surface border border-accent/20 rounded-lg overflow-hidden">
+                <div className="bg-[#1c1414] border-b border-accent/15 px-3 py-1.5 flex items-center justify-between">
+                  <span className="font-source-code-pro text-[9px] text-accent tracking-wide">
+                    Stage 2
+                  </span>
+                  <span className="font-source-code-pro text-[9px] text-muted">
+                    Claude Sonnet
+                  </span>
+                </div>
+                <div className="p-3">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <div className="w-5 h-5 rounded bg-[#1c1414] border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <FiZap className="w-3 h-3 text-accent" />
+                    </div>
+                    <p className="font-squada-one text-[11px] uppercase tracking-wide text-foreground">
+                      Generator
+                    </p>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {[
+                      "Grounded in report",
+                      "Freelancer's voice",
+                      "No AI tells",
+                      "Word-by-word stream",
+                    ].map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-center gap-1.5 font-source-code-pro text-[10px] text-muted"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-accent/40 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <span className="font-source-code-pro text-[9px] text-muted/40 uppercase tracking-widest">
+                streaming
+              </span>
+            </div>
+
+            {/* Connector */}
+            <div className="flex items-center flex-1 px-2 mb-5">
+              <div className="h-px flex-1 bg-[#3a2020]" />
+              <FiArrowRight className="w-3 h-3 text-accent flex-shrink-0" />
+            </div>
+
+            {/* 4 — Output: Streamed Proposal */}
+            <div className="flex flex-col items-center gap-2 w-[108px] flex-shrink-0">
+              <div className="w-full h-full bg-[#161111] border border-accent/30 rounded-lg p-4 text-center flex flex-col items-center justify-center">
+                <div className="w-8 h-8 mb-3 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <FiCheck className="w-4 h-4 text-accent" />
+                </div>
+                <p className="font-squada-one text-[11px] uppercase tracking-wide text-foreground mb-1">
+                  Proposal
+                </p>
+                <p className="font-source-code-pro text-[10px] text-muted leading-relaxed">
+                  Streamed live
+                </p>
+              </div>
+              <span className="font-source-code-pro text-[9px] text-accent/50 uppercase tracking-widest">
+                output
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-6 pt-5 border-t border-[#2a1e1e] flex items-center justify-between gap-4 flex-wrap">
+          <span className="font-source-code-pro text-[10px] text-muted/40">
+            Spec / scam detection triggers automatic token refund — no credit consumed
+          </span>
+          <span className="font-source-code-pro text-[10px] text-muted/40 ml-auto whitespace-nowrap">
+            ~2–4 s end-to-end
+          </span>
+        </div>
+      </div>
+      <figcaption className="font-source-code-pro text-[10px] text-muted/40 text-center mt-3 uppercase tracking-widest">
+        Fig. 1 — Two-Stage AI Pipeline
+      </figcaption>
+    </figure>
+  );
+}
+
 /* ─── Primitives ─────────────────────────────────────────────────────────── */
 
 function SectionKicker({ number, label }: { number: string; label: string }) {
@@ -411,10 +594,7 @@ export default function PropresCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="DIAGRAM: 2-Stage AI Pipeline — Job Post → Analyzer (Haiku) → Intelligence Report → Generator (Sonnet) → Streamed Proposal."
-          wide={true}
-        />
+        <PipelineDiagram />
       </div>
 
       {/* Feature grid */}
