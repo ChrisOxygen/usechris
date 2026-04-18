@@ -161,47 +161,6 @@ function Divider() {
   return <div className="w-full h-px bg-surface my-20" />;
 }
 
-function ImagePlaceholder({
-  label,
-  wide = true,
-}: {
-  label: string;
-  wide?: boolean;
-}) {
-  return (
-    <figure className="my-10">
-      <div
-        className={`w-full ${
-          wide ? "aspect-video" : "aspect-[4/3]"
-        } bg-surface border-2 border-dashed border-[#2a1e1e] rounded-xl flex flex-col items-center justify-center gap-3`}
-      >
-        <div className="w-12 h-12 rounded-full bg-[#1e1414] flex items-center justify-center">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#5a4040"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2.5" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-        </div>
-        <p className="font-squada-one text-[10px] text-[#5a4040] text-center px-8 leading-relaxed max-w-[380px] uppercase tracking-[0.12em]">
-          {label}
-        </p>
-      </div>
-      <figcaption className="font-source-code-pro text-xs text-muted text-center mt-3 leading-relaxed">
-        {label}
-      </figcaption>
-    </figure>
-  );
-}
-
 type InvoiceStatus =
   | "DRAFT"
   | "SENT"
@@ -472,10 +431,13 @@ export default function InvoxCaseStudyPage() {
         </div>
 
         <div className="max-w-[1100px] mx-auto px-6 pb-12">
-          <ImagePlaceholder
-            label="Dashboard overview — invoice list with status filters and stats cards."
-            wide={true}
-          />
+          <figure className="my-10">
+            <img
+              src="/assets/invox-dashboard.png"
+              alt="Invox dashboard overview — invoice list with status filters and stats cards"
+              className="w-full rounded-xl border border-[#2a1e1e]"
+            />
+          </figure>
         </div>
       </section>
 
@@ -561,10 +523,13 @@ export default function InvoxCaseStudyPage() {
           ))}
         </div>
 
-        <ImagePlaceholder
-          label="Invoice creation form — dynamic line items with live total calculations."
-          wide={true}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/invoice-creation-form.gif"
+            alt="Invoice creation form — dynamic line items with live total calculations"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       <div className="max-w-[780px] mx-auto px-6 pb-20">
@@ -690,10 +655,13 @@ export default function InvoxCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="Generated PDF invoice — branded header, line items, and bank transfer details."
-          wide={false}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/generated-pdf-invoice.gif"
+            alt="Generated PDF invoice — branded header, line items, and bank transfer details"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       <div className="max-w-[780px] mx-auto px-6 pb-4">
@@ -740,10 +708,13 @@ export default function InvoxCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="Invoice detail — payment history and status workflow."
-          wide={false}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/invoice-status-details.png"
+            alt="Invoice detail — payment history and status workflow"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       <div className="max-w-[780px] mx-auto px-6 pb-4">
@@ -773,10 +744,13 @@ export default function InvoxCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6 pb-6">
-        <ImagePlaceholder
-          label="Public invoice view — accessible to clients via share link, no login required."
-          wide={false}
-        />
+        <figure className="my-10">
+          <img
+            src="/assets/public-invoice-view.gif"
+            alt="Public invoice view — accessible to clients via share link, no login required"
+            className="w-full rounded-xl border border-[#2a1e1e]"
+          />
+        </figure>
       </div>
 
       <div className="max-w-[780px] mx-auto px-6 pb-20 pt-4">
