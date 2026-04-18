@@ -1,16 +1,815 @@
+import type { Metadata } from "next";
+import {
+  FiZap,
+  FiCpu,
+  FiPackage,
+  FiCreditCard,
+  FiUser,
+  FiMessageSquare,
+  FiClock,
+  FiShield,
+  FiBarChart2,
+  FiToggleRight,
+  FiExternalLink,
+  FiGithub,
+  FiArrowRight,
+  FiCheck,
+  FiX,
+} from "react-icons/fi";
+
+export const metadata: Metadata = {
+  title: "Propreso — Case Study",
+  description:
+    "AI-powered proposal generation for Upwork freelancers. A full-stack SaaS with a two-stage Claude pipeline, Chrome extension, and Stripe billing.",
+};
+
+/* ─── Primitives ─────────────────────────────────────────────────────────── */
+
+function SectionKicker({ number, label }: { number: string; label: string }) {
+  return (
+    <p className="font-squada-one text-[11px] tracking-[0.2em] uppercase text-muted mb-5 flex items-center gap-3">
+      <span className="text-accent">{number}</span>
+      <span className="inline-block w-5 h-px bg-surface" />
+      {label}
+    </p>
+  );
+}
+
+function Divider() {
+  return <div className="w-full h-px bg-surface my-20" />;
+}
+
+function ImagePlaceholder({
+  label,
+  wide = true,
+}: {
+  label: string;
+  wide?: boolean;
+}) {
+  return (
+    <figure className="my-10">
+      <div
+        className={`w-full ${
+          wide ? "aspect-video" : "aspect-[4/3]"
+        } bg-surface border-2 border-dashed border-[#2a1e1e] rounded-xl flex flex-col items-center justify-center gap-3`}
+      >
+        <div className="w-12 h-12 rounded-full bg-[#1e1414] flex items-center justify-center">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#5a4040"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2.5" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+        </div>
+        <p className="font-squada-one text-[10px] text-[#5a4040] text-center px-8 leading-relaxed max-w-[400px] uppercase tracking-[0.12em]">
+          {label}
+        </p>
+      </div>
+      <figcaption className="font-source-code-pro text-xs text-muted text-center mt-3 leading-relaxed">
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
+
+function InlineCode({ children }: { children: React.ReactNode }) {
+  return (
+    <code className="font-source-code-pro text-[12px] bg-surface text-accent px-1.5 py-0.5 rounded">
+      {children}
+    </code>
+  );
+}
+
+/* ─── Static data ────────────────────────────────────────────────────────── */
+
+const heroStats = [
+  { icon: FiZap, value: "~60s", label: "to generate a proposal" },
+  { icon: FiCpu, value: "2-stage", label: "AI pipeline (analyze → generate)" },
+  { icon: FiPackage, value: "Chrome", label: "extension for in-page generation" },
+  { icon: FiCreditCard, value: "Free", label: "freemium with Stripe billing" },
+];
+
+const features = [
+  {
+    icon: FiUser,
+    title: "Niche Profiles",
+    desc: "Up to 2 (free) or 4 (pro) profiles — each with role, skills, bio, and portfolio items.",
+  },
+  {
+    icon: FiMessageSquare,
+    title: "4 Writing Tones",
+    desc: "Professional, Conversational, Confident, Friendly — each tunes vocabulary and sentence rhythm.",
+  },
+  {
+    icon: FiZap,
+    title: "Streaming Output",
+    desc: "Proposals stream word-by-word in real-time via Vercel AI SDK's streamText().",
+  },
+  {
+    icon: FiPackage,
+    title: "Chrome Extension",
+    desc: "WXT-based extension injects a generation panel directly into Upwork job pages.",
+  },
+  {
+    icon: FiClock,
+    title: "Proposal History",
+    desc: "All proposals saved. Track status (Won / Replied / No Response) for win-rate analytics.",
+  },
+  {
+    icon: FiToggleRight,
+    title: "Token Economy",
+    desc: "Free: 10 lifetime tokens. Pro: 200/month. Tokens refunded on failed or suspicious posts.",
+  },
+  {
+    icon: FiShield,
+    title: "Suspicious Post Detection",
+    desc: "AI flags spec work, scam posts, and unclassifiable jobs — no token wasted.",
+  },
+  {
+    icon: FiBarChart2,
+    title: "Freemium + Stripe Billing",
+    desc: "Free → Pro upgrade with monthly ($6/mo) or annual ($48/yr) plans via Stripe Checkout.",
+  },
+];
+
+const techStack = [
+  { layer: "Frontend", tech: "Next.js 16.1 (App Router), TypeScript strict, Tailwind CSS v4, shadcn/ui" },
+  { layer: "AI", tech: "Vercel AI SDK v6, OpenRouter (Haiku → Sonnet), real-time streamText()" },
+  { layer: "Database", tech: "PostgreSQL (Supabase), Prisma ORM v7 (ES modules)" },
+  { layer: "Auth", tech: "Supabase Auth + SSR cookie sessions" },
+  { layer: "Billing", tech: "Stripe Checkout + Webhooks, idempotent handling via Upstash Redis" },
+  { layer: "Rate Limiting", tech: "Upstash Redis (5 req/min per user on generation endpoint)" },
+  { layer: "Analytics", tech: "PostHog (client + server-side event tracking)" },
+  { layer: "Extension", tech: "WXT + React (Chrome extension, separate project)" },
+  { layer: "Deployment", tech: "Vercel" },
+];
+
+const archDecisions = [
+  {
+    title: "Auth-only Supabase, Prisma for all data.",
+    body: "Supabase handles sessions; every DB read/write goes through Prisma. This avoids mixing two ORM paradigms and keeps query logic fully typed and predictable.",
+  },
+  {
+    title: "Feature-based folder structure.",
+    body: "Code lives in features/<feature>/ with sub-folders for components, hooks, schemas, and server functions. Shared code goes in shared/. Keeps related code co-located, avoids a monolithic utils/ blob.",
+  },
+  {
+    title: "Server functions prefixed with _.",
+    body: "_createProfile, _generateProposal. A visual convention that makes it immediately clear a function must only run server-side and can access Prisma directly.",
+  },
+  {
+    title: "Atomic token deduction before generation.",
+    body: "Tokens are decremented before the AI call, then refunded on failure. Prevents race conditions and ensures users can't over-consume by firing parallel requests.",
+  },
+  {
+    title: "Two-model pipeline for cost control.",
+    body: "Analysis uses the cheapest capable model (Haiku) to extract structured signals; only generation uses the more expensive Sonnet. Keeps per-generation cost low while keeping quality high.",
+  },
+  {
+    title: "Idempotent Stripe webhooks.",
+    body: "Every webhook event ID is cached in Redis with a 7-day TTL. Duplicate deliveries from Stripe are silently ignored, preventing double token grants.",
+  },
+];
+
+const challenges = [
+  {
+    title: "Streaming in App Router with Prisma.",
+    body: "The generation endpoint needed to stream while also saving the result to the DB after completion. Solved with Vercel AI SDK's onFinish callback, which fires server-side after the stream ends without blocking the client.",
+  },
+  {
+    title: "Race conditions in token deduction.",
+    body: "Early versions allowed parallel requests to both pass a balance check. Switched to a Prisma atomic update (decrement where balance > 0) that either succeeds or returns zero rows — making check-and-decrement a single atomic operation.",
+  },
+  {
+    title: "Prisma v7 ES module migration.",
+    body: "Prisma 7 ships as ESM and moves database config out of schema.prisma into a separate prisma.config.ts. Required careful adjustment of import paths and the build pipeline.",
+  },
+  {
+    title: "Next.js 16 middleware.ts deprecation.",
+    body: "Next.js 16 deprecated middleware.ts in favor of proxy.ts with a renamed export. Small but easy to miss when scaffolding — noted in project docs to avoid future confusion.",
+  },
+];
+
+/* ─── Page ───────────────────────────────────────────────────────────────── */
+
 export default function PropresCaseStudyPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-6">
-      <div className="text-center flex flex-col items-center gap-4">
-        <span className="font-source-code-pro text-xs text-accent tracking-widest uppercase">
-          Case Study
-        </span>
-        <h1 className="font-russo-one text-4xl md:text-5xl text-foreground">
-          Propreso
-        </h1>
-        <p className="font-source-code-pro text-muted text-sm mt-2">
-          Coming soon — full case study in progress.
+    <main className="bg-background text-muted min-h-screen">
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="border-b border-surface">
+        <div className="h-0.5 w-full bg-accent" />
+
+        <div className="max-w-[1100px] mx-auto px-6 pt-16 pb-10">
+          <p className="font-squada-one text-[11px] tracking-[0.2em] uppercase text-muted mb-8 flex items-center gap-3">
+            <span className="inline-block w-6 h-px bg-accent" />
+            Case Study
+          </p>
+
+          <div className="max-w-[780px]">
+            <h1 className="font-russo-one text-[56px] md:text-[80px] text-foreground leading-none tracking-tight mb-4">
+              Propreso
+            </h1>
+            <p className="font-squada-one text-xl md:text-2xl text-foreground tracking-wide mb-5">
+              AI-Powered Proposal Generation for Upwork Freelancers
+            </p>
+            <p className="font-source-code-pro text-sm leading-7 text-muted mb-10 max-w-[580px]">
+              Upwork freelancers waste hours on proposals that never convert.
+              Propreso analyzes each job post for emotional signals and client
+              intent, then streams a personalized, human-sounding proposal in
+              under 60 seconds — built by Christopher Okafor.
+            </p>
+
+            {/* Stat badges */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+              {heroStats.map((s) => (
+                <div
+                  key={s.label}
+                  className="bg-surface border border-[#2a1e1e] rounded-xl p-4 flex flex-col gap-2"
+                >
+                  <div className="w-7 h-7 rounded-lg bg-[#1e1414] border border-[#2a1e1e] flex items-center justify-center">
+                    <s.icon className="w-3.5 h-3.5 text-accent" />
+                  </div>
+                  <p className="font-russo-one text-foreground text-lg leading-none">
+                    {s.value}
+                  </p>
+                  <p className="font-source-code-pro text-[11px] text-muted leading-snug">
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#"
+                className="font-squada-one inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+              >
+                View Live App
+                <FiExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="#"
+                className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+              >
+                View GitHub
+                <FiGithub className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-[1100px] mx-auto px-6 pb-12">
+          <ImagePlaceholder
+            label="SCREENSHOT: Generate Page — job post input, profile selector, tone picker, and streaming proposal output."
+            wide={true}
+          />
+        </div>
+      </section>
+
+      {/* ── Sections ─────────────────────────────────────────────────────── */}
+      <div className="max-w-[780px] mx-auto px-6 py-20">
+
+        {/* ── 01 The Problem ─────────────────────────────────────────────── */}
+        <SectionKicker number="01" label="The Problem" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Freelancers are losing bids they should be winning.
+        </h2>
+        <div className="space-y-4 font-source-code-pro text-sm leading-7">
+          <p>
+            Upwork freelancers send dozens of proposals per week. A strong
+            proposal — one that mirrors the client&apos;s tone, addresses their
+            actual fear, and sounds like a human wrote it — takes 15–30 minutes
+            to craft from scratch.
+          </p>
+          <p>
+            Generic AI tools make this worse, not better. ChatGPT prompts
+            produce hollow, detectable text (&ldquo;I came across your posting
+            and…&rdquo;) that clients have learned to skip. The output doesn&apos;t
+            know the client&apos;s sophistication level, urgency, or emotional state
+            — it just completes the sentence.
+          </p>
+          <p>
+            Freelancers with multiple niches face a compound problem: the
+            proposal for a React development job should read nothing like the
+            one for a technical writing contract. There&apos;s no tool that lets them
+            maintain multiple context profiles and apply the right one per job —
+            until now.
+          </p>
+        </div>
+
+        <blockquote className="my-10 pl-6 border-l-4 border-accent">
+          <p className="font-revalia text-xl text-foreground leading-snug">
+            &ldquo;Stop Losing Bids. Start Winning Clients.&rdquo;
+          </p>
+        </blockquote>
+
+        <Divider />
+
+        {/* ── 02 The Solution ────────────────────────────────────────────── */}
+        <SectionKicker number="02" label="The Solution" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          A two-stage AI pipeline built for signal, not just completion.
+        </h2>
+        <p className="font-source-code-pro text-sm leading-7 mb-8">
+          Propreso&apos;s core architecture is a deliberate two-model pipeline. The
+          first stage analyzes; the second generates. Most AI tools skip the
+          first step entirely — and that&apos;s why their output is generic.
         </p>
+
+        {/* Pipeline visualization */}
+        <div className="bg-surface border border-[#2a1e1e] rounded-xl overflow-hidden mb-8">
+          {/* Stage 1 */}
+          <div className="p-6 border-b border-[#2a1e1e]">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-source-code-pro text-[11px] text-accent bg-[#1e1414] border border-accent/20 px-2 py-0.5 rounded">
+                Stage 1
+              </span>
+              <span className="font-squada-one text-sm text-foreground uppercase tracking-wide">
+                Job Post Analysis
+              </span>
+              <span className="font-source-code-pro text-[10px] text-muted ml-auto">
+                Claude Haiku
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {[
+                "Core problem extraction",
+                "Client sophistication level",
+                "Emotional tone + urgency",
+                "Keywords to mirror",
+                "Biggest client fears",
+                "Red flag / scam detection",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 font-source-code-pro text-xs text-muted"
+                >
+                  <span className="w-1 h-1 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Arrow */}
+          <div className="flex items-center justify-center py-3 bg-[#0f0c0c] border-b border-[#2a1e1e]">
+            <div className="flex items-center gap-2 font-squada-one text-[10px] text-muted uppercase tracking-widest">
+              <span>Intelligence Report</span>
+              <FiArrowRight className="w-3 h-3 text-accent" />
+              <span>Stage 2</span>
+            </div>
+          </div>
+
+          {/* Stage 2 */}
+          <div className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-source-code-pro text-[11px] text-accent bg-[#1e1414] border border-accent/20 px-2 py-0.5 rounded">
+                Stage 2
+              </span>
+              <span className="font-squada-one text-sm text-foreground uppercase tracking-wide">
+                Proposal Generation
+              </span>
+              <span className="font-source-code-pro text-[10px] text-muted ml-auto">
+                Claude Sonnet
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {[
+                "Grounded in intelligence report",
+                "Tuned to freelancer's real profile",
+                "No hollow openers, no AI tells",
+                "Rhythm-aware writing + contractions",
+                "One CTA, proof points with numbers",
+                "Streamed word-by-word in real-time",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 font-source-code-pro text-xs text-muted"
+                >
+                  <span className="w-1 h-1 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p className="font-source-code-pro text-sm leading-7">
+          The pipeline also handles edge cases cleanly: posts flagged as spec
+          work, scams, or unclassifiable trigger a refund of the generation
+          token — the system never consumes a credit on a job that can&apos;t
+          produce a useful proposal.
+        </p>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6">
+        <ImagePlaceholder
+          label="DIAGRAM: 2-Stage AI Pipeline — Job Post → Analyzer (Haiku) → Intelligence Report → Generator (Sonnet) → Streamed Proposal."
+          wide={true}
+        />
+      </div>
+
+      {/* Feature grid */}
+      <div className="max-w-[780px] mx-auto px-6 pb-4">
+        <Divider />
+        <SectionKicker number="03" label="Key Features" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-10">
+          Everything a freelancer needs. Nothing they don&apos;t.
+        </h2>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {features.map((f) => (
+            <div
+              key={f.title}
+              className="bg-surface border border-[#2a1e1e] rounded-xl p-5 flex gap-4 hover:border-accent/30 transition-colors"
+            >
+              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#1e1414] border border-[#2a1e1e] flex items-center justify-center mt-0.5">
+                <f.icon className="w-4 h-4 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-squada-one text-sm text-foreground tracking-wide uppercase mb-1">
+                  {f.title}
+                </h3>
+                <p className="font-source-code-pro text-xs leading-relaxed text-muted">
+                  {f.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6">
+        <ImagePlaceholder
+          label="SCREENSHOT: Profile Setup — role selector, skills picker, bio input, and portfolio items."
+          wide={false}
+        />
+      </div>
+
+      {/* Architecture */}
+      <div className="max-w-[780px] mx-auto px-6 pb-4">
+        <Divider />
+        <SectionKicker number="04" label="Technical Architecture" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Opinionated by design.
+        </h2>
+        <p className="font-source-code-pro text-sm leading-7 mb-8">
+          Every dependency was chosen to solve a specific problem at scale in a
+          serverless, AI-heavy SaaS. The stack reflects hard lessons from v1 and
+          deliberate tradeoffs between simplicity and capability.
+        </p>
+      </div>
+
+      {/* Tech stack table */}
+      <div className="max-w-[1100px] mx-auto px-6">
+        <div className="bg-surface border border-[#2a1e1e] rounded-xl overflow-hidden mb-6">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[#2a1e1e] bg-[#0f0c0c]">
+                <th className="font-squada-one text-left px-6 py-3 text-[10px] tracking-[0.18em] uppercase text-muted w-36">
+                  Layer
+                </th>
+                <th className="font-squada-one text-left px-6 py-3 text-[10px] tracking-[0.18em] uppercase text-muted">
+                  Technology
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {techStack.map((row, i) => (
+                <tr
+                  key={row.layer}
+                  className={`border-b border-[#1e1414] last:border-0 ${
+                    i % 2 === 0 ? "bg-surface" : "bg-[#120e0e]"
+                  }`}
+                >
+                  <td className="font-squada-one px-6 py-3 text-sm text-foreground tracking-wide">
+                    {row.layer}
+                  </td>
+                  <td className="font-source-code-pro px-6 py-3 text-xs text-muted">
+                    {row.tech}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Arch decisions */}
+      <div className="max-w-[780px] mx-auto px-6 pb-4">
+        <h3 className="font-squada-one text-xl text-foreground tracking-wide uppercase mb-6 mt-4">
+          Key Architectural Decisions
+        </h3>
+        <div className="space-y-7">
+          {archDecisions.map((d, i) => (
+            <div key={d.title} className="flex gap-5">
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1e1414] border border-accent/20 flex items-center justify-center mt-0.5">
+                <span className="font-source-code-pro text-[10px] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div>
+                <h4 className="font-squada-one text-sm text-foreground uppercase tracking-wide mb-1.5">
+                  {d.title}
+                </h4>
+                <p className="font-source-code-pro text-sm leading-7">{d.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6">
+        <ImagePlaceholder
+          label="SCREENSHOT: Proposal History — status badges (Won, Replied, No Response) and win-rate metric."
+          wide={false}
+        />
+      </div>
+
+      {/* Design system */}
+      <div className="max-w-[780px] mx-auto px-6 pb-20 pt-4">
+        <Divider />
+        <SectionKicker number="05" label="Design System" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Warm ember. Urgency without aggression.
+        </h2>
+        <p className="font-source-code-pro text-sm leading-7 mb-8">
+          Propreso uses a custom Tailwind v4 token system built around a warm
+          ember palette — evocative of productivity and focus, without the
+          cold sterility of most SaaS tools. The typography pairs Space
+          Grotesk (headings), Instrument Serif italic (display/hero), Inter
+          (body), and JetBrains Mono (badges, tags, code).
+        </p>
+
+        {/* Color swatches */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+          {[
+            { name: "Deep Ember", hex: "#C85438", label: "Primary actions" },
+            { name: "Warm Canvas", hex: "#FDF8F6", label: "Page background" },
+            { name: "Ember Tint", hex: "#FDF0EC", label: "Accent surfaces" },
+            { name: "Rich Ink", hex: "#1A1412", label: "Primary text" },
+            { name: "Warm Slate", hex: "#5A4E4A", label: "Secondary text" },
+            { name: "Border", hex: "#E8DDD9", label: "Dividers, outlines" },
+          ].map((c) => (
+            <div
+              key={c.name}
+              className="bg-surface border border-[#2a1e1e] rounded-xl overflow-hidden"
+            >
+              <div
+                className="h-10 w-full"
+                style={{ backgroundColor: c.hex }}
+              />
+              <div className="p-3">
+                <p className="font-squada-one text-xs text-foreground uppercase tracking-wide">
+                  {c.name}
+                </p>
+                <p className="font-source-code-pro text-[10px] text-accent mt-0.5">
+                  {c.hex}
+                </p>
+                <p className="font-source-code-pro text-[10px] text-muted mt-0.5">
+                  {c.label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6">
+        <ImagePlaceholder
+          label="SCREENSHOT: Design System / Brand — landing hero and dashboard side-by-side showing the warm ember palette in context."
+          wide={true}
+        />
+      </div>
+
+      {/* Billing */}
+      <div className="max-w-[780px] mx-auto px-6 pb-4">
+        <Divider />
+        <SectionKicker number="06" label="Billing & Freemium" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Simple pricing. Generous free tier.
+        </h2>
+        <p className="font-source-code-pro text-sm leading-7 mb-8">
+          Token flow: Stripe <InlineCode>invoice.paid</InlineCode> webhook →
+          grant 200 tokens atomically → Prisma{" "}
+          <InlineCode>User.tokenBalance</InlineCode> incremented. Users manage
+          billing via Stripe Customer Portal — no custom billing UI required.
+        </p>
+
+        {/* Billing table */}
+        <div className="bg-surface border border-[#2a1e1e] rounded-xl overflow-hidden">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[#2a1e1e] bg-[#0f0c0c]">
+                <th className="font-squada-one text-left px-6 py-3 text-[10px] tracking-[0.18em] uppercase text-muted" />
+                <th className="font-squada-one text-center px-6 py-3 text-[10px] tracking-[0.18em] uppercase text-muted">
+                  Free
+                </th>
+                <th className="font-squada-one text-center px-6 py-3 text-[10px] tracking-[0.18em] uppercase text-accent border-l border-[#2a1e1e]">
+                  Pro
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { label: "Profiles", free: "2", pro: "4" },
+                { label: "Generation tokens", free: "10 lifetime", pro: "200 / month" },
+                { label: "Monthly price", free: "$0", pro: "$6 / mo" },
+                { label: "Annual price", free: "$0", pro: "$48 / yr ($4/mo)" },
+                { label: "Token rollover", free: false, pro: true },
+              ].map((row, i) => (
+                <tr
+                  key={row.label}
+                  className={`border-b border-[#1e1414] last:border-0 ${
+                    i % 2 === 0 ? "bg-surface" : "bg-[#120e0e]"
+                  }`}
+                >
+                  <td className="font-squada-one px-6 py-3 text-sm text-foreground tracking-wide">
+                    {row.label}
+                  </td>
+                  <td className="font-source-code-pro px-6 py-3 text-xs text-muted text-center">
+                    {typeof row.free === "boolean" ? (
+                      row.free ? (
+                        <FiCheck className="w-3.5 h-3.5 text-accent mx-auto" />
+                      ) : (
+                        <FiX className="w-3.5 h-3.5 text-muted mx-auto opacity-40" />
+                      )
+                    ) : (
+                      row.free
+                    )}
+                  </td>
+                  <td className="font-source-code-pro px-6 py-3 text-xs text-foreground text-center border-l border-[#2a1e1e]">
+                    {typeof row.pro === "boolean" ? (
+                      row.pro ? (
+                        <FiCheck className="w-3.5 h-3.5 text-accent mx-auto" />
+                      ) : (
+                        <FiX className="w-3.5 h-3.5 text-muted mx-auto opacity-40" />
+                      )
+                    ) : (
+                      row.pro
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Chrome extension */}
+      <div className="max-w-[780px] mx-auto px-6 pb-4">
+        <Divider />
+        <SectionKicker number="07" label="Chrome Extension" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Generate without switching tabs.
+        </h2>
+        <div className="space-y-4 font-source-code-pro text-sm leading-7">
+          <p>
+            The Chrome extension — built with WXT + React — injects a Propreso
+            panel directly into Upwork job listing pages. Freelancers can select
+            a profile, choose a tone, and generate a proposal without leaving
+            the job page.
+          </p>
+          <p>
+            The extension communicates with the same API as the web app, sharing
+            auth state via the Supabase session cookie. No separate login. No
+            token duplication. The same token balance governs both surfaces.
+          </p>
+          <p>
+            WXT was chosen over a manual webpack manifest setup for its
+            first-class HMR support during development and automatic manifest v3
+            compatibility — reducing extension-specific boilerplate to near
+            zero.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6 pb-6">
+        <ImagePlaceholder
+          label="SCREENSHOT: Chrome Extension — Propreso panel open on an Upwork job page."
+          wide={false}
+        />
+      </div>
+
+      {/* Challenges */}
+      <div className="max-w-[780px] mx-auto px-6 pb-20 pt-4">
+        <Divider />
+        <SectionKicker number="08" label="Challenges & Learnings" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-10">
+          What I&apos;d do differently.
+        </h2>
+
+        <div className="space-y-8">
+          {challenges.map((c, i) => (
+            <div key={c.title} className="flex gap-5">
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#1e1414] border border-accent/20 flex items-center justify-center mt-0.5">
+                <span className="font-source-code-pro text-[10px] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div>
+                <h3 className="font-squada-one text-base text-foreground tracking-wide uppercase mb-2">
+                  {c.title}
+                </h3>
+                <p className="font-source-code-pro text-sm leading-7">{c.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <Divider />
+
+        {/* Results */}
+        <SectionKicker number="09" label="Results & Status" />
+        <h2 className="font-russo-one text-3xl text-foreground leading-tight mb-6">
+          Live and billing.
+        </h2>
+        <ul className="space-y-3 mb-16">
+          {[
+            "Live product at production URL with freemium model fully operational",
+            "Stripe billing integrated — monthly and annual plans processing successfully",
+            "Chrome extension published and available on the Chrome Web Store",
+            "PostHog tracking proposal generation events, plan upgrades, and token limit hits",
+          ].map((item) => (
+            <li
+              key={item}
+              className="flex gap-3 font-source-code-pro text-sm leading-[1.7]"
+            >
+              <span className="mt-1 flex-shrink-0 w-4 h-4 rounded-full bg-[#1e1414] border border-accent/30 flex items-center justify-center">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                  <path
+                    d="M1.5 4l1.5 1.5 3.5-3.5"
+                    stroke="#dc3545"
+                    strokeWidth="1.25"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <Divider />
+
+        {/* Footer CTA */}
+        <div className="text-center py-10">
+          <p className="font-squada-one text-[10px] tracking-[0.2em] uppercase text-muted mb-4">
+            Project
+          </p>
+          <h2 className="font-russo-one text-3xl text-foreground mb-2">
+            Propreso
+          </h2>
+          <p className="font-source-code-pro text-sm text-muted mb-8">
+            AI-powered proposal generation for Upwork freelancers.
+          </p>
+
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            <a
+              href="#"
+              className="font-squada-one inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+            >
+              View Live App
+              <FiExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="#"
+              className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+            >
+              View GitHub
+              <FiGithub className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="#"
+              className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+            >
+              Chrome Extension
+              <FiPackage className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://usechris.dev"
+              className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+            >
+              Christopher Okafor
+            </a>
+          </div>
+
+          <p className="font-source-code-pro text-[11px] text-muted/60 leading-relaxed">
+            Built with Next.js, Supabase, Prisma, and the Vercel AI SDK.
+            Deployed on Vercel.
+          </p>
+        </div>
       </div>
     </main>
   );
