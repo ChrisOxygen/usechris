@@ -8,6 +8,7 @@ import {
   FiShield,
   FiExternalLink,
   FiGithub,
+  FiArrowRight,
 } from "react-icons/fi";
 
 export const metadata: Metadata = {
@@ -15,6 +16,134 @@ export const metadata: Metadata = {
   description:
     "From draft to paid — invoicing built for the Nigerian market. A full-stack SaaS by Christopher Okafor.",
 };
+
+/* ─── Data Flow Diagram ──────────────────────────────────────────────────── */
+
+function DataFlowDiagram() {
+  const layers = [
+    {
+      icon: FiUsers,
+      name: "Client",
+      badge: "React / Next.js",
+      bullets: ["App Router UI", "Optimistic updates", "Streaming responses"],
+    },
+    {
+      icon: FiShare2,
+      name: "TanStack Query",
+      badge: "Cache Layer",
+      bullets: ["Query deduplication", "Background refetch", "Mutation hooks"],
+    },
+    {
+      icon: FiGitBranch,
+      name: "API Route",
+      badge: "Route Handler",
+      bullets: ["Auth middleware", "Request validation", "Error boundaries"],
+    },
+    {
+      icon: FiFileText,
+      name: "Prisma",
+      badge: "ORM",
+      bullets: ["Type-safe queries", "Schema migrations", "Relation loading"],
+    },
+    {
+      icon: FiShield,
+      name: "PostgreSQL",
+      badge: "Supabase",
+      bullets: ["Row Level Security", "Composite indexes", "Cascade deletes"],
+    },
+  ];
+
+  return (
+    <figure className="my-10">
+      <div className="w-full bg-[#0d0a0a] border border-[#2a1e1e] rounded-xl p-8">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-[#2a1e1e]" />
+          <span className="font-squada-one text-[11px] tracking-[0.18em] uppercase text-muted px-2">
+            Data Flow
+          </span>
+          <div className="h-px flex-1 bg-[#2a1e1e]" />
+        </div>
+
+        {/* Flow */}
+        <div className="overflow-x-auto pb-2">
+          <div className="flex items-stretch min-w-[740px] gap-0">
+            {layers.map((layer, i) => (
+              <>
+                {/* Layer node */}
+                <div
+                  key={layer.name}
+                  className="flex flex-col items-center gap-2 flex-1 min-w-0"
+                >
+                  <div className="w-full bg-surface border border-[#2a1e1e] rounded-lg overflow-hidden hover:border-accent/25 transition-colors">
+                    <div className="bg-[#1c1414] border-b border-[#2a1e1e] px-3 py-1.5 flex items-center justify-between gap-2">
+                      <span className="font-squada-one text-[10px] uppercase tracking-wide text-foreground truncate">
+                        {layer.name}
+                      </span>
+                      <span className="font-source-code-pro text-[9px] text-muted whitespace-nowrap">
+                        {layer.badge}
+                      </span>
+                    </div>
+                    <div className="p-3">
+                      <div className="w-6 h-6 rounded bg-[#1c1414] border border-[#2a1e1e] flex items-center justify-center mb-2.5">
+                        <layer.icon className="w-3 h-3 text-accent" />
+                      </div>
+                      <ul className="space-y-1.5">
+                        {layer.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className="flex items-start gap-1.5 font-source-code-pro text-[10px] text-muted leading-snug"
+                          >
+                            <span className="w-1 h-1 rounded-full bg-accent/40 flex-shrink-0 mt-1" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <span className="font-source-code-pro text-[9px] text-muted/40 uppercase tracking-widest">
+                    {i === 0 ? "browser" : i === layers.length - 1 ? "database" : `layer ${i}`}
+                  </span>
+                </div>
+
+                {/* Connector — not after last node */}
+                {i < layers.length - 1 && (
+                  <div
+                    key={`conn-${i}`}
+                    className="flex flex-col items-center justify-center gap-1 px-1 mb-5 flex-shrink-0 w-[28px]"
+                  >
+                    <FiArrowRight className="w-3 h-3 text-accent" />
+                    <FiArrowRight className="w-3 h-3 text-muted/30 rotate-180" />
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-6 pt-5 border-t border-[#2a1e1e] flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5 font-source-code-pro text-[10px] text-muted/40">
+              <FiArrowRight className="w-3 h-3 text-accent/50" />
+              Query / mutation
+            </span>
+            <span className="flex items-center gap-1.5 font-source-code-pro text-[10px] text-muted/40">
+              <FiArrowRight className="w-3 h-3 text-muted/30 rotate-180" />
+              Response / data
+            </span>
+          </div>
+          <span className="font-source-code-pro text-[10px] text-muted/40 ml-auto whitespace-nowrap">
+            Prisma singleton — max: 1 per Vercel function
+          </span>
+        </div>
+      </div>
+      <figcaption className="font-source-code-pro text-[10px] text-muted/40 text-center mt-3 uppercase tracking-widest">
+        Fig. 1 — Full-Stack Data Flow
+      </figcaption>
+    </figure>
+  );
+}
 
 /* ─── Reusable primitives ────────────────────────────────────────────────── */
 
@@ -519,10 +648,7 @@ export default function InvoxCaseStudyPage() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        <ImagePlaceholder
-          label="Data flow: Client → TanStack Query → API Route → Prisma → PostgreSQL (Supabase)."
-          wide={true}
-        />
+        <DataFlowDiagram />
       </div>
 
       <div className="max-w-[780px] mx-auto px-6 py-20">
