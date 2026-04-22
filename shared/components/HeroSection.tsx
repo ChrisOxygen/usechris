@@ -46,7 +46,7 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex items-center gap-5 flex-wrap">
             <Link
-              href="#projects"
+              href="#work"
               className="px-5 py-2.5 rounded-lg border border-accent text-accent font-squada-one text-base tracking-wide hover:bg-accent hover:text-foreground transition-all duration-200"
             >
               See my work

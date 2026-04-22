@@ -932,13 +932,13 @@ export default function PropresCaseStudyPage() {
               View GitHub
               <FiGithub className="w-3.5 h-3.5" />
             </a>
-            <a
-              href="#"
-              className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
+            <span
+              className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface text-muted/40 text-sm tracking-wider px-5 py-2.5 rounded-lg uppercase cursor-not-allowed"
+              title="Chrome Extension — coming soon"
             >
               Chrome Extension
               <FiPackage className="w-3.5 h-3.5" />
-            </a>
+            </span>
             <a
               href="https://usechris.dev"
               className="font-squada-one inline-flex items-center gap-2 bg-surface border border-surface hover:border-accent text-foreground text-sm tracking-wider px-5 py-2.5 rounded-lg transition-colors uppercase"
