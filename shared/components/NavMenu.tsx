@@ -125,7 +125,7 @@ export default function NavMenu() {
           {/* Mobile menu footer */}
           <div className="flex flex-col items-center gap-6">
             <Link
-              href="#contact"
+              href="/#contact"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
               onClick={() => setMobileOpen(false)}
             >
