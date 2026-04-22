@@ -6,6 +6,7 @@ import {
   Source_Code_Pro,
 } from "next/font/google";
 import "./globals.css";
+import { PHProvider } from "./providers";
 
 const russoOne = Russo_One({
   weight: "400",
@@ -114,7 +115,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${russoOne.variable} ${squadaOne.variable} ${revalia.variable} ${sourceCodePro.variable} antialiased`}
       >
-        {children}
+        <PHProvider>{children}</PHProvider>
       </body>
     </html>
   );

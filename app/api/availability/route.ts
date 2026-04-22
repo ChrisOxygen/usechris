@@ -43,32 +43,31 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Filter out slots that overlap with busy periods and return slot objects
-    const slots = allSlots
-      .filter((slot) => {
-        const slotStart = new Date(`${date}T${slot}:00+01:00`);
-        const slotEnd = new Date(
-          slotStart.getTime() + (SLOT_DURATION + BUFFER) * 60000,
-        );
+    // Build all slots, marking booked ones instead of filtering them out
+    const slots = allSlots.map((slot) => {
+      const slotStart = new Date(`${date}T${slot}:00+01:00`);
+      const slotEnd = new Date(
+        slotStart.getTime() + (SLOT_DURATION + BUFFER) * 60000,
+      );
 
-        return !busySlots.some((busy) => {
-          const busyStart = new Date(busy.start!);
-          const busyEnd = new Date(busy.end!);
-          return slotStart < busyEnd && slotEnd > busyStart;
-        });
-      })
-      .map((slot) => {
-        const [h, m] = slot.split(":").map(Number);
-        const endMinutes = h * 60 + m + SLOT_DURATION;
-        const endH = Math.floor(endMinutes / 60);
-        const endM = endMinutes % 60;
-        const end = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
-        return {
-          start: slot,
-          end,
-          label: `${slot} – ${end}`,
-        };
+      const booked = busySlots.some((busy) => {
+        const busyStart = new Date(busy.start!);
+        const busyEnd = new Date(busy.end!);
+        return slotStart < busyEnd && slotEnd > busyStart;
       });
+
+      const [h, m] = slot.split(":").map(Number);
+      const endMinutes = h * 60 + m + SLOT_DURATION;
+      const endH = Math.floor(endMinutes / 60);
+      const endM = endMinutes % 60;
+      const end = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
+      return {
+        start: slot,
+        end,
+        label: `${slot} – ${end}`,
+        booked,
+      };
+    });
 
     return NextResponse.json({ slots });
   } catch (error) {

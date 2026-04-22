@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { getCalendarClient } from "@/lib/google";
 import { Resend } from "resend";
 import ical from "ical-generator";
 import { render } from "@react-email/render";
 import { ClientConfirmationEmail } from "@/emails/ClientConfirmation";
 import { OwnerNotificationEmail } from "@/emails/OwnerNotification";
+import { ipRatelimit, emailRatelimit } from "@/lib/ratelimit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -48,7 +50,32 @@ async function createZoomMeeting(topic: string, startTime: string) {
 
 // ─── Main handler ────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
-  const { name, email, notes, platform, date, slotStart } = await req.json();
+  const headersList = await headers();
+  const ip =
+    headersList.get("x-forwarded-for")?.split(",")[0].trim() ?? "anonymous";
+
+  const body = await req.json();
+  const { name, email, notes, platform, date, slotStart } = body;
+
+  const [ipCheck, emailCheck] = await Promise.all([
+    ipRatelimit.limit(ip),
+    emailRatelimit.limit(`email:${email}`),
+  ]);
+
+  if (!ipCheck.success || !emailCheck.success) {
+    const reset = !ipCheck.success ? ipCheck.reset : emailCheck.reset;
+    const retryAfter = Math.ceil((reset - Date.now()) / 1000);
+    return NextResponse.json(
+      { error: "Too many booking attempts. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(retryAfter),
+          "X-RateLimit-Remaining": "0",
+        },
+      },
+    );
+  }
 
   // Build start/end ISO strings
   const startDate = new Date(`${date}T${slotStart}:00+01:00`); // WAT

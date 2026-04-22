@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { usePostHog } from "posthog-js/react";
 import { createPortal } from "react-dom";
 import { DayPicker } from "react-day-picker";
 import { useForm } from "react-hook-form";
@@ -22,6 +23,7 @@ interface TimeSlot {
   start: string;
   end: string;
   label: string;
+  booked?: boolean;
 }
 
 const bookingSchema = z.object({
@@ -70,6 +72,8 @@ export default function BookingModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const posthog = usePostHog();
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -157,6 +161,10 @@ export default function BookingModal({
   const handleSlotSelect = (slot: TimeSlot) => {
     setSelectedSlot(slot);
     setStep("form");
+    posthog.capture("booking_slot_selected", {
+      slot: slot.start,
+      date: selectedDate?.toISOString().split("T")[0],
+    });
   };
 
   // ── Form submit ────────────────────────────────────────────────────────────
@@ -176,9 +184,23 @@ export default function BookingModal({
           date: selectedDate.toISOString().split("T")[0],
         }),
       });
+      if (res.status === 429) {
+        posthog.capture("booking_rate_limited");
+        setErrorMessage(
+          "Too many booking attempts. Please try again in an hour.",
+        );
+        setStep("error");
+        return;
+      }
+
       const result = await res.json();
 
       if (result.success) {
+        posthog.capture("booking_completed", {
+          platform: data.platform,
+          date: selectedDate?.toISOString().split("T")[0],
+          slot: selectedSlot?.start,
+        });
         setMeetingLink(result.meetingLink ?? "");
         setStep("success");
         reset();
@@ -351,10 +373,22 @@ export default function BookingModal({
                     {slots.map((slot) => (
                       <button
                         key={slot.start}
-                        onClick={() => handleSlotSelect(slot)}
-                        className="w-full py-2.5 px-3 rounded-lg font-source-code-pro text-xs whitespace-nowrap transition-all duration-150 text-center bg-background/60 border border-white/8 text-muted hover:border-accent/50 hover:text-foreground hover:bg-accent/10"
+                        onClick={() => !slot.booked && handleSlotSelect(slot)}
+                        disabled={slot.booked}
+                        aria-label={slot.booked ? `${slot.label} — unavailable` : slot.label}
+                        className={[
+                          "w-full py-2.5 px-3 rounded-lg font-source-code-pro text-xs whitespace-nowrap transition-all duration-150 text-center border",
+                          slot.booked
+                            ? "bg-background/30 border-white/4 text-muted/30 cursor-not-allowed line-through"
+                            : "bg-background/60 border-white/8 text-muted hover:border-accent/50 hover:text-foreground hover:bg-accent/10",
+                        ].join(" ")}
                       >
-                        {slot.label}
+                        <span className={slot.booked ? "line-through" : ""}>{slot.label}</span>
+                        {slot.booked && (
+                          <span className="ml-1.5 font-squada-one text-[9px] tracking-wider [text-decoration:none]">
+                            booked
+                          </span>
+                        )}
                       </button>
                     ))}
                   </div>
