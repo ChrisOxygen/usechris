@@ -36,6 +36,9 @@ const bookingSchema = z.object({
 type BookingFormData = z.infer<typeof bookingSchema>;
 
 type Step = "select" | "form" | "submitting" | "success" | "error";
+type ErrorType = "conflict" | "service_down";
+
+const FALLBACK_BOOKING_URL = "https://calendar.app.google/SWeTNQNZUKUG66rZA";
 
 // ─── react-day-picker classNames ──────────────────────────────────────────────
 // Navigation is hidden — we render our own month header above the grid.
@@ -91,6 +94,7 @@ export default function BookingModal({
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [meetingLink, setMeetingLink] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorType, setErrorType] = useState<ErrorType>("conflict");
 
   const {
     register,
@@ -186,6 +190,7 @@ export default function BookingModal({
       });
       if (res.status === 429) {
         posthog.capture("booking_rate_limited");
+        setErrorType("conflict");
         setErrorMessage(
           "Too many booking attempts. Please try again in an hour.",
         );
@@ -204,7 +209,16 @@ export default function BookingModal({
         setMeetingLink(result.meetingLink ?? "");
         setStep("success");
         reset();
+      } else if (res.status === 503 || result.code === "SERVICE_UNAVAILABLE") {
+        posthog.capture("booking_service_unavailable");
+        setErrorType("service_down");
+        setErrorMessage(
+          result.error ??
+            "Our booking system is temporarily unavailable. Please book directly on Google Calendar instead.",
+        );
+        setStep("error");
       } else {
+        setErrorType("conflict");
         setErrorMessage(
           result.error ??
             "That slot was just taken. Please choose another time.",
@@ -212,7 +226,10 @@ export default function BookingModal({
         setStep("error");
       }
     } catch {
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorType("service_down");
+      setErrorMessage(
+        "Our booking system is temporarily unavailable. Please book directly on Google Calendar instead.",
+      );
       setStep("error");
     }
   };
@@ -225,6 +242,7 @@ export default function BookingModal({
     setSlots([]);
     setSelectedSlot(null);
     setErrorMessage("");
+    setErrorType("conflict");
     setMeetingLink("");
     reset();
     onClose();
@@ -619,18 +637,32 @@ export default function BookingModal({
             </div>
             <div className="space-y-2">
               <h3 className="font-russo-one text-xl text-foreground">
-                Slot taken
+                {errorType === "service_down"
+                  ? "Booking system unavailable"
+                  : "Slot taken"}
               </h3>
               <p className="font-source-code-pro text-sm text-muted leading-relaxed max-w-xs">
                 {errorMessage}
               </p>
             </div>
-            <button
-              onClick={goBack}
-              className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
-            >
-              ← Try a different time
-            </button>
+            {errorType === "service_down" ? (
+              <a
+                href={FALLBACK_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-foreground font-squada-one text-sm tracking-widest rounded-xl transition-all duration-200"
+              >
+                <RiCalendarLine size={14} aria-hidden="true" />
+                Book on Google Calendar
+              </a>
+            ) : (
+              <button
+                onClick={goBack}
+                className="font-squada-one text-xs text-accent hover:text-accent-light tracking-wider transition-colors"
+              >
+                ← Try a different time
+              </button>
+            )}
           </div>
         )}
       </div>
