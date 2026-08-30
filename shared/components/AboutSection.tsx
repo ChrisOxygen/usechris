@@ -53,7 +53,7 @@ export default function AboutSection() {
               build it. So I learned to build.
             </p>
             <p>
-              Three years later, I&apos;ve shipped a Chrome extension with over
+              Five years later, I&apos;ve shipped a Chrome extension with over
               1,000 downloads, an invoice platform handling 500+ real
               transactions, and a visa application system with some of the most
               complex form logic I&apos;ve ever had to think through. I&apos;ve

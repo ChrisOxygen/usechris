@@ -39,7 +39,7 @@ export default function HeroSection() {
             </p>
 
             <p className="font-source-code-pro max-w-[300px] sm:max-w-full text-sm text-foreground/60 leading-relaxed text-center sm:text-left">
-              3+ years. 5 production apps. 1,000+ real users.
+              5+ years. 5 production apps. 1,000+ real users.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function HeroSection() {
 
               <div className="flex flex-col items-center gap-1 px-6">
                 <span className="font-russo-one text-2xl leading-none text-foreground">
-                  3+
+                  5+
                 </span>
                 <div className="flex flex-col items-center">
                   <span className="font-squada-one text-[0.6rem] text-muted uppercase tracking-[0.16em] text-center">
