@@ -40,6 +40,16 @@ type ErrorType = "conflict" | "service_down";
 
 const FALLBACK_BOOKING_URL = "https://calendar.app.google/SWeTNQNZUKUG66rZA";
 
+// Formats a Date using its local calendar fields (not UTC) — avoids the
+// off-by-one-day bug that `date.toISOString().split("T")[0]` causes for
+// any visitor whose timezone is ahead of UTC.
+function toLocalDateStr(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 // ─── react-day-picker classNames ──────────────────────────────────────────────
 // Navigation is hidden — we render our own month header above the grid.
 
@@ -147,7 +157,7 @@ export default function BookingModal({
     setIsLoadingSlots(true);
     setSlots([]);
 
-    const dateStr = date.toISOString().split("T")[0];
+    const dateStr = toLocalDateStr(date);
     try {
       const res = await fetch(`/api/availability?date=${dateStr}`);
       const data = await res.json();
@@ -167,7 +177,7 @@ export default function BookingModal({
     setStep("form");
     posthog.capture("booking_slot_selected", {
       slot: slot.start,
-      date: selectedDate?.toISOString().split("T")[0],
+      date: selectedDate ? toLocalDateStr(selectedDate) : undefined,
     });
   };
 
@@ -185,7 +195,7 @@ export default function BookingModal({
           ...data,
           slotStart: selectedSlot.start,
           slotEnd: selectedSlot.end,
-          date: selectedDate.toISOString().split("T")[0],
+          date: toLocalDateStr(selectedDate),
         }),
       });
       if (res.status === 429) {
@@ -203,7 +213,7 @@ export default function BookingModal({
       if (result.success) {
         posthog.capture("booking_completed", {
           platform: data.platform,
-          date: selectedDate?.toISOString().split("T")[0],
+          date: selectedDate ? toLocalDateStr(selectedDate) : undefined,
           slot: selectedSlot?.start,
         });
         setMeetingLink(result.meetingLink ?? "");
